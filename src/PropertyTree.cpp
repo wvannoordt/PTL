@@ -3,6 +3,9 @@
 #include "Error.h"
 #include "PropertyTree.h"
 #include "PropStringHandler.h"
+#include <fstream>
+#include <sys/stat.h>
+#include <unistd.h>
 namespace PropTreeLib
 {
     PropertyTree::PropertyTree(void)
@@ -28,6 +31,16 @@ namespace PropTreeLib
     void PropertyTree::SetCloseMessage(std::string message)
     {
     	closeMessage = message;
+    }
+
+    void PropertyTree::CreateDefaultValuesFile(std::string filename)
+    {
+        std::cout << "PTL :: Saving default values as " << filename << std::endl;
+        std::ofstream myfile;
+        myfile.open(filename.c_str());
+        myfile << stringHandler.GetCommentSpecifier() << " This file was generated with default values" << std::endl;
+        principalSection->RecursiveWriteDefaults(myfile);
+        myfile.close();
     }
 
     void PropertyTree::ReadInputFileToTreeData(std::string filename)

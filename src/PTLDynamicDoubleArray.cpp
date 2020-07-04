@@ -9,7 +9,7 @@ namespace PropTreeLib
         {
             strHandle = new PropStringHandler();
             this->SetDescription(descriptionIn);
-            defaultValue = "[NULL] (dynamically allocated)";
+            defaultValue = "[]";
             basePointerType = BasePointer::DoubleArrayPointer;
             secondaryBasePointerType=BasePointer::IntPointer;
             requiresDelete = false;

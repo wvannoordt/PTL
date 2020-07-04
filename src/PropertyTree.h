@@ -21,6 +21,7 @@ namespace PropTreeLib
             PropertySection& operator [](std::string argument);
             void StrictParse(void);
             void Destroy(void);
+            void CreateDefaultValuesFile(std::string filename);
         private:
             PropertySection* principalSection;
             PropStringHandler stringHandler;

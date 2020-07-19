@@ -33,6 +33,9 @@ namespace PropTreeLib
             Variables::InputVariable* & MapTo(bool*        ptr);
             Variables::InputVariable* & MapTo(std::string* ptr);
             Variables::InputVariable* & MapTo(double** ptr, int* nPtr);
+            Variables::InputVariable* & MapTo(double** ptr);
+            Variables::InputVariable* & MapTo(int** ptr, int* nPtr);
+            Variables::InputVariable* & MapTo(int** ptr);
             bool StrictTraverseParse(std::string depthString);
             void BreakIfAlreadyMapped(void);
             void DeclareIsPrincipal(void);

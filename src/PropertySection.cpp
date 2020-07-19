@@ -326,6 +326,24 @@ namespace PropTreeLib
         return templateVariable;
     }
 
+    Variables::InputVariable* & PropertySection::MapTo(double** ptr)
+    {
+        isTerminalNode = true;
+        BreakIfAlreadyMapped();
+        terminalEndpointTarget = (void*)ptr;
+        basePointerType = Variables::BasePointer::DoubleArrayPointer;
+        return templateVariable;
+    }
+
+    Variables::InputVariable* & PropertySection::MapTo(int** ptr)
+    {
+        isTerminalNode = true;
+        BreakIfAlreadyMapped();
+        terminalEndpointTarget = (void*)ptr;
+        basePointerType = Variables::BasePointer::IntArrayPointer;
+        return templateVariable;
+    }
+
     Variables::InputVariable* & PropertySection::MapTo(bool* ptr)
     {
         isTerminalNode = true;
@@ -351,6 +369,17 @@ namespace PropTreeLib
         terminalEndpointTarget = (void*)ptr;
         terminalEndpointTargetSecondaryData = (void*)nPtr;
         basePointerType = Variables::BasePointer::DoubleArrayPointer;
+        secondaryBasePointerType = Variables::BasePointer::IntPointer;
+        return templateVariable;
+    }
+
+    Variables::InputVariable* & PropertySection::MapTo(int** ptr, int* nPtr)
+    {
+        isTerminalNode = true;
+        BreakIfAlreadyMapped();
+        terminalEndpointTarget = (void*)ptr;
+        terminalEndpointTargetSecondaryData = (void*)nPtr;
+        basePointerType = Variables::BasePointer::IntArrayPointer;
         secondaryBasePointerType = Variables::BasePointer::IntPointer;
         return templateVariable;
     }

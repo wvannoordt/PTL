@@ -11,7 +11,6 @@ namespace PropTreeLib
             this->SetDescription(descriptionIn);
             defaultValue = "[]";
             basePointerType = BasePointer::IntArrayPointer;
-            secondaryBasePointerType=BasePointer::IntPointer;
             requiresDelete = false;
             basePtr = NULL;
             count = 0;

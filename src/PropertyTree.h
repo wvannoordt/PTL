@@ -22,11 +22,13 @@ namespace PropTreeLib
             void StrictParse(void);
             void Destroy(void);
             void CreateDefaultValuesFile(std::string filename);
+            void SetAsSubtree(PropertySection& newPrincipal);
         private:
             PropertySection* principalSection;
             PropStringHandler stringHandler;
             int treeSpecification;
             std::string closeMessage;
+            bool wasCreatedAsSubtree;
     };
 }
 #endif

@@ -14,6 +14,7 @@ namespace PropTreeLib
         principalSection = new PropertySection(&stringHandler, 0, NULL);
         principalSection->DeclareIsPrincipal();
         closeMessage = "none";
+        wasCreatedAsSubtree = false;
     }
 
     PropertyTree::~PropertyTree(void)
@@ -21,11 +22,21 @@ namespace PropTreeLib
         this->Destroy();
     }
 
+    void PropertyTree::SetAsSubtree(PropertySection& newPrincipal)
+    {
+        this->Destroy();
+        wasCreatedAsSubtree = true;
+        principalSection = &newPrincipal;
+    }
+
     void PropertyTree::Destroy(void)
     {
-    	if (closeMessage != "none") std::cout << closeMessage << std::endl;
-        principalSection->Destroy();
-        delete principalSection;
+        if (!wasCreatedAsSubtree)
+        {
+        	if (closeMessage != "none") std::cout << closeMessage << std::endl;
+            principalSection->Destroy();
+            delete principalSection;
+        }
     }
 
     void PropertyTree::SetCloseMessage(std::string message)

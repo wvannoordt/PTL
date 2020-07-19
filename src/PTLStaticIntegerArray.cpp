@@ -48,15 +48,13 @@ namespace PropTreeLib
                         }
                     }
                     i=std::stoi(parseValCurrent);
-                    *((int*)(ptr)+j) = i;
-                    return true;
+                    *(basePtr+j) = i;
                 }
                 catch (...)
                 {
                     this->SetDefaultValue(ptr);
                     return false;
                 }
-                return false;
             }
             return true;
         }

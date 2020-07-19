@@ -17,6 +17,10 @@ int main(void)
 	input.ReadInputFileToTreeData(filename);
 	input.StrictParse();
 	input.DebugPrint();
+
+	std::cout << "Read static5: " << static5[0] << ", ..., " << static5[4] << std::endl;
+	std::cout << "Read staticDouble: " << staticDouble[0] << ", ..., " << staticDouble[2] << std::endl;
+	std::cout << "Read ar1: " << ar1[0] << ", ..., " << ar1[car1-1] << std::endl;
 	std::cout << "(SUCCESS)" << std::endl;
 	return 0;
 }

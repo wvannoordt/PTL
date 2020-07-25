@@ -80,6 +80,64 @@ int main(int argc, char** argv)
 myInteger = 5
 ```
 
+### Other Types
+The reader is directed to [examples](https://github.com/wvannoordt/PropTreeLib/tree/master/examples) and [testing](https://github.com/wvannoordt/PropTreeLib/tree/master/testing)
+for more examples of usage.
+
+### Defaults
+This example shows how to create a default-filled file called `def.ptl`:
+
+`main.cc`
+```c++
+//Compiles to a.out
+#include <iostream>
+#include "PropTreeLib.h"
+int main(int argc, char** argv)
+{
+    //This is the simplest example of a PTL input.
+
+    PropTreeLib::PropertyTree input;
+
+    //Define an interactive object
+    PropTreeLib::Interactive i(argc, argv, &input);
+
+    //define some input data
+    std::string str;
+    int aa, ab, ba, bb;
+    double* ar;
+    int n;
+
+    input["SectionA"]["ValueA"].MapTo(&aa) = new PropTreeLib::Variables::PTLInteger(1, "aa");
+    input["SectionA"]["ValueB"].MapTo(&ab) = new PropTreeLib::Variables::PTLInteger(1, "ab");
+    input["SectionA"]["StringValue"].MapTo(&str) = new PropTreeLib::Variables::PTLString("defaultVal", "str");
+    input["SectionB"]["ValueA"].MapTo(&ba) = new PropTreeLib::Variables::PTLInteger(1, "ba");
+    input["SectionB"]["ValueB"].MapTo(&bb) = new PropTreeLib::Variables::PTLInteger(1, "bb");
+    input["SectionB"]["arr"].MapTo(&ar, &n) = new PropTreeLib::Variables::PTLDynamicDoubleArray("array");
+
+    //Outputs file "def.ptl" and kills program if program is run as "./a.out PTL:defaultVals"
+    i.Run();
+
+    return 0;
+}
+```
+
+`def.ptl`:
+```
+// This file was generated with default values
+SectionA
+{
+    StringValue = defaultVal
+    ValueA = 1
+    ValueB = 1
+}
+SectionB
+{
+    ValueA = 1
+    ValueB = 1
+    arr = []
+}
+```
+
 
 ## Supported Input Types
 Any input type can be implemented by inheriting the `PropTreeLib::Variables::InputVariable` class. PropTreeLib currently has implementations for:
@@ -105,7 +163,7 @@ std::string myTypeStr(int i)
 ```
 * `PropTreeLib::Variables::PTLDynamicDoubleArray`: An arbitrary-size array of double-precision values. This object maps to two outputs: an integer representing
 the size of the array, and a `double*` that is heap-allocated, then deallocated when the relevant `PropTreeLib::PropertyTree` object goes out of
-scope (*this is very important!*).
+scope (**this is very important!**).
 
 * `PropTreeLib::Variables::PTLStaticDoubleArray`: A fixed-size array of double-precision values. This object maps only to a `double*`, and is assumed to have a
 fixed size known to the user at compile time. Other than the fact that this only maps to a single value, this object behaves identically to a
@@ -114,8 +172,10 @@ fixed size known to the user at compile time. Other than the fact that this only
 * `PropTreeLib::Variables::PTLDynamicIntegerArray`: This object is identical to a `PropTreeLib::Variables::PTLDynamicDoubleArray`, just with an integer element type.
 * `PropTreeLib::Variables::PTLStaticIntegerArray`: This object is identical to a `PropTreeLib::Variables::PTLStaticIntegerArray`, just with an integer element type.
 
+Other types are still in development as needed, but the reader is encouraged to contribute implementations of more (preferably standard) types.
+
 
 
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+[GNU GENERAL PUBLIC LICENSE](https://choosealicense.com/licenses/gpl-3.0/)

@@ -81,6 +81,31 @@ myInteger = 5
 ```
 
 
+## Supported Input Types
+Any input type can be implemented by inheriting the `PropTreeLib::Variables::InputVariable` class. PropTreeLib currently has implementations for:
+
+* `PropTreeLib::Variables::PTLInteger`: An integer value.
+* `PropTreeLib::Variables::PTLBoolean`: A boolean value.
+* `PropTreeLib::Variables::PTLDouble`: A double-precision value.
+* `PropTreeLib::Variables::PTLString`: A string (`std::string`) value.
+* `PropTreeLib::Variables::PTLEnum`: A string-based enumeration that maps to an integer value. Options are passed to the constructor as a colon-delimited list,
+i.e. `"option1:option2:option3"`. It is recommended that each option has some corresponding, meaningful comparison when used to branch.
+* `PropTreeLib::Variables::PTLAutoEnum`: An enumeration defined by an `enum` implementation, e.g. `enum myType{option1,option2}`. Since C++ is not reflective,
+this type's constructor also takes a function pointer that returns the string representation of each option, e.g:
+```c++
+std::string myTypeStr(int i)
+{
+    switch (i)
+    {
+        case option1: return "option1";
+        case option2: return "option2";
+    }
+    return PTL_AUTO_ENUM_TERMINATOR;
+}
+```
+* `PropTreeLib::Variables::PTLDouble`: A double-precision value.
+
+
 
 
 ## License

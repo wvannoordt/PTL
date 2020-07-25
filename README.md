@@ -103,7 +103,16 @@ std::string myTypeStr(int i)
     return PTL_AUTO_ENUM_TERMINATOR;
 }
 ```
-* `PropTreeLib::Variables::PTLDouble`: A double-precision value.
+* `PropTreeLib::Variables::PTLDynamicDoubleArray`: An arbitrary-size array of double-precision values. This object maps to two outputs: an integer representing
+the size of the array, and a `double*` that is heap-allocated, then deallocated when the relevant `PropTreeLib::PropertyTree` object goes out of
+scope (*this is very important!*).
+
+* `PropTreeLib::Variables::PTLStaticDoubleArray`: A fixed-size array of double-precision values. This object maps only to a `double*`, and is assumed to have a
+fixed size known to the user at compile time. Other than the fact that this only maps to a single value, this object behaves identically to a
+`PropTreeLib::Variables::PTLDynamicDoubleArray`.
+
+* `PropTreeLib::Variables::PTLDynamicIntegerArray`: This object is identical to a `PropTreeLib::Variables::PTLDynamicDoubleArray`, just with an integer element type.
+* `PropTreeLib::Variables::PTLStaticIntegerArray`: This object is identical to a `PropTreeLib::Variables::PTLStaticIntegerArray`, just with an integer element type.
 
 
 

@@ -36,6 +36,14 @@ object, you can branch `mainInput` into a subtree using `subInput.SetAsSubtree(m
 `PropTreeLib::PropertyTree` (and is automatically active) and allows for contextualized `#define` directives, e.g. `#define myDefinedValue 0.1`, and then
 `someOtherValue = $(myDefinedValue)`
 
+## Building
+PropTreeLib is current built with GNU make. A Cmake build system may come in the future.
+
+To build and test, simply run `make test` from the top directory. If successful, the following message will appear following the build output:
+```
+PropTreeLib passed all tests.
+```
+
 ## Usage
 
 ### Basic Example

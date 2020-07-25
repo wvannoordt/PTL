@@ -55,6 +55,7 @@ test: final
 	@for fldr in examples/* ; do \
                 ${MAKE} -C $${fldr} -f makefile || exit 1; \
         done
+	@echo "${LIB_NAME} passed all tests."
 
 clean:
 	for fldr in testing/* ; do \

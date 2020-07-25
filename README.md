@@ -12,7 +12,11 @@ days, possibly even weeks, at a time. This costs a lot of money and effort, so i
 Sometimes, however, deadlines can get to us. Small mistakes are made, such as a typo on one input option that causes it to be ignored and/or
 set to a default value. In some cases, this can cause an entire simulation to be garbage.
 
+## Purpose
 PropTreeLib is designed to fix the following symptoms of primitive input file readers:
+
+* You run 10 different cases with slightly varying input parameters, but forgot to print the values of the parameters to the slurm log. Now half of the data is meaningless
+and needs to be run again!
 
 
 

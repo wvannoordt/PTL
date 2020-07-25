@@ -18,6 +18,9 @@ PropTreeLib is designed to fix the following symptoms of primitive input file re
 * You run 10 different cases with slightly varying input parameters, but forgot to print the values of the parameters to the slurm log. Now half of the data is meaningless
 and needs to be run again! With a `PropTreeLib::PropertyTree input` object, simply call `input.DebugPrint()` and everything is there.
 
+* You set up the case and run, and get a segmentation fault when the input is read (`std::stoi` etc. give a segmentation fault if the input is
+improperly formatted). PropTreeLib will identify all unrecognized or improperly formatted inputs.
+
 * All of your runtime parameters have default values but you can't remember what subsection or name a certain one of them has.
 Using a `PropTreeLib::Interactive i` object, and a command-line argument `PTL:defaultVals`, simply call `i.Run()` to create a
 full input file with every option set to its default value (GUI generation coming soon!).

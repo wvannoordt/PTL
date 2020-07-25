@@ -50,22 +50,27 @@ int main(int argc, char** argv)
     PropTreeLib::PropertyTree input;
     int myInteger;
 
-    //Bind string "myInteger" to integer myInteger. The string can be any string, not just the variable name.
-    //The default value of myInteger is 1. Note the string description is the second argument.
-    input["myIntegerValue"].MapTo(&myInteger) = new PropTreeLib::Variables::PTLInteger(1, "Some integer value");
+    //Bind string "myInteger" to integer myInteger. The string can be any string,
+    //not just the variable name. The default value of myInteger is 1. Note the
+    //string description is the second argument.
+    input["myIntegerValue"].MapTo(&myInteger)
+        = new PropTreeLib::Variables::PTLInteger(1, "Some integer value");
 
-    //This function actually populates the tree structure with string data but does not parse anything.
-    //Reading and parsing are kept separate so that the tree can be used to read arbitrary data if need be.
+    //This function actually populates the tree structure with string data but
+    //does not parse anything. Reading and parsing are kept separate so that the
+    //tree can be used to read arbitrary data if need be.
     input.ReadInputFileToTreeData("input.ptl");
 
-    //After this function call, myInteger has the value read from the file (5). This function will throw an
-    //error if any input option cannot be successfully parsed.
+    //After this function call, myInteger has the value read from the file (5).
+    //This function will throw an error if any input option cannot be
+    //successfully parsed.
     input.StrictParse();
 
     //This simply prints every value in the tree to the screen.
     input.DebugPrint();
 
-    //Every resource used by input is cleaned up when the object goes out of scope. The object is memory-safe.
+    //Every resource used by input is cleaned up when the object goes out of
+    //scope. The object is memory-safe.
     return 0;
 }
 ```

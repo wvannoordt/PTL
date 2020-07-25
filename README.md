@@ -36,8 +36,8 @@ every input option is documented. This is a huge help to rapidly bring newcomers
 object, you can branch `mainInput` into a subtree using `subInput.SetAsSubtree(mainInput["mySubSection"])`, so every component is initialized from one file.
 
 * You have multiple parameters in your input file that, for some reason, all have to have the same value. The `PropTreeLib::PreProcessContext` object is a part of every
-`PropTreeLib::PropertyTree` (and is automatically active) and allows for contextualized `#define` directives, e.g. `#define myDefinedValue 0.1`, and then
-`someOtherValue = $(myDefinedValue)`
+`PropTreeLib::PropertyTree` (and is automatically active) and allows for contextualized `#define` directives, e.g. `#define myValue 0.1`, and then
+`someValue = $(myValue)`
 
 ## Building
 PropTreeLib is current built with GNU make. A Cmake build system may come in the future.

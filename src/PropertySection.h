@@ -41,6 +41,10 @@ namespace PropTreeLib
             void DeclareIsPrincipal(void);
             std::string GetTotalName(void);
             void RecursiveWriteDefaults(std::ofstream& myfile);
+            void PushSection(std::string pushedSection);
+            void KeyToNewValue(std::string key, PropertySection* newValue);
+            void SetExistingKeyValuePair(std::string key, PropertySection* val);
+            void RecursiveIncrementDepth(void);
         private:
             void AssertPointerConsistency(std::string variableLocation, bool isSecondary);
             std::map<std::string,PropertySection*> sectionSubSections;

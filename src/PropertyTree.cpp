@@ -25,7 +25,8 @@ namespace PropTreeLib
 
     void PropertyTree::PushSection(std::string pushedSection)
     {
-        principalSection->PushSection(pushedSection);
+        principalSection = principalSection->PushSection(pushedSection);
+        principalSection->DeclareIsPrincipal();
     }
 
     void PropertyTree::SetAsSubtree(PropertySection& newPrincipal)

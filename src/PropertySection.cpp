@@ -37,27 +37,22 @@ namespace PropTreeLib
         return &context;
     }
     
-    void PropertySection::PushSection(std::string pushedSection)
+    PropertySection* PropertySection::PushSection(std::string pushedSection)
     {
         PropertySection* prevHost = host;
         std::string oldName = sectionName;
         this->SetName(pushedSection);
         host = new PropertySection(stringHandler, depth, prevHost);
-        if (host==NULL)
-        {
-            ErrorKill("Attempting to push section \"" + pushedSection + "\": host is NULL. What to do?");
-        }
-        else
-        {
-            prevHost->KeyToNewValue(oldName, host);
-        }
+        host->DeclareIsNotPrincipal();
+        if (prevHost!=NULL) prevHost->KeyToNewValue(oldName, host);
         host->SetExistingKeyValuePair(sectionName, this);
         host->SetName(oldName);
-        
-        host->GetContext()->SetHostContext(prevHost->GetContext());
+        if (prevHost!=NULL) host->GetContext()->SetHostContext(prevHost->GetContext());
         context.SetHostContext(host->GetContext());
         
         RecursiveIncrementDepth();
+        
+        return host;
     }
     
     void PropertySection::RecursiveIncrementDepth(void)
@@ -96,6 +91,11 @@ namespace PropTreeLib
     void PropertySection::DeclareIsPrincipal(void)
     {
         isPrincipal = true;
+    }
+    
+    void PropertySection::DeclareIsNotPrincipal(void)
+    {
+        isPrincipal = false;
     }
 
     void PropertySection::DeclareIsTerminal(void)

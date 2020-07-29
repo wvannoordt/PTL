@@ -26,8 +26,8 @@ namespace PropTreeLib
             void DeclareIsTerminal(void);
             void Destroy(void);
             PreProcessContext* GetContext(void);
-            PropertySection& operator [](std::string argument);
-            PropertySection& operator =(std::string argument);
+            PropertySection& operator [] (std::string argument);
+            PropertySection& operator = (std::string argument);
             Variables::InputVariable* & MapTo(int*         ptr);
             Variables::InputVariable* & MapTo(double*      ptr);
             Variables::InputVariable* & MapTo(bool*        ptr);

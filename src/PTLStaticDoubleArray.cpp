@@ -30,7 +30,11 @@ namespace PropTreeLib
             basePtr = new double[count];
             *((double**)ptr) = basePtr;
             requiresDelete = true;
-            if (count!=assertCount) return false;
+            if (count!=assertCount)
+            {
+                parseErrorString = "Expecting exactly " + std::to_string(assertCount) + " elements, but found " + std::to_string(count) + ".";
+                return false;
+            }
             for (int i = 0; i < vals.size(); i++)
             {
                 double z;
@@ -41,6 +45,7 @@ namespace PropTreeLib
                 }
                 catch (...)
                 {
+                    parseErrorString = "could not parse at least 1 entry to double.";
                     return false;
                 }
             }

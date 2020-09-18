@@ -40,6 +40,7 @@ namespace PropTreeLib
                 }
                 catch (...)
                 {
+                    parseErrorString = "could not parse at least 1 entry to double.";
                     return false;
                 }
             }

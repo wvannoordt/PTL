@@ -37,6 +37,11 @@ namespace PropTreeLib
             else
             {
                 this->SetDefaultValue(ptr);
+                parseErrorString = "Could not match \"" + parseVal + "\" to a valid option. Valid options are:\n";
+                for (std::map<std::string, int>::iterator it = options.begin(); it != options.end(); it++)
+                {
+                    parseErrorString += (it->first + "\n");
+                }
                 return false;
             }
         }

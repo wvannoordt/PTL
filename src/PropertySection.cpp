@@ -274,6 +274,7 @@ namespace PropTreeLib
                     {
                         std::cout << "Could not parse the following variable (after preprocessor expansion):" << std::endl;
                         std::cout << "  >>  " << newDepthString << "  =  " << sectionValue << std::endl;
+                        templateVariable->PrintFailureMessage();
                         return false;
                     }
                     return true;
@@ -283,6 +284,7 @@ namespace PropTreeLib
             {
                 std::cout << "Could not parse the following variable:" << std::endl;
                 std::cout << "  >>  " << newDepthString << "  =  " << sectionValue << std::endl;
+                templateVariable->PrintFailureMessage();
                 return false;
             }
             if (terminalEndpointTargetSecondaryData!=NULL)

@@ -12,7 +12,7 @@ namespace PropTreeLib
         class InputVariable
         {
             public:
-                InputVariable(void){hasRestrictedValues = false; secondaryBasePointerType=BasePointer::None;}
+                InputVariable(void){hasRestrictedValues = false; secondaryBasePointerType=BasePointer::None;parseErrorString="none";}
                 virtual bool ParseFromString(std::string parseVal, void* ptr)=0;
                 virtual void Destroy(void)=0;
                 virtual std::string GetDescription(void) {return variableDescription;}
@@ -20,6 +20,13 @@ namespace PropTreeLib
                 virtual void SetDefaultValue(void* ptr)=0;
                 virtual std::string GetDefaultValueString(void)=0;
                 virtual void SetSecondaryVariable(void*){};
+                void PrintFailureMessage(void)
+                {
+                    if (parseErrorString!="none")
+                    {
+                        std::cout << "Info: " << parseErrorString << std::endl;
+                    }
+                }
                 virtual std::string GetAcceptableValueString(void){return "[UNSPECIFIED]";};
                 virtual void SetName(std::string name) {variableName = name;}
                 virtual bool ValidateBasePointer(BasePointer assignedPointer, std::string* message)
@@ -45,6 +52,7 @@ namespace PropTreeLib
             protected:
                 std::string variableDescription;
                 std::string variableName;
+                std::string parseErrorString;
                 BasePointer basePointerType, secondaryBasePointerType;
                 bool hasRestrictedValues;
         };

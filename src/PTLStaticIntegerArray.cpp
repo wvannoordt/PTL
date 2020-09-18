@@ -32,7 +32,11 @@ namespace PropTreeLib
             requiresDelete = true;
             std::string nums = "0123456789";
             std::string parseValCurrent;
-            if (assertCount != vals.size()) return false;
+            if (assertCount != vals.size())
+            {
+                parseErrorString = "Expecting exactly " + std::to_string(assertCount) + " elements, but found " + std::to_string(count) + ".";
+                return false;
+            }
             for (int j = 0; j < vals.size(); j++)
             {
                 int i;
@@ -53,6 +57,7 @@ namespace PropTreeLib
                 catch (...)
                 {
                     this->SetDefaultValue(ptr);
+                    parseErrorString = "could not parse at least 1 entry to double.";
                     return false;
                 }
             }

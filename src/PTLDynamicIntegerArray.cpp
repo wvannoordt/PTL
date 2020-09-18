@@ -51,6 +51,7 @@ namespace PropTreeLib
                 }
                 catch (...)
                 {
+                    parseErrorString = "could not parse at least 1 entry to integer.";
                     this->SetDefaultValue(ptr);
                     return false;
                 }

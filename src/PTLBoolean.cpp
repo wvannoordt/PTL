@@ -23,6 +23,7 @@ namespace PropTreeLib
                 *((bool*)ptr) = false;
                 return true;
             }
+            parseErrorString = "could not parse entry to bool.";
             this->SetDefaultValue(ptr);
             return false;
         }

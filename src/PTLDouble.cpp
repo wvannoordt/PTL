@@ -31,6 +31,7 @@ namespace PropTreeLib
             }
             catch (...)
             {
+                parseErrorString = "could not parse entry to double.";
                 this->SetDefaultValue(ptr);
                 return false;
             }

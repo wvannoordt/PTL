@@ -21,15 +21,15 @@ namespace PropTreeLib
         {
             switch (p)
             {
-                case BasePointer::None:                return "BasePointer::None";
-                case BasePointer::IntPointer:          return "BasePointer::IntPointer";
-                case BasePointer::DoublePointer:       return "BasePointer::DoublePointer";
-                case BasePointer::BoolPointer:         return "BasePointer::BoolPointer";
-                case BasePointer::IntArrayPointer:     return "BasePointer::IntArrayPointer";
-                case BasePointer::DoubleArrayPointer:  return "BasePointer::DoubleArrayPointer";
-                case BasePointer::BoolArrayPointer:    return "BasePointer::BoolArrayPointer";
-                case BasePointer::StringPointer:       return "BasePointer::StringPointer";
-                case BasePointer::CustomClassPointers: return "BasePointer::CustomClassPointers";
+                case None:                return "BasePointer::None";
+                case IntPointer:          return "BasePointer::IntPointer";
+                case DoublePointer:       return "BasePointer::DoublePointer";
+                case BoolPointer:         return "BasePointer::BoolPointer";
+                case IntArrayPointer:     return "BasePointer::IntArrayPointer";
+                case DoubleArrayPointer:  return "BasePointer::DoubleArrayPointer";
+                case BoolArrayPointer:    return "BasePointer::BoolArrayPointer";
+                case StringPointer:       return "BasePointer::StringPointer";
+                case CustomClassPointers: return "BasePointer::CustomClassPointers";
                 default: return "NO_BASE_PTR";
             }
         }

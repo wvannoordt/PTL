@@ -113,8 +113,8 @@ namespace PropTreeLib
         {
             if (!isPrincipal)
             {
-                myfile << indent << sectionName << std::endl;
-                myfile << indent << beginSection << std::endl;
+                myfile << indent << sectionName << ptl::endl;
+                myfile << indent << beginSection << ptl::endl;
             }
             for (std::map<std::string, PropertySection*>::iterator it = sectionSubSections.begin(); it!=sectionSubSections.end(); it++)
             {
@@ -122,18 +122,18 @@ namespace PropTreeLib
             }
             if (!isPrincipal)
             {
-                myfile << indent << endSection << std::endl;
+                myfile << indent << endSection << ptl::endl;
             }
         }
         else
         {
             if (templateVariable==NULL)
             {
-                myfile << indent << sectionName << " = "  << sectionValue << std::endl;
+                myfile << indent << sectionName << " = "  << sectionValue << ptl::endl;
             }
             else
             {
-                myfile << indent << sectionName << " = "  << templateVariable->GetDefaultValueString() << std::endl;
+                myfile << indent << sectionName << " = "  << templateVariable->GetDefaultValueString() << ptl::endl;
             }
         }
     }
@@ -204,11 +204,11 @@ namespace PropTreeLib
         for (int i = 0; i < depth; i++) style = style + "----";
         if (isTerminalNode)
         {
-            std::cout << style << " " << sectionName << " = " << sectionValue << std::endl;
+            ptlout << style << " " << sectionName << " = " << sectionValue << ptl::endl;
         }
         else
         {
-            std::cout << style << " " << sectionName << ": " << context.DebugPrint() << std::endl;
+            ptlout << style << " " << sectionName << ": " << context.DebugPrint() << ptl::endl;
         }
         for (std::map<std::string, PropertySection*>::iterator it = sectionSubSections.begin(); it!=sectionSubSections.end(); it++)
         {
@@ -255,8 +255,8 @@ namespace PropTreeLib
             if (terminalEndpointTargetSecondaryData!=NULL) AssertPointerConsistency(newDepthString, true);
             if (templateVariable==NULL)
             {
-                std::cout << "Unrecognized variable:" << std::endl;
-                std::cout << "  >>  " << newDepthString << "  =  " << sectionValue << std::endl;
+                ptlout << "Unrecognized variable:" << ptl::endl;
+                ptlout << "  >>  " << newDepthString << "  =  " << sectionValue << ptl::endl;
                 return false;
             }
             else if(!hasValue)
@@ -272,8 +272,8 @@ namespace PropTreeLib
                     sectionValue = resolvedValue;
                     if(!templateVariable->ParseFromString(resolvedValue, terminalEndpointTarget))
                     {
-                        std::cout << "Could not parse the following variable (after preprocessor expansion):" << std::endl;
-                        std::cout << "  >>  " << newDepthString << "  =  " << sectionValue << std::endl;
+                        ptlout << "Could not parse the following variable (after preprocessor expansion):" << ptl::endl;
+                        ptlout << "  >>  " << newDepthString << "  =  " << sectionValue << ptl::endl;
                         templateVariable->PrintFailureMessage();
                         return false;
                     }
@@ -282,8 +282,8 @@ namespace PropTreeLib
             }
             else if(!templateVariable->ParseFromString(sectionValue, terminalEndpointTarget))
             {
-                std::cout << "Could not parse the following variable:" << std::endl;
-                std::cout << "  >>  " << newDepthString << "  =  " << sectionValue << std::endl;
+                ptlout << "Could not parse the following variable:" << ptl::endl;
+                ptlout << "  >>  " << newDepthString << "  =  " << sectionValue << ptl::endl;
                 templateVariable->PrintFailureMessage();
                 return false;
             }
@@ -302,8 +302,8 @@ namespace PropTreeLib
         {
             if (!templateVariable->ValidateBasePointer(basePointerType, &message))
             {
-                std::cout << "Error in definition of " + variableLocation + ":" << std::endl;
-                std::cout << message << std::endl;
+                ptlout << "Error in definition of " + variableLocation + ":" << ptl::endl;
+                ptlout << message << ptl::endl;
                 ErrorKill("Stopping");
             }
         }
@@ -311,8 +311,8 @@ namespace PropTreeLib
         {
             if (!templateVariable->ValidateSecondaryBasePointer(secondaryBasePointerType, &message))
             {
-                std::cout << "Error in definition of " + variableLocation + ":" << std::endl;
-                std::cout << message << std::endl;
+                ptlout << "Error in definition of " + variableLocation + ":" << ptl::endl;
+                ptlout << message << ptl::endl;
                 ErrorKill("Stopping");
             }
         }
@@ -355,8 +355,8 @@ namespace PropTreeLib
     {
         if (terminalEndpointTarget!=NULL)
         {
-            std::cout << "Detected double-mapping of a variable:" << std::endl;
-            std::cout << GetTotalName() << std::endl;
+            ptlout << "Detected double-mapping of a variable:" << ptl::endl;
+            ptlout << GetTotalName() << ptl::endl;
             ErrorKill("Stopping");
         }
     }

@@ -40,7 +40,7 @@ namespace PropTreeLib
     {
         if (!wasCreatedAsSubtree)
         {
-        	if (closeMessage != "none") std::cout << closeMessage << std::endl;
+        	if (closeMessage != "none") ptlout << closeMessage << ptl::endl;
             principalSection->Destroy();
             delete principalSection;
         }
@@ -53,7 +53,7 @@ namespace PropTreeLib
 
     void PropertyTree::CreateDefaultValuesFile(std::string filename)
     {
-        std::cout << "PTL :: Saving default values as " << filename << std::endl;
+        ptlout << "PTL :: Saving default values as " << filename << ptl::endl;
         std::ofstream myfile;
         myfile.open(filename.c_str());
         myfile << stringHandler.GetCommentSpecifier() << " This file was generated with default values" << std::endl;

@@ -11,6 +11,7 @@
 #include <fstream>
 #include <sys/stat.h>
 #include <unistd.h>
+#include "PTLOutputStream.h"
 namespace PropTreeLib
 {
     class PropertySection

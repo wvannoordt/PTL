@@ -3,6 +3,7 @@
 
 #include <string>
 #include "BasePointerTypes.h"
+#include "PTLOutputStream.h"
 #include "Error.h"
 
 namespace PropTreeLib
@@ -24,7 +25,7 @@ namespace PropTreeLib
                 {
                     if (parseErrorString!="none")
                     {
-                        std::cout << "Info: " << parseErrorString << std::endl;
+                        ptlout << "Info: " << parseErrorString << ptl::endl;
                     }
                 }
                 virtual std::string GetAcceptableValueString(void){return "[UNSPECIFIED]";};

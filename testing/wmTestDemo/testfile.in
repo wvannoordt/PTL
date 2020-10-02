@@ -1,5 +1,11 @@
 #define base_dir .
 #define num 0.8
+#define opt1 1
+#define opt2 2
+#define num11 1.1
+#define num12 1.2
+#define num21 2.1
+#define num22 2.2
 NavierStokes
 {
     WallModel
@@ -16,17 +22,17 @@ NavierStokes
         Momentum
         {
             equation = ODE
-            underRelaxation = $(num)
+            underRelaxation = $(num$(opt1)$(opt2))
         }
         Turbulence
         {
             equation = ODE
-            underRelaxation = $(num)
+            underRelaxation = $(num$(opt1)1)
         }
         Energy
         {
             equation = ODE
-            underRelaxation = $(num)
+            underRelaxation = $(num$(opt2)2)
         }
     }
 }

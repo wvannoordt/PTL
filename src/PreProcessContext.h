@@ -19,9 +19,15 @@ namespace PropTreeLib
             bool ParseInvocationExpression(std::string inputLine, std::string* outputLine);
             std::string DebugPrint(void);
             bool CheckContextDefinition(std::string input, std::string* output);
+            std::string ResolveWithinContext(std::string str, int level, bool* success);
+            void AssertBracketConsistency(std::string str);
+            bool PositionIsStart(size_t i, std::string str);
+            bool PositionIsEnd(size_t i, std::string str);
+            std::string GetDefinition(std::string input, bool* success);
         private:
             std::map<std::string, std::string> definitions;
-            char preProcessIndicator, invocationSymbol, invocationStart, invocationEnd, dlmChar;
+            char preProcessIndicator, dlmChar;
+            std::string invocationStart, invocationEnd, invocationSymbol;
             bool isTopLevelContext;
             PreProcessContext* hostContext;
             std::string defineString, forbiddenNameChars;

@@ -21,8 +21,9 @@ NavierStokes
         outputDir                   = $(base_dir)/$(wm_dir)
         Momentum
         {
+        	#define something 3
             equation = ODE
-            underRelaxation = $(num$(opt1)$(opt2))
+            underRelaxation = $(num$(opt1)$(opt2))$(something)
         }
         Turbulence
         {

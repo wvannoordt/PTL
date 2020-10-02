@@ -135,7 +135,7 @@ namespace PropTreeLib
         std::string macroValue;
         if (!CheckContextDefinition(input, &macroValue))
         {
-            ErrorKill("No preprocessor definition found for \"" + input + "\"");
+            ErrorKill("No preprocessor definition found for \"" + input + "\" (is it defined within this context?)");
             *success = false;
         }
         *success = true;

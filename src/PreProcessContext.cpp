@@ -10,9 +10,9 @@ namespace PropTreeLib
     PreProcessContext::PreProcessContext(void)
     {
         preProcessIndicator = '#';
-        invocationSymbol = '$';
-        invocationStart = '(';
-        invocationEnd = ')';
+        invocationSymbol = "$";
+        invocationStart = "(";
+        invocationEnd = ")";
         hostContext = NULL;
         isTopLevelContext = true;
         defineString = "define";
@@ -95,39 +95,79 @@ namespace PropTreeLib
 
     bool PreProcessContext::ParseInvocationExpression(std::string inputLine, std::string* outputLine)
     {
-        std::vector<size_t> invocations;
-        std::vector<size_t> starts;
-        std::vector<size_t> ends;
-        for (size_t i = 0; i < inputLine.length(); i++)
+        bool success;
+        *outputLine = ResolveWithinContext(inputLine, 0, &success);
+        if (!success)
         {
-            if (inputLine[i]==invocationSymbol) invocations.push_back(i);
-            if (inputLine[i]==invocationStart) starts.push_back(i);
-            if (inputLine[i]==invocationEnd) ends.push_back(i);
+            ErrorKill("Error parsing preprocessor invocation \"" + inputLine + "\".");
         }
-        if ((starts.size() != ends.size()) && (invocations.size() != ends.size())) ErrorKill("Error parsing preprocessor invocation \"" + inputLine + "\": unbalanced parentheses or invocations.");
-        if (invocations.size()==0) {*outputLine = inputLine;return true;}
-        std::vector<std::string> macros;
-        for (size_t i = 0; i < starts.size(); i++)
+        return success;
+    }
+
+    std::string PreProcessContext::ResolveWithinContext(std::string str, int level, bool* success)
+    {
+        std::string fullInvocationStart = invocationSymbol + invocationStart;
+        if (str.length()==0) return str;
+        AssertBracketConsistency(str);
+        size_t start, end;
+        start = str.find(fullInvocationStart);
+        if (start==std::string::npos)
         {
-            std::string keyValue = inputLine.substr(starts[i]+1, ends[i]-starts[i]-1);
-            std::string macroValue;
-            if (!CheckContextDefinition(keyValue, &macroValue)) ErrorKill("Error parsing preprocessor invocation \"" + inputLine + "\": found no suitable definition of keyValue \"" + keyValue + "\".");
-            macros.push_back(macroValue);
+            return str;
         }
-        std::vector<std::string> baseStrings;
-        baseStrings.push_back(inputLine.substr(0, starts[0]-1));
-        for (int i = 0; i < ends.size()-1; i++)
+        int bracketLevel = 1;
+        for (size_t i = start+fullInvocationStart.length(); i < str.length(); i++)
         {
-            baseStrings.push_back(inputLine.substr(ends[i]+1, starts[i+1]-ends[i]-2));
+            if (PositionIsStart(i, str)) bracketLevel++;
+            if (PositionIsEnd(i, str)) bracketLevel--;
+            if (bracketLevel==0) {end = i; break;}
         }
-        baseStrings.push_back(inputLine.substr(ends[ends.size()-1]+1, inputLine.length() - ends[ends.size()-1]-1));
-        std::string output = baseStrings[0];
-        for (int i = 0; i < macros.size(); i++)
+        std::string pre = str.substr(0, start);
+        std::string med = str.substr(start+fullInvocationStart.length(), end-start-fullInvocationStart.length());
+        std::string post = str.substr(end+invocationEnd.length(), str.length()-end-invocationEnd.length());
+        std::string defn = GetDefinition(ResolveWithinContext(med, level+1, success), success);
+        std::string after = ResolveWithinContext(post, level+1, success);
+        return pre + defn + after;
+    }
+
+    std::string PreProcessContext::GetDefinition(std::string input, bool* success)
+    {
+        std::string macroValue;
+        if (!CheckContextDefinition(input, &macroValue))
         {
-            output = output + macros[i] + baseStrings[i+1];
+            ErrorKill("No preprocessor definition found for \"" + input + "\" (is it defined within this context?)");
+            *success = false;
         }
-        *outputLine = output;
-        return true;
+        *success = true;
+        return macroValue;
+    }
+
+    bool PreProcessContext::PositionIsStart(size_t i, std::string str)
+    {
+        std::string fullInvocationStart = invocationSymbol + invocationStart;
+        if (i < fullInvocationStart.length()-1) return false;
+        return (str.substr(i-fullInvocationStart.length()+1, fullInvocationStart.length())==fullInvocationStart);
+    }
+
+    bool PreProcessContext::PositionIsEnd(size_t i, std::string str)
+    {
+        if (i+invocationEnd.length()-1 >= (str.length())) return false;
+        return (str.substr(i, invocationEnd.length()) == invocationEnd);
+    }
+
+    void PreProcessContext::AssertBracketConsistency(std::string str)
+    {
+        int level = 0;
+        for (size_t i = 0; i < str.length(); i++)
+        {
+            if (PositionIsStart(i, str)) level++;
+            if (PositionIsEnd(i, str))
+            {
+                level--;
+                if (level<0) ErrorKill("Invocation \"" + str + "\" has inconsistent brackets.");
+            }
+        }
+        if (level!=0) ErrorKill("Invocation \"" + str + "\" has inconsistent brackets.");
     }
 
     bool PreProcessContext::CheckContextDefinition(std::string input, std::string* output)

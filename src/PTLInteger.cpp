@@ -13,7 +13,7 @@ namespace PropTreeLib
         }
         bool PTLInteger::ParseFromString(std::string parseVal, void* ptr)
         {
-            std::string nums = "0123456789";
+            std::string nums = "-0123456789";
             int i;
             try
             {

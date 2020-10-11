@@ -1,1 +1,3 @@
 [ ] Segmentation fault when reading empty file
+[ ] No error thrown on an unwarranted section
+[ ] Small memory leak when a PTLString is part of a pushed section (see cmf/testing/neighbors3D/)

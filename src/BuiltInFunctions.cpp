@@ -1,4 +1,7 @@
 #include "BuiltInFunctions.h"
+#include "Error.h"
+#include "PropTreeLib.h"
+
 namespace PropTreeLib::BuiltIns
 {
     std::string PTLFunc_env(std::vector<std::string>& args)
@@ -12,5 +15,13 @@ namespace PropTreeLib::BuiltIns
         std::string output = "";
         for (int i = 0; i < args.size(); i++) output = output + args[i];
         return output;
+    }
+    
+    std::string PTLFunc_choose(std::vector<std::string>& args)
+    {
+        int idx;
+        Variables::PTLInteger i(0, "Choosing index");
+        i.ParseFromString(args[0], &idx);
+        return args[idx+1];
     }
 }

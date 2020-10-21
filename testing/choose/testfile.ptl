@@ -1,0 +1,5 @@
+#define idx 1
+
+testValue1 = @choose($(idx), v1, v2, v3)
+testValue2 = @choose($(idx), v1, v2, v3)
+testValue3 = @choose($(idx), v1, v2, v3)

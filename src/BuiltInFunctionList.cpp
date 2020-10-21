@@ -7,8 +7,10 @@ namespace PropTreeLib
         BuiltInFunctionList builtInFunctions;
         BuiltInFunctionList::BuiltInFunctionList(void)
         {
-            this->AddFunction("env", PTLFunc_env);
-            this->AddFunction("cat", PTLFunc_cat);
+            this->AddFunction("env",    PTLFunc_env);
+            this->AddFunction("cat",    PTLFunc_cat);
+            this->AddFunction("choose", PTLFunc_choose);
+            
         }
         
         bool BuiltInFunctionList::AddFunction(std::string funcName, PTLBuiltinFunction_t func)

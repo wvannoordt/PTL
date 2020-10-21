@@ -1,0 +1,4 @@
+#define FXN aTestValue
+#define rachael TheBest
+testValue = helloworld
+testValue2 = @env(@cat(CODE, _, DIR))

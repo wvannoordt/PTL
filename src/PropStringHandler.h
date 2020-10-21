@@ -17,9 +17,10 @@ namespace PropTreeLib
             void AssertGroupingConsistency(std::string str);
             std::string charString(char x);
             std::vector<std::string> IdentifyTopLevels(std::string line);
+            std::vector<std::string> IdentifyTopLevels(std::string line, char delimiterIn);
             void ParseElementAsVariable(std::string line, std::string* variableName, std::string* variableValue);
             void ParseElementAsSubSection(std::string line, std::string* sectionName, std::string* sectionContents);
-            std::string RemoveTrailingDelimiters(std::string str);
+            std::string RemoveTrailingDelimiters(std::string str, char delimiterIn);
             int GetElementClass(std::string element, PreProcessContext* context);
             void SetDelimiter(char dlm);
             void SetSectionStyle(char open, char close);

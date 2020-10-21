@@ -16,7 +16,7 @@ namespace PropTreeLib
             defaultValue = defaultValueIn;
             basePointerType = BasePointer::IntPointer;
             strHandle->SetDelimiter(':');
-            std::vector<std::string> optStrings = strHandle->IdentifyTopLevels(formattedOptions);
+            std::vector<std::string> optStrings = strHandle->IdentifyTopLevels(formattedOptions, ':');
             for (int i = 0; i < optStrings.size(); i++)
             {
                 for (int j = 0; j < optStrings[i].length(); j++)

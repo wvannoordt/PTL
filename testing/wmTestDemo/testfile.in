@@ -11,8 +11,7 @@ NavierStokes
     WallModel
     {
         #define wm_dir WallModelOutput
-        useWallModel                = true
-        outputWallModelData         = true
+        useWallModel                = true;outputWallModelData         = true
         wallModelOutputDataInterval = 13
         forcingOffset               = 4
         errorTolerance              = 3.4e-4

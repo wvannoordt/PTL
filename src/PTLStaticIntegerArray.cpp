@@ -25,7 +25,7 @@ namespace PropTreeLib
             if (ePos-sPos==1) return true; //empty
             if (sPos!=0||ePos!=parseVal.length()-1) return false;
             std::string internalValues = parseVal.substr(sPos+1,ePos-sPos-1);
-            std::vector<std::string> vals = strHandle->IdentifyTopLevels(internalValues);
+            std::vector<std::string> vals = strHandle->IdentifyTopLevels(internalValues, ',');
             count = vals.size();
             basePtr = new int[count];
             *((int**)ptr) = basePtr;

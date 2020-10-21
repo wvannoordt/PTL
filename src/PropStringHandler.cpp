@@ -22,7 +22,7 @@ namespace PropTreeLib
         closeVector = ']';
         variableSpecification = '$';
         assignChar = '=';
-        delimiter = ',';
+        delimiter = ';';
         forbiddenNameChars = "!@#$%^&*(){}[]\\|~\'`?/<>,";
     }
     void PropStringHandler::SetDelimiter(char dlm)
@@ -93,6 +93,11 @@ namespace PropTreeLib
 
     std::vector<std::string> PropStringHandler::IdentifyTopLevels(std::string line)
     {
+        return IdentifyTopLevels(line, delimiter);
+    }
+    
+    std::vector<std::string> PropStringHandler::IdentifyTopLevels(std::string line, char delimiterIn)
+    {
         std::vector<std::string> output;
         std::vector<size_t> positions;
         positions.push_back(0);
@@ -104,7 +109,7 @@ namespace PropTreeLib
             if (line[i]==closeSection) sectionLevel--;
             if (line[i]==openVector)   vectorLevel ++;
             if (line[i]==closeVector)  vectorLevel --;
-            if ((line[i]==delimiter) && (sectionLevel==0) && (vectorLevel==0)) positions.push_back(i);
+            if ((line[i]==delimiterIn) && (sectionLevel==0) && (vectorLevel==0)) positions.push_back(i);
         }
         positions.push_back(line.length());
         for (int i = 0; i < positions.size()-1; i++)
@@ -112,16 +117,16 @@ namespace PropTreeLib
             size_t start = positions[i];
             if (i >0) start++;
             size_t end = positions[i+1];
-            std::string elem = RemoveTrailingDelimiters(line.substr(start, end-start));
+            std::string elem = RemoveTrailingDelimiters(line.substr(start, end-start), delimiterIn);
             if (elem.length()>0) output.push_back(elem);
         }
         return output;
     }
 
-    std::string PropStringHandler::RemoveTrailingDelimiters(std::string str)
+    std::string PropStringHandler::RemoveTrailingDelimiters(std::string str, char delimiterIn)
     {
         size_t i;
-        for (i = 0; str[str.length()-i-1]==delimiter;i++){}
+        for (i = 0; str[str.length()-i-1]==delimiterIn;i++){}
         return str.substr(0, str.length()-i);
     }
 
@@ -193,7 +198,8 @@ namespace PropTreeLib
                 lineContainsAssignment = lineContainsAssignment || (inter[i] == assignChar);
             }
         }
-        return lineContainsAssignment?output+",":output;
+        return lineContainsAssignment?output+delimiter:output;
+        //return lineContainsAssignment?output+",":output;
     }
 
     std::string PropStringHandler::Trim(std::string str)

@@ -41,8 +41,12 @@ namespace PropTreeLib
         if (!wasCreatedAsSubtree)
         {
         	if (closeMessage != "none") ptlout << closeMessage << ptl::endl;
-            principalSection->Destroy();
-            delete principalSection;
+            if (principalSection != NULL)
+            {
+				principalSection->Destroy();
+				delete principalSection;
+				principalSection = NULL;
+            }
         }
     }
 

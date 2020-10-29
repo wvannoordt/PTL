@@ -232,6 +232,14 @@ namespace PropTreeLib
         }
         sectionSubSections.clear();
     }
+    
+    void PropertySection::StrictParse(void)
+    {
+    	if (!this->StrictTraverseParse(""))
+        {
+            ErrorKill("Found at least 1 invalid argument. Stopping.");
+        }
+    }
 
     bool PropertySection::StrictTraverseParse(std::string depthString)
     {

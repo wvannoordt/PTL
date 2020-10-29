@@ -108,19 +108,19 @@ namespace PropTreeLib
         }
         return success;
     }
-    
+
     bool PreProcessContext::StringContains(std::string str, std::string c)
     {
         return (str.find(c) != std::string::npos);
     }
-    
+
     bool PreProcessContext::SymbolPrecedes(std::string str, std::string preceder, std::string test)
     {
         if (!StringContains(str, preceder)) return false;
         if (!StringContains(str, test)) return true;
         return (str.find(preceder) < str.find(test));
     }
-    
+
     void PreProcessContext::SplitFunction(std::string str, std::string* pre, std::string* post, std::string* func, std::vector<std::string>* args, int level, bool* success)
     {
         size_t idxFuncSym = str.find(functionInvocationSymbol);
@@ -141,7 +141,7 @@ namespace PropTreeLib
         *post = noPre.substr(iEnd+1, noPre.length()-iEnd-1);
         BuildArgs(args, contents, functionArgDelimiter, level, success);
     }
-    
+
     void PreProcessContext::BuildArgs(std::vector<std::string>* args, std::string line, char delimiterIn, int level, bool* success)
     {
         std::vector<std::string> output;
@@ -167,7 +167,7 @@ namespace PropTreeLib
             }
         }
     }
-    
+
     std::string PreProcessContext::EvalFunction(std::string& func, std::vector<std::string>& args)
     {
         if (BuiltIns::builtInFunctions.Exists(func))
@@ -235,7 +235,7 @@ namespace PropTreeLib
         if (i < toFind.length()-1) return false;
         return (str.substr(i-toFind.length()+1, toFind.length())==toFind);
     }
-    
+
     bool PreProcessContext::PositionIsStart(size_t i, std::string str)
     {
         std::string fullInvocationStart = invocationSymbol + invocationStart;

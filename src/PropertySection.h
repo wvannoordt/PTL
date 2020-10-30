@@ -48,6 +48,7 @@ namespace PropTreeLib
             void KeyToNewValue(std::string key, PropertySection* newValue);
             void SetExistingKeyValuePair(std::string key, PropertySection* val);
             void RecursiveIncrementDepth(void);
+            std::string GetSectionName(void);
         private:
             void AssertPointerConsistency(std::string variableLocation, bool isSecondary);
             std::map<std::string,PropertySection*> sectionSubSections;

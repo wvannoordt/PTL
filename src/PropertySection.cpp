@@ -37,6 +37,11 @@ namespace PropTreeLib
         return &context;
     }
     
+	std::string PropertySection::GetSectionName(void)
+	{
+		return sectionName;	
+	}
+    
     PropertySection* PropertySection::PushSection(std::string pushedSection)
     {
         PropertySection* prevHost = host;

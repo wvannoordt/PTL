@@ -15,7 +15,27 @@ namespace PropTreeLib
             basePtr = NULL;
             count = 0;
             assertCount = assertCount_in;
+            basePtr = new int[assertCount_in];
+            requiresDelete = true;
+            hasFiller = false;
         }
+        
+        PTLStaticIntegerArray::PTLStaticIntegerArray(const int assertCount_in, std::string descriptionIn, int (*filler_in)(int))
+        {
+            strHandle = new PropStringHandler();
+            this->SetDescription(descriptionIn);
+            defaultValue = "[]";
+            basePointerType = BasePointer::IntArrayPointer;
+            requiresDelete = false;
+            basePtr = NULL;
+            count = 0;
+            assertCount = assertCount_in;
+            basePtr = new int[assertCount_in];
+            requiresDelete = true;
+            hasFiller = true;
+            filler = filler_in;
+        }
+        
         bool PTLStaticIntegerArray::ParseFromString(std::string parseVal, void* ptr)
         {
             char open, close;
@@ -27,9 +47,7 @@ namespace PropTreeLib
             std::string internalValues = parseVal.substr(sPos+1,ePos-sPos-1);
             std::vector<std::string> vals = strHandle->IdentifyTopLevels(internalValues, ',');
             count = vals.size();
-            basePtr = new int[count];
             *((int**)ptr) = basePtr;
-            requiresDelete = true;
             std::string nums = "0123456789";
             std::string parseValCurrent;
             if (assertCount != vals.size())
@@ -67,7 +85,16 @@ namespace PropTreeLib
         {
             return std::string(defaultValue);
         }
-        void PTLStaticIntegerArray::SetDefaultValue(void* ptr){}
+        
+        void PTLStaticIntegerArray::SetDefaultValue(void* ptr)
+        {
+            *((int**)ptr) = basePtr;
+            if (hasFiller)
+            {
+                for (int i = 0; i < assertCount; i++) basePtr[i] = filler(i);
+            }
+        }
+        
         void PTLStaticIntegerArray::Destroy(void)
         {
             delete strHandle;

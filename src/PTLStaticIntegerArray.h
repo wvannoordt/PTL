@@ -13,6 +13,7 @@ namespace PropTreeLib
         {
             public:
                 PTLStaticIntegerArray(const int assertCount_in, std::string descriptionIn);
+                PTLStaticIntegerArray(const int assertCount_in, std::string descriptionIn, int (*filler_in)(int));
                 bool ParseFromString(std::string parseVal, void* ptr);
                 void Destroy(void);
                 void SetDefaultValue(void* ptr);
@@ -24,6 +25,8 @@ namespace PropTreeLib
                 int* basePtr;
                 int count;
                 int assertCount;
+                int (*filler)(int);
+                bool hasFiller;
         };
     }
 }

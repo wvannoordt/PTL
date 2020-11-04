@@ -15,7 +15,27 @@ namespace PropTreeLib
             basePtr = NULL;
             count = 0;
             assertCount = assertCount_in;
+            basePtr = new double[assertCount_in];
+            requiresDelete = true;
+            hasFiller = false;
         }
+        
+        PTLStaticDoubleArray::PTLStaticDoubleArray(int assertCount_in, std::string descriptionIn, double (*filler_in)(int))
+        {
+            strHandle = new PropStringHandler();
+            this->SetDescription(descriptionIn);
+            defaultValue = "[]";
+            basePointerType = BasePointer::DoubleArrayPointer;
+            requiresDelete = false;
+            basePtr = NULL;
+            count = 0;
+            assertCount = assertCount_in;
+            basePtr = new double[assertCount_in];
+            requiresDelete = true;
+            hasFiller = true;
+            filler = filler_in;
+        }
+        
         bool PTLStaticDoubleArray::ParseFromString(std::string parseVal, void* ptr)
         {
             char open, close;
@@ -27,9 +47,7 @@ namespace PropTreeLib
             std::string internalValues = parseVal.substr(sPos+1,ePos-sPos-1);
             std::vector<std::string> vals = strHandle->IdentifyTopLevels(internalValues, ',');
             count = vals.size();
-            basePtr = new double[count];
             *((double**)ptr) = basePtr;
-            requiresDelete = true;
             if (count!=assertCount)
             {
                 parseErrorString = "Expecting exactly " + std::to_string(assertCount) + " elements, but found " + std::to_string(count) + ".";
@@ -55,7 +73,14 @@ namespace PropTreeLib
         {
             return std::string(defaultValue);
         }
-        void PTLStaticDoubleArray::SetDefaultValue(void* ptr){}
+        void PTLStaticDoubleArray::SetDefaultValue(void* ptr)
+        {
+            *((double**)ptr) = basePtr;
+            if (hasFiller)
+            {
+                for (int i = 0; i < assertCount; i++) basePtr[i] = filler(i);
+            }
+        }
         void PTLStaticDoubleArray::Destroy(void)
         {
             delete strHandle;

@@ -22,5 +22,5 @@ int main(void)
 	std::cout << "Read staticDouble: " << staticDouble[0] << ", ..., " << staticDouble[2] << std::endl;
 	std::cout << "Read ar1: " << ar1[0] << ", ..., " << ar1[car1-1] << std::endl;
 	std::cout << "(SUCCESS)" << std::endl;
-	return 1;
+	return 0;
 }

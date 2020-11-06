@@ -16,5 +16,5 @@ int main(void)
 	input.DebugPrint();
 	
 	std::cout << "(SUCCESS)" << std::endl;
-	return 1;
+	return 0;
 }

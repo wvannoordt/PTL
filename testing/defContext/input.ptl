@@ -1,0 +1,5 @@
+#define a 0.1
+#define b 0.2
+#define c @sum($(a), $(b))
+inputValue1 = @sum($(a), $(b))
+inputValue2 = $(c)

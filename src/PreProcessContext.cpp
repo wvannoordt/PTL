@@ -18,7 +18,7 @@ namespace PropTreeLib
         hostContext = NULL;
         isTopLevelContext = true;
         defineString = "define";
-        forbiddenNameChars = "!@#$%^&*(){}[]\\|~\'`?/<>,";
+        forbiddenNameChars = "!#$%^&*{}[]\\|~\'`?/<>";
         dlmChar = ' ';
         functionArgDelimiter = ',';
     }
@@ -94,7 +94,14 @@ namespace PropTreeLib
             errorReason = "multiple definition";
         }
         if (error) ErrorKill("Error parsing preprocessor directive \"" + inputLine + "\": " + errorReason + ".");
-        definitions.insert({varName,varVal});
+        bool success = true;
+        std::string valueToAdd = ResolveWithinContext(varVal, 0, &success);
+        if (!success)
+        {
+            errorReason = "could not resolve value within context";
+            ErrorKill("Error parsing preprocessor directive \"" + inputLine + "\": " + errorReason + ".");
+        }
+        definitions.insert({varName,valueToAdd});
         return true;
     }
 
@@ -168,11 +175,20 @@ namespace PropTreeLib
         }
     }
 
-    std::string PreProcessContext::EvalFunction(std::string& func, std::vector<std::string>& args)
+    std::string PreProcessContext::EvalFunction(std::string& func, std::vector<std::string>& args, std::string origLine)
     {
         if (BuiltIns::builtInFunctions.Exists(func))
         {
-            return BuiltIns::builtInFunctions[func](args);
+            try
+            {
+                return BuiltIns::builtInFunctions[func](args);
+            }
+            catch(BuiltIns::BuiltinException a)
+            {
+                ErrorKill("Error evaluating built-in function \"" + func + "\" from the following line:\n >> " + origLine + "\nMessage: " + a.what());
+                return "";
+            }
+            
         }
         else
         {
@@ -191,7 +207,7 @@ namespace PropTreeLib
             std::string pre, post, func;
             std::vector<std::string> args;
             SplitFunction(str, &pre, &post, &func, &args, level, success);
-            return pre + ResolveWithinContext(EvalFunction(func, args), level+1, success) + ResolveWithinContext(post, level+1, success);
+            return pre + ResolveWithinContext(EvalFunction(func, args, str_in), level+1, success) + ResolveWithinContext(post, level+1, success);
         }
         else
         {

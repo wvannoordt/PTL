@@ -30,7 +30,7 @@ namespace PropTreeLib
             bool StringContains(std::string str, std::string c);
             bool SymbolPrecedes(std::string str, std::string preceder, std::string test);
             void SplitFunction(std::string str, std::string* pre, std::string* post, std::string* func, std::vector<std::string>* args, int level, bool* success);
-            std::string EvalFunction(std::string& func, std::vector<std::string>& args);
+            std::string EvalFunction(std::string& func, std::vector<std::string>& args, std::string origLine);
         private:
             std::map<std::string, std::string> definitions;
             char preProcessIndicator, dlmChar, functionArgDelimiter;

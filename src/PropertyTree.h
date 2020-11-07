@@ -24,6 +24,7 @@ namespace PropTreeLib
             void CreateDefaultValuesFile(std::string filename);
             void SetAsSubtree(PropertySection& newPrincipal);
             void PushSection(std::string pushedSection);
+            PropertySection& Principal(void);
         private:
             PropertySection* principalSection;
             PropStringHandler stringHandler;

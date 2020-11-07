@@ -29,6 +29,11 @@ namespace PropTreeLib
         principalSection->DeclareIsPrincipal();
     }
 
+    PropertySection& PropertyTree::Principal(void)
+    {
+        return *principalSection;
+    }
+
     void PropertyTree::SetAsSubtree(PropertySection& newPrincipal)
     {
         this->Destroy();

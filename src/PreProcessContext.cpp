@@ -94,15 +94,22 @@ namespace PropTreeLib
             errorReason = "multiple definition";
         }
         if (error) ErrorKill("Error parsing preprocessor directive \"" + inputLine + "\": " + errorReason + ".");
+        CreateDefinition(varName, varVal);
+        return true;
+    }
+    
+    void PreProcessContext::CreateDefinition(std::string nameValue, std::string resolvableValue)
+    {
         bool success = true;
-        std::string valueToAdd = ResolveWithinContext(varVal, 0, &success);
+        std::string valueToAdd = ResolveWithinContext(resolvableValue, 0, &success);
         if (!success)
         {
-            errorReason = "could not resolve value within context";
-            ErrorKill("Error parsing preprocessor directive \"" + inputLine + "\": " + errorReason + ".");
+            std::string errorReason = "could not resolve value within context";
+            ErrorKill("Error parsing preprocessor directive \"" + resolvableValue + "\": " + errorReason + ".");
         }
-        definitions.insert({varName,valueToAdd});
-        return true;
+        std::string dummy;
+        if (CheckContextDefinition(nameValue, &dummy)) ErrorKill("Found duplicate definitions for preprocessor variable \"" + nameValue + "\".");
+        definitions.insert({nameValue,valueToAdd});
     }
 
     bool PreProcessContext::ParseInvocationExpression(std::string inputLine, std::string* outputLine)

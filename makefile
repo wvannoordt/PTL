@@ -1,7 +1,7 @@
 LIB_NAME := PropTreeLib
 
 ifndef OPTLEVEL
-OPTLEVEL := 0
+OPTLEVEL := 3
 endif
 
 BASEIDIR  := $(shell pwd)

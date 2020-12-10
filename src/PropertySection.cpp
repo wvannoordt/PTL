@@ -39,7 +39,7 @@ namespace PropTreeLib
     
 	std::string PropertySection::GetSectionName(void)
 	{
-		return sectionName;	
+		return sectionName;
 	}
     
     PropertySection* PropertySection::PushSection(std::string pushedSection)
@@ -353,6 +353,7 @@ namespace PropTreeLib
     {
         this->SetValue(argument);
         this->DeclareIsTerminal();
+        return *this;
     }
 
     std::string PropertySection::GetTotalName(void)

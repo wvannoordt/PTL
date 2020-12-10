@@ -14,7 +14,9 @@ namespace PropTreeLib
         }
         bool PTLString::ParseFromString(std::string parseVal, void* ptr)
         {
+            if (hasBeenParsed) return true;
             *((std::string*)ptr) = parseVal;
+            hasBeenParsed = true;
             return true;
         }
         std::string PTLString::GetDefaultValueString(void)

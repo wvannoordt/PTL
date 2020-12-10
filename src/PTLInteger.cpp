@@ -13,6 +13,7 @@ namespace PropTreeLib
         }
         bool PTLInteger::ParseFromString(std::string parseVal, void* ptr)
         {
+            if (hasBeenParsed) return true;
             std::string nums = "-0123456789";
             int i;
             try
@@ -27,6 +28,7 @@ namespace PropTreeLib
                 }
                 i=std::stoi(parseVal);
                 *((int*)ptr) = i;
+                hasBeenParsed = true;
                 return true;
             }
             catch (...)

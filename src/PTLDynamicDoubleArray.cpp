@@ -18,6 +18,7 @@ namespace PropTreeLib
         }
         bool PTLDynamicDoubleArray::ParseFromString(std::string parseVal, void* ptr)
         {
+            if (hasBeenParsed) return true;
             char open, close;
             strHandle->GetVectorStyle(&open, &close);
             size_t sPos = parseVal.find(open);
@@ -44,6 +45,7 @@ namespace PropTreeLib
                     return false;
                 }
             }
+            hasBeenParsed = true;
             return true;
         }
         void PTLDynamicDoubleArray::SetSecondaryVariable(void* ptr)

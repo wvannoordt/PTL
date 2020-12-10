@@ -13,14 +13,17 @@ namespace PropTreeLib
         }
         bool PTLBoolean::ParseFromString(std::string parseVal, void* ptr)
         {
+            if (hasBeenParsed) return true;
             if ((parseVal=="True")||(parseVal=="true")||(parseVal=="T")||(parseVal=="t"))
             {
                 *((bool*)ptr) = true;
+                hasBeenParsed = true;
                 return true;
             }
             if ((parseVal=="False")||(parseVal=="false")||(parseVal=="F")||(parseVal=="f"))
             {
                 *((bool*)ptr) = false;
+                hasBeenParsed = true;
                 return true;
             }
             parseErrorString = "could not parse entry to bool.";

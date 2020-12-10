@@ -38,9 +38,11 @@ namespace PropTreeLib
         }
         bool PTLEnum::ParseFromString(std::string parseVal, void* ptr)
         {
+            if (hasBeenParsed) return true;
             if (options.find(parseVal)!=options.end())
             {
                 *((int*)ptr) = options[parseVal];
+                hasBeenParsed = true;
                 return true;
             }
             else

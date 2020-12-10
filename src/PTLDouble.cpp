@@ -14,6 +14,7 @@ namespace PropTreeLib
         }
         bool PTLDouble::ParseFromString(std::string parseVal, void* ptr)
         {
+            if (hasBeenParsed) return true;
             for (size_t a = 0; a < parseVal.length(); a++)
             {
                 if (allowed.find(parseVal[a])==std::string::npos)
@@ -27,6 +28,7 @@ namespace PropTreeLib
             {
                 i=std::stod(parseVal);
                 *((double*)ptr) = i;
+                hasBeenParsed = true;
                 return true;
             }
             catch (...)

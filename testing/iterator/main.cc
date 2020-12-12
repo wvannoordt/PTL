@@ -9,6 +9,11 @@ int main(void)
 	int globalValue;
 	input["globalValue"].MapTo(&globalValue) = new PTL::Variables::PTLInteger(3, "Dummy variables");
 	
+	// for (PTL::Iterator it(input); it.HasNext(); it++)
+	// {
+	// 
+	// }
+	
 	input.StrictParse();
 	input.DebugPrint();
 

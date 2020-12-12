@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include <exception>
-namespace PropTreeLib
+namespace PTL
 {
     namespace BuiltIns
     {

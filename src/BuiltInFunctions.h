@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include "stdlib.h"
-namespace PropTreeLib
+namespace PTL
 {
     namespace BuiltIns
     {

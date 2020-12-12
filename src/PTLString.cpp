@@ -2,7 +2,7 @@
 #include <string>
 #include "PTLString.h"
 
-namespace PropTreeLib
+namespace PTL
 {
     namespace Variables
     {

@@ -6,7 +6,7 @@
 #include "PTLOutputStream.h"
 #include "Error.h"
 
-namespace PropTreeLib
+namespace PTL
 {
     namespace Variables
     {

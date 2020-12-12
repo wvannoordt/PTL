@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include "PreProcessContext.h"
-namespace PropTreeLib
+namespace PTL
 {
     class PropStringHandler
     {

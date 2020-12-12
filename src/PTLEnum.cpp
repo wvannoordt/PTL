@@ -3,7 +3,7 @@
 #include "PTLEnum.h"
 #include <map>
 #include <vector>
-namespace PropTreeLib
+namespace PTL
 {
     namespace Variables
     {
@@ -63,7 +63,6 @@ namespace PropTreeLib
         void PTLEnum::SetDefaultValue(void* ptr)
         {
             *((int*)ptr) = options[defaultValue];
-            *((int*)ptr) = 0;
         }
         void PTLEnum::Destroy(void)
         {

@@ -10,7 +10,7 @@
 #include <fstream>
 #include <sys/stat.h>
 #include <unistd.h>
-namespace PropTreeLib
+namespace PTL
 {
     PropertySection::PropertySection(PropStringHandler* stringHandler_in, int depthIn, PropertySection* host_in)
     {

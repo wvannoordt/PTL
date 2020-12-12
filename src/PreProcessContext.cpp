@@ -6,7 +6,7 @@
 #include "Error.h"
 #include "BuiltInFunctionList.h"
 
-namespace PropTreeLib
+namespace PTL
 {
     PreProcessContext::PreProcessContext(void)
     {

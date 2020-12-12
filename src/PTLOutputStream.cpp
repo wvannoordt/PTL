@@ -1,5 +1,5 @@
 #include "PTLOutputStream.h"
-namespace PropTreeLib
+namespace PTL
 {
     namespace ptl
     {

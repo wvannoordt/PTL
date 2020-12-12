@@ -8,7 +8,7 @@
 #define TR_PROTOTYPE 123873
 #define TR_DATA      232342
 
-namespace PropTreeLib
+namespace PTL
 {
     class PropertyTree
     {

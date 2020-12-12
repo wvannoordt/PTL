@@ -4,7 +4,7 @@
 #include <vector>
 #include "stdlib.h"
 #include "BuiltInFunctionList.h"
-namespace PropTreeLib
+namespace PTL
 {
     namespace BuiltIns
     {

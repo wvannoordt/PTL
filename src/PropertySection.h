@@ -12,7 +12,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include "PTLOutputStream.h"
-namespace PropTreeLib
+namespace PTL
 {
     class PropertySection
     {

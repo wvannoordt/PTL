@@ -61,6 +61,17 @@ int main(void)
 	= new PTL::Variables::PTLDouble(0.4, "Under-relaxation factor for energy equation Newton solve");
 
 	input.ReadInputFileToTreeData(filename);
+	//test parse redundancy
+	input.StrictParse();
+	input.StrictParse();
+	input.StrictParse();
+	input.StrictParse();
+	input.StrictParse();
+	input.StrictParse();
+	input.StrictParse();
+	input.StrictParse();
+	input.StrictParse();
+	input.StrictParse();
 	input.StrictParse();
 	input.DebugPrint();
 	std::cout << "(SUCCESS)" << std::endl;

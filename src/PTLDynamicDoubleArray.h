@@ -5,7 +5,7 @@
 #include "InputVariable.h"
 #include "PropStringHandler.h"
 
-namespace PropTreeLib
+namespace PTL
 {
     namespace Variables
     {

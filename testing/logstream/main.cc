@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "PropTreeLib.h"
+#include "PTL.h"
 
 enum MySpecialEnum
 {
@@ -25,14 +25,14 @@ std::string MySpecialEnumToString(int i)
 int main(void)
 {
 	std::string filename = "testfile.ptl";
-	PropTreeLib::ptlout.AddFileToStream("test.log");
-	PropTreeLib::PropertyTree input;
+	PTL::ptlout.AddFileToStream("test.log");
+	PTL::PropertyTree input;
 
 	int myval;
 	int somevalue;
 
-	input["myIntegerValue"].MapTo(&myval) = new PropTreeLib::Variables::PTLInteger(1, "Some integer value");
-	input["myEnumValue"].MapTo(&somevalue) = new PropTreeLib::Variables::PTLAutoEnum(option1, MySpecialEnumToString, "Some enum value");
+	input["myIntegerValue"].MapTo(&myval) = new PTL::Variables::PTLInteger(1, "Some integer value");
+	input["myEnumValue"].MapTo(&somevalue) = new PTL::Variables::PTLAutoEnum(option1, MySpecialEnumToString, "Some enum value");
 
 	input.ReadInputFileToTreeData(filename);
 	input.StrictParse();

@@ -1,14 +1,14 @@
 #include <iostream>
-#include "PropTreeLib.h"
+#include "PTL.h"
 int main(int argc, char** argv)
 {
 	std::string filename = "input.ptl";
-	PropTreeLib::PropertyTree input;
-	PropTreeLib::Interactive i(argc, argv, &input);
+	PTL::PropertyTree input;
+	PTL::Interactive i(argc, argv, &input);
 
 	double inputValue;
 
-	input["inputValue"].MapTo(&inputValue) = new PropTreeLib::Variables::PTLDouble(1.0, "A dummy variable");
+	input["inputValue"].MapTo(&inputValue) = new PTL::Variables::PTLDouble(1.0, "A dummy variable");
 
 	input.ReadInputFileToTreeData(filename);
 	input.StrictParse();

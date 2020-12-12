@@ -1,9 +1,9 @@
 #include "Interactive.h"
 #include <string>
-#include "PropTreeLib.h"
+#include "PTL.h"
 #include "PropertyTree.h"
 #include "Error.h"
-namespace PropTreeLib
+namespace PTL
 {
     Interactive::Interactive(int argc_in, char** argv_in, PropertyTree* pTree_in)
     {

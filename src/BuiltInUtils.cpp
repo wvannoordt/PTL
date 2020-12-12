@@ -1,6 +1,6 @@
 #include "BuiltInUtils.h"
 
-namespace PropTreeLib
+namespace PTL
 {
     namespace BuiltIns
     {

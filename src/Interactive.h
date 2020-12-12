@@ -1,9 +1,9 @@
 #ifndef INTERACTIVE_H
 #define INTERACTIVE_H
 #include <string>
-#include "PropTreeLib.h"
+#include "PTL.h"
 #include "PropertyTree.h"
-namespace PropTreeLib
+namespace PTL
 {
     class Interactive
     {

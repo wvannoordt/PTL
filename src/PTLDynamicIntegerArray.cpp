@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include "PTLDynamicIntegerArray.h"
-namespace PropTreeLib
+namespace PTL
 {
     namespace Variables
     {

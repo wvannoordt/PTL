@@ -4,7 +4,7 @@
 #include <ostream>
 #include <iostream>
 #include <fstream>
-namespace PropTreeLib
+namespace PTL
 {
     namespace ptl
     {

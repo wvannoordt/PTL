@@ -4,7 +4,7 @@
 #include <map>
 #include <string>
 
-namespace PropTreeLib
+namespace PTL
 {
     class PreProcessContext
     {

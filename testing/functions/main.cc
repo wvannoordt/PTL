@@ -1,17 +1,17 @@
 #include <iostream>
-#include "PropTreeLib.h"
+#include "PTL.h"
 int main(void)
 {
 	std::string filename = "testfile.ptl";
-	PropTreeLib::PropertyTree input;
+	PTL::PropertyTree input;
 
 	std::string testValue;
 	std::string testValue2;
 	std::cout << "ENV:" << std::endl;
 	input["testValue"].MapTo(&testValue)
-	= new PropTreeLib::Variables::PTLString("default", "Test variable");
+	= new PTL::Variables::PTLString("default", "Test variable");
 	input["testValue2"].MapTo(&testValue2)
-	= new PropTreeLib::Variables::PTLString("default", "Test variable");
+	= new PTL::Variables::PTLString("default", "Test variable");
 	input.ReadInputFileToTreeData(filename);
 	input.StrictParse();
 	input.DebugPrint();

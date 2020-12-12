@@ -6,7 +6,7 @@
 #include <fstream>
 #include <sys/stat.h>
 #include <unistd.h>
-namespace PropTreeLib
+namespace PTL
 {
     PropertyTree::PropertyTree(void)
     {

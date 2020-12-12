@@ -1,17 +1,17 @@
 #include <iostream>
-#include "PropTreeLib.h"
+#include "PTL.h"
 int main(void)
 {
     //This is the simplest example of a PTL input.
 
     //Define an input class
-    PropTreeLib::PropertyTree input;
+    PTL::PropertyTree input;
 
     //Target variable to read data into
     int testValue;
 
     //Define a template variable and map to target
-    input["testValue"].MapTo(&testValue) = new PropTreeLib::Variables::PTLInteger(1, "A test value with default value 1");
+    input["testValue"].MapTo(&testValue) = new PTL::Variables::PTLInteger(1, "A test value with default value 1");
 
     //Read the input file
     input.ReadInputFileToTreeData("test.ptl");

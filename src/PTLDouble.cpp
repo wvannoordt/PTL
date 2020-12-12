@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include "PTLDouble.h"
-namespace PropTreeLib
+namespace PTL
 {
     namespace Variables
     {

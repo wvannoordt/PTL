@@ -1,4 +1,4 @@
-LIB_NAME := PropTreeLib
+LIB_NAME := PTL
 
 ifndef OPTLEVEL
 OPTLEVEL := 3
@@ -17,7 +17,6 @@ SRC_FILES := $(wildcard ${SRC_DIR}/*.cpp)
 HEADER_FILES := $(wildcard ${SRC_DIR}/*.h)
 
 OBJ_FILES   := $(patsubst ${SRC_DIR}/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
-
 
 TARGET := ${LIB_DIR}/lib${LIB_NAME}.a
 

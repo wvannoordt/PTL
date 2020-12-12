@@ -7,7 +7,7 @@
 #define MAX_ENUM_OPTIONS 1024
 
 
-namespace PropTreeLib
+namespace PTL
 {
     namespace Variables
     {

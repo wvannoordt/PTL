@@ -8,7 +8,7 @@
 #include "PropStringHandler.h"
 #define PTL_AUTO_ENUM_TERMINATOR ""
 
-namespace PropTreeLib
+namespace PTL
 {
     namespace Variables
     {

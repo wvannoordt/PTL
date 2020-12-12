@@ -1,7 +1,7 @@
 #ifndef BASE_POINTER_TYPES_H
 #define BASE_POINTER_TYPES_H
 #include <string>
-namespace PropTreeLib
+namespace PTL
 {
     namespace Variables
     {

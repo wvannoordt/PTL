@@ -4,7 +4,7 @@
 #include <string>
 #include "InputVariable.h"
 
-namespace PropTreeLib
+namespace PTL
 {
     namespace Variables
     {

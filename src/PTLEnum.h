@@ -7,7 +7,7 @@
 #include <vector>
 #include "PropStringHandler.h"
 
-namespace PropTreeLib
+namespace PTL
 {
     namespace Variables
     {

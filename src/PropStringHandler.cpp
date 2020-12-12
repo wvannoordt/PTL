@@ -10,7 +10,7 @@
 #include <sstream>
 #include <stack>
 #include "PreProcessContext.h"
-namespace PropTreeLib
+namespace PTL
 {
     PropStringHandler::PropStringHandler(void)
     {

@@ -1,8 +1,8 @@
 #include "BuiltInFunctions.h"
 #include "Error.h"
-#include "PropTreeLib.h"
+#include "PTL.h"
 #include "BuiltInUtils.h"
-namespace PropTreeLib
+namespace PTL
 {
     namespace BuiltIns
     {

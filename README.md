@@ -64,7 +64,7 @@ int main(int argc, char** argv)
     //Bind string "myInteger" to integer myInteger. The string can be any string,
     //not just the variable name. The default value of myInteger is 1. Note the
     //string description is the second argument.
-    input["myIntegerValue"].MapTo(&myInteger)
+    input["myInteger"].MapTo(&myInteger)
         = new PTL::Variables::PTLInteger(1, "Some integer value");
 
     //This function actually populates the tree structure with string data but

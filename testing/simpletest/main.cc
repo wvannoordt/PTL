@@ -2,7 +2,7 @@
 #include "PTL.h"
 int main(void)
 {
-	std::string filename = "testfile.in";
+	std::string filename = "test.ptl";
 	PTL::PropertyTree input;
 
 	int testInteger1, testInteger2;

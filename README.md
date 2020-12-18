@@ -1,5 +1,8 @@
 # PTL (Property Tree Library)
-A flexible and feature-rich input file reader designed for use in scientific computing applications.
+A flexible and feature-rich script format designed for use in scientific computing applications.
+
+Now supporting syntax highlighting for the Atom editor via the [language-ptl](https://github.com/wvannoordt/language-ptl) package
+(as well as the [tree-sitter-ptl](https://github.com/wvannoordt/tree-sitter-ptl) parser).
 
 ## Description
 This project was inspired by extensive work with a number of scientific computing codes.

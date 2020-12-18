@@ -14,6 +14,17 @@ namespace PTL
         std::string PTLFunc_prod    (std::vector<std::string>& args);
         std::string PTLFunc_sub     (std::vector<std::string>& args);
         std::string PTLFunc_div     (std::vector<std::string>& args);
+        std::string PTLFunc_fread   (std::vector<std::string>& args);
+        std::string PTLFunc_round   (std::vector<std::string>& args);
+        std::string PTLFunc_sin     (std::vector<std::string>& args);
+        std::string PTLFunc_cos     (std::vector<std::string>& args);
+        std::string PTLFunc_sind    (std::vector<std::string>& args);
+        std::string PTLFunc_cosd    (std::vector<std::string>& args);
+        std::string PTLFunc_max     (std::vector<std::string>& args);
+        std::string PTLFunc_min     (std::vector<std::string>& args);
+        std::string PTLFunc_atan2   (std::vector<std::string>& args);
+        std::string PTLFunc_atan2d  (std::vector<std::string>& args);
+        std::string PTLFunc_sqrt    (std::vector<std::string>& args);
     }
 }
 #endif

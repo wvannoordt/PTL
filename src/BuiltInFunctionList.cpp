@@ -14,6 +14,17 @@ namespace PTL
             this->AddFunction("prod",   PTLFunc_prod);
             this->AddFunction("sub",    PTLFunc_sub);
             this->AddFunction("div",    PTLFunc_div);
+            this->AddFunction("fread",  PTLFunc_fread);
+            this->AddFunction("round",  PTLFunc_round);
+            this->AddFunction("sin",        PTLFunc_sin);
+            this->AddFunction("cos",        PTLFunc_cos);
+            this->AddFunction("sind",       PTLFunc_sind);
+            this->AddFunction("cosd",       PTLFunc_cosd);
+            this->AddFunction("max",        PTLFunc_max);
+            this->AddFunction("min",        PTLFunc_min);
+            this->AddFunction("atan2",      PTLFunc_atan2);
+            this->AddFunction("atan2d",     PTLFunc_atan2d);
+            this->AddFunction("sqrt",       PTLFunc_sqrt);
         }
         
         bool BuiltInFunctionList::AddFunction(std::string funcName, PTLBuiltinFunction_t func)

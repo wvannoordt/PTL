@@ -2,6 +2,8 @@
 #include "Error.h"
 #include "PTL.h"
 #include "BuiltInUtils.h"
+#include <cmath>
+#define PI180 0.01745329251
 namespace PTL
 {
     namespace BuiltIns
@@ -61,6 +63,102 @@ namespace PTL
             output = AssertConvertDouble(args[0]);
             output /= AssertConvertDouble(args[1]);
             return std::to_string(output);
+        }
+        
+        std::string PTLFunc_fread(std::vector<std::string>& args)
+        {
+            if (args.size() != 2) throw BuiltinException("Expecting exactly two arguments.");
+            int idx = AssertConvertInt(args[1]);
+            std::vector<std::string> fileContents = ReadFileToStringVector(args[0]);
+            if (idx >= fileContents.size()) throw BuiltinException("Provided index \""
+                + std::to_string(idx) + "\" out of range: found only "
+                + std::to_string(fileContents.size()) + " lines (zero-base indexing!).");
+            return fileContents[idx];
+        }
+        
+        std::string PTLFunc_round(std::vector<std::string>& args)
+        {
+            if (args.size() != 1) throw BuiltinException("Expecting exactly one argument.");
+            double d = AssertConvertDouble(args[0]);
+            int output = round(d);
+            return std::to_string(output);
+        }
+        
+        std::string PTLFunc_sin(std::vector<std::string>& args)
+        {
+            if (args.size() != 1) throw BuiltinException("Expecting exactly one argument.");
+            double sarg = AssertConvertDouble(args[0]);
+            return std::to_string(sin(sarg));
+        }
+
+        std::string PTLFunc_cos(std::vector<std::string>& args)
+        {
+            if (args.size() != 1) throw BuiltinException("Expecting exactly one argument.");
+            double sarg = AssertConvertDouble(args[0]);
+            return std::to_string(cos(sarg));
+        }
+
+        std::string PTLFunc_sind(std::vector<std::string>& args)
+        {
+            if (args.size() != 1) throw BuiltinException("Expecting exactly one argument.");
+            double sarg = AssertConvertDouble(args[0]);
+            return std::to_string(sin(PI180*sarg));
+        }
+
+        std::string PTLFunc_cosd(std::vector<std::string>& args)
+        {
+            if (args.size() != 1) throw BuiltinException("Expecting exactly one argument.");
+            double sarg = AssertConvertDouble(args[0]);
+            return std::to_string(cos(PI180*sarg));
+        }
+
+        std::string PTLFunc_atan2d(std::vector<std::string>& args)
+        {
+            if (args.size() != 2) throw BuiltinException("Expecting exactly two arguments.");
+            double yarg = AssertConvertDouble(args[0]);
+            double xarg = AssertConvertDouble(args[1]);
+            return std::to_string(atan2(yarg, xarg)/PI180);
+        }
+
+        std::string PTLFunc_atan2(std::vector<std::string>& args)
+        {
+            if (args.size() != 2) throw BuiltinException("Expecting exactly two arguments.");
+            double yarg = AssertConvertDouble(args[0]);
+            double xarg = AssertConvertDouble(args[1]);
+            return std::to_string(atan2(yarg, xarg));
+        }
+
+        std::string PTLFunc_max(std::vector<std::string>& args)
+        {
+            double output = 1.0;
+            if (args.size() < 1) throw BuiltinException("Expecting at least one argument.");
+            output = AssertConvertDouble(args[0]);
+            for (int i = 0; i < args.size(); i++)
+            {
+                double a = AssertConvertDouble(args[i]);
+                output = (a>output)?(a):(output);
+            }
+            return std::to_string(output);
+        }
+
+        std::string PTLFunc_min(std::vector<std::string>& args)
+        {
+            double output = 1.0;
+            if (args.size() < 1) throw BuiltinException("Expecting at least one argument.");
+            output = AssertConvertDouble(args[0]);
+            for (int i = 0; i < args.size(); i++)
+            {
+                double a = AssertConvertDouble(args[i]);
+                output = (a<output)?(a):(output);
+            }
+            return std::to_string(output);
+        }
+
+        std::string PTLFunc_sqrt(std::vector<std::string>& args)
+        {
+            if (args.size() != 1) throw BuiltinException("Expecting exactly one argument.");
+            double sarg = AssertConvertDouble(args[0]);
+            return std::to_string(sqrt(sarg));
         }
     }
 }

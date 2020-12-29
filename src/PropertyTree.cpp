@@ -86,7 +86,7 @@ namespace PTL
     {
         if (!principalSection->StrictTraverseParse(""))
         {
-            ErrorKill("Found at least 1 invalid argument. Stopping.");
+            ErrorKill("Found at least 1 invalid argument.");
         }
     }
 

@@ -16,7 +16,7 @@ namespace PTL
             file = file_in;
             lineNumber = lineNumber_in;
             std::string line = "---------------------------------------";
-            completeMessage = "";
+            completeMessage = "\n";
             completeMessage += line;
             completeMessage += "\nPTLException thrown.\nMessage:\n";
             completeMessage += message;

@@ -7,15 +7,15 @@ namespace PTL
         BuiltInFunctionList builtInFunctions;
         BuiltInFunctionList::BuiltInFunctionList(void)
         {
-            this->AddFunction("env",    PTLFunc_env);
-            this->AddFunction("cat",    PTLFunc_cat);
-            this->AddFunction("choose", PTLFunc_choose);
-            this->AddFunction("sum",    PTLFunc_sum);
-            this->AddFunction("prod",   PTLFunc_prod);
-            this->AddFunction("sub",    PTLFunc_sub);
-            this->AddFunction("div",    PTLFunc_div);
-            this->AddFunction("fread",  PTLFunc_fread);
-            this->AddFunction("round",  PTLFunc_round);
+            this->AddFunction("env",        PTLFunc_env);
+            this->AddFunction("cat",        PTLFunc_cat);
+            this->AddFunction("choose",     PTLFunc_choose);
+            this->AddFunction("sum",        PTLFunc_sum);
+            this->AddFunction("prod",       PTLFunc_prod);
+            this->AddFunction("sub",        PTLFunc_sub);
+            this->AddFunction("div",        PTLFunc_div);
+            this->AddFunction("fread",      PTLFunc_fread);
+            this->AddFunction("round",      PTLFunc_round);
             this->AddFunction("sin",        PTLFunc_sin);
             this->AddFunction("cos",        PTLFunc_cos);
             this->AddFunction("sind",       PTLFunc_sind);
@@ -25,6 +25,8 @@ namespace PTL
             this->AddFunction("atan2",      PTLFunc_atan2);
             this->AddFunction("atan2d",     PTLFunc_atan2d);
             this->AddFunction("sqrt",       PTLFunc_sqrt);
+            this->AddFunction("lt",         PTLFunc_lt);
+            this->AddFunction("gt",         PTLFunc_gt);
         }
         
         bool BuiltInFunctionList::AddFunction(std::string funcName, PTLBuiltinFunction_t func)

@@ -160,5 +160,21 @@ namespace PTL
             double sarg = AssertConvertDouble(args[0]);
             return std::to_string(sqrt(sarg));
         }
+        
+        std::string PTLFunc_gt(std::vector<std::string>& args)
+        {
+            if (args.size() != 2) throw BuiltinException("Expecting exactly two arguments.");
+            double arg1 = AssertConvertDouble(args[0]);
+            double arg2 = AssertConvertDouble(args[1]);
+            return (arg1>arg2)?"1":"0";
+        }
+        
+        std::string PTLFunc_lt(std::vector<std::string>& args)
+        {
+            if (args.size() != 2) throw BuiltinException("Expecting exactly two arguments.");
+            double arg1 = AssertConvertDouble(args[0]);
+            double arg2 = AssertConvertDouble(args[1]);
+            return (arg1<arg2)?"1":"0";
+        }
     }
 }

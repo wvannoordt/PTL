@@ -25,6 +25,8 @@ namespace PTL
         std::string PTLFunc_atan2   (std::vector<std::string>& args);
         std::string PTLFunc_atan2d  (std::vector<std::string>& args);
         std::string PTLFunc_sqrt    (std::vector<std::string>& args);
+        std::string PTLFunc_gt      (std::vector<std::string>& args);
+        std::string PTLFunc_lt      (std::vector<std::string>& args);
     }
 }
 #endif

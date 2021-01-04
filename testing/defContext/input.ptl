@@ -1,5 +1,29 @@
 #define a 0.1
 #define b 0.2
 #define c @sum($(a), $(b))
+
+#define xmin 0.02
+#define xmax 0.028458
+#define ymin 0.02
+#define ymax 0.028458
+#define zmin 0.0
+#define zmax 0.051225
+
+#define inclineAngle 0.1
+#define impingementDistance 0.173
+
+#define boxDiag @sqrt(@sum(@prod($(xmax),$(xmax)),@prod($(ymax),$(ymax))))
+#define boxAngle @atan2d($(ymax), $(xmax))
+
+#define shockAngleDeg 12.3701588
+#define absShockAngle @sum(@sub(180, $(shockAngleDeg)), $(inclineAngle))
+
+#define A1 @prod($(impingementDistance), @cosd($(inclineAngle)))
+#define A2 @div(@cosd($(absShockAngle)), @sind($(absShockAngle)))
+#define A3 @prod($(boxDiag), @sind(@sum($(boxAngle),$(inclineAngle))))
+#define A4 @prod($(impingementDistance), @sind($(inclineAngle)))
+#define shockIntersectsYmaxAt @sum($(A1), @prod($(A2), @sub($(A3), $(A4))))
+
+
 inputValue1 = @sum($(a), $(b))
 inputValue2 = $(c)

@@ -13,5 +13,6 @@
 #include "PTLDynamicIntegerArray.h"
 #include "PTLStaticIntegerArray.h"
 #include "Interactive.h"
+#include "InputArguments.h"
 #include "Error.h"
 #endif

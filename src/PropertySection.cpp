@@ -10,6 +10,7 @@
 #include <fstream>
 #include <sys/stat.h>
 #include <unistd.h>
+
 namespace PTL
 {
     PropertySection::PropertySection(PropStringHandler* stringHandler_in, int depthIn, PropertySection* host_in)
@@ -106,6 +107,76 @@ namespace PTL
     void PropertySection::DeclareIsTerminal(void)
     {
         isTerminalNode = true;
+    }
+    
+    QueryResult PropertySection::Query(std::string sectionQuery)
+    {
+        std::vector<std::string> sptVec = stringHandler->Split(sectionQuery, '.');
+        std::reverse(sptVec.begin(), sptVec.end());
+        std::stack<std::string> sptStack(std::deque<std::string>(sptVec.begin(), sptVec.end()));
+        return this->Query(sptStack, sectionQuery);
+    }
+    
+    QueryResult PropertySection::Query(std::stack<std::string>& sectionQuery, std::string absoluteString)
+    {
+        std::string toCheck = sectionQuery.top();
+        sectionQuery.pop();
+        bool hasSection = (sectionSubSections.find(toCheck) == sectionSubSections.end());
+        if (hasSection) // didn't find the subsection
+        {
+            return QueryResult("", false, false, this, absoluteString);
+        }
+        else
+        {
+            if (sectionQuery.size() == 0)
+            {
+                std::string content = "[section content not supported]";
+                PropertySection* sec = sectionSubSections[toCheck];
+                bool dummy;
+                if (sec->isTerminalNode) content = stringHandler->Trim(context.ResolveWithinContext(sec->sectionValue, 0, &dummy));
+                return QueryResult(content, true, !(sec->isTerminalNode), sec, absoluteString);
+            }
+            else
+            {
+                return sectionSubSections[toCheck]->Query(sectionQuery, absoluteString);
+            }
+        }
+        
+    }
+    
+    std::vector<std::string> PropertySection::GetTerminalSections(void)
+    {
+        std::vector<std::string> output;
+        for (const auto& sec: sectionSubSections)
+        {
+            if (sec.second->isTerminalNode)
+            {
+                output.push_back(sec.second->sectionName);
+            }
+        }
+        return output;
+    }
+    
+    void PropertySection::ResolveAllStrings(void)
+    {
+        if (isTerminalNode)
+        {
+            bool success = true;
+            std::string pre = sectionValue;
+            sectionValue = context.ResolveWithinContext(pre, 0, &success);
+            if (!success)
+            {
+                std::string message = "Could not parse the following preprocessor expansion:\n" + pre;
+                ErrorKill(message);
+            }
+        }
+        else
+        {
+            for (const auto sub : sectionSubSections)
+            {
+                sub.second->ResolveAllStrings();
+            }
+        }
     }
 
     void PropertySection::RecursiveWriteDefaults(std::ofstream& myfile)

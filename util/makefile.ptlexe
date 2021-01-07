@@ -1,0 +1,4 @@
+MAIN := $(wildcard *.cc)
+EXE := ${BIN_DIR}/$(basename ${MAIN})
+main:
+	${CC_HOST} ${ICONFIG} ${MAIN} -o ${EXE} ${LCONFIG}

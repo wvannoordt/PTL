@@ -5,6 +5,12 @@
 #include "PropStringHandler.h"
 #include <fstream>
 #include <sys/stat.h>
+#include <stack>
+#include <vector>
+#include <deque>
+#include <iterator>
+#include <algorithm>
+#include <utility>
 #include <unistd.h>
 namespace PTL
 {
@@ -53,6 +59,19 @@ namespace PTL
 				principalSection = NULL;
             }
         }
+    }
+    
+    QueryResult PropertyTree::Query(std::string sectionQuery)
+    {
+        std::vector<std::string> sptVec = stringHandler.Split(sectionQuery, '.');
+        std::reverse(sptVec.begin(), sptVec.end());
+        std::stack<std::string> sptStack(std::deque<std::string>(sptVec.begin(), sptVec.end()));
+        return principalSection->Query(sptStack, sectionQuery);
+    }
+    
+    void PropertyTree::ResolveAllStrings(void)
+    {
+        principalSection->ResolveAllStrings();
     }
 
     void PropertyTree::SetCloseMessage(std::string message)

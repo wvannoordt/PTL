@@ -8,7 +8,12 @@ BASEIDIR  := $(shell pwd)
 SRC_DIR   := ${BASEIDIR}/src
 LIB_DIR   := ${BASEIDIR}/lib
 OBJ_DIR   := ${BASEIDIR}/obj
+BIN_DIR   := ${BASEIDIR}/bin
 HDR_DIR   := ${BASEIDIR}/include
+export BASEIDIR
+export LIB_DIR
+export HDR_DIR
+export BIN_DIR
 
 IFLAGS := -I${HDR_DIR}
 
@@ -30,8 +35,12 @@ export CC_HOST
 export ICONFIG=-I${HDR_DIR}
 export LCONFIG=-L${LIB_DIR} -l${LIB_NAME}
 
+.PHONY: executables
+executables: final
+	@for fldr in executables/* ; do \
+				${MAKE} -C $${fldr} -f makefile || exit 1; \
+		done
 .PHONY: final
-
 final: setup ${OBJ_FILES}
 	${CC_HOST} -fPIC -shared ${COMPILE_TIME_OPT} ${OBJ_FILES} ${IFLAGS} -o ${TARGET}
 
@@ -43,11 +52,12 @@ setup:
 	mkdir -p ${LIB_DIR}
 	mkdir -p ${OBJ_DIR}
 	mkdir -p ${HDR_DIR}
+	mkdir -p ${BIN_DIR}
 	@for hdr in ${HEADER_FILES} ; do \
 		ln -s $${hdr} -t ${HDR_DIR};\
 	done
 
-test: final
+test: executables
 	@for fldr in testing/* ; do \
                 ${MAKE} -C $${fldr} -f makefile -s test || exit 1; \
         done
@@ -66,3 +76,4 @@ clean:
 	-rm -r ${LIB_DIR}
 	-rm -r ${OBJ_DIR}
 	-rm -r ${HDR_DIR}
+	-rm -r ${BIN_DIR}

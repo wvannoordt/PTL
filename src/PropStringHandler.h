@@ -29,6 +29,7 @@ namespace PTL
             void GetVectorStyle(char* open, char* close);
             std::string GetCommentSpecifier(void);
             std::string Trim(std::string str);
+            std::vector<std::string> Split(const std::string& str, char c);
         private:
             std::string commentString;
             std::string whiteSpace;

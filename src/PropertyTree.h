@@ -4,7 +4,7 @@
 #include <string>
 #include "PropertySection.h"
 #include "PropStringHandler.h"
-
+#include "QueryResult.h"
 #define TR_PROTOTYPE 123873
 #define TR_DATA      232342
 
@@ -25,6 +25,8 @@ namespace PTL
             void SetAsSubtree(PropertySection& newPrincipal);
             void PushSection(std::string pushedSection);
             PropertySection& Principal(void);
+            void ResolveAllStrings(void);
+            QueryResult Query(std::string sectionQuery);
         private:
             PropertySection* principalSection;
             PropStringHandler stringHandler;

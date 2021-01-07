@@ -25,6 +25,26 @@ namespace PTL
         delimiter = ';';
         forbiddenNameChars = "!@#$%^&*(){}[]\\|~\'`?/<>,";
     }
+    std::vector<std::string> PropStringHandler::Split(const std::string& str, char c)
+    {
+        std::vector<std::string> output;
+        std::string elem = "";
+        for (int i = 0; i < str.length(); i++)
+        {
+            char cur = str[i];
+            if (cur==c)
+            {
+                output.push_back(elem);
+                elem = "";
+            }
+            else
+            {
+                elem += cur;
+            }
+        }
+        output.push_back(elem);
+        return output;
+    }
     void PropStringHandler::SetDelimiter(char dlm)
     {
         delimiter = dlm;

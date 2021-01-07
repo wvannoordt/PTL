@@ -6,12 +6,15 @@
 #include <vector>
 #include "PropStringHandler.h"
 #include "InputVariable.h"
+#include <stack>
+#include <algorithm>
 #include "BasePointerTypes.h"
 #include "PreProcessContext.h"
 #include <fstream>
 #include <sys/stat.h>
 #include <unistd.h>
 #include "PTLOutputStream.h"
+#include "QueryResult.h"
 namespace PTL
 {
     class PropertySection
@@ -49,6 +52,10 @@ namespace PTL
             void SetExistingKeyValuePair(std::string key, PropertySection* val);
             void RecursiveIncrementDepth(void);
             std::string GetSectionName(void);
+            void ResolveAllStrings(void);
+            QueryResult Query(std::string sectionQuery);
+            QueryResult Query(std::stack<std::string>& sectionQuery, std::string absoluteString);
+            std::vector<std::string> GetTerminalSections(void);
         private:
             void AssertPointerConsistency(std::string variableLocation, bool isSecondary);
             std::map<std::string,PropertySection*> sectionSubSections;

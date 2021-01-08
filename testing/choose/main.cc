@@ -10,11 +10,11 @@ int main(void)
 	std::string testValue3;
 	std::cout << "ENV:" << std::endl;
 	input["testValue1"].MapTo(&testValue1)
-	= new PTL::Variables::PTLString("default", "Test variable");
+	= new PTL::PTLString("default", "Test variable");
 	input["testValue2"].MapTo(&testValue2)
-	= new PTL::Variables::PTLString("default", "Test variable");
+	= new PTL::PTLString("default", "Test variable");
 	input["testValue3"].MapTo(&testValue3)
-	= new PTL::Variables::PTLString("default", "Test variable");
+	= new PTL::PTLString("default", "Test variable");
 	input.ReadInputFileToTreeData(filename);
 	input.StrictParse();
 	input.DebugPrint();

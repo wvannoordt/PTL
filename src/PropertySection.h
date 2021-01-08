@@ -32,14 +32,14 @@ namespace PTL
             PreProcessContext* GetContext(void);
             PropertySection& operator [] (std::string argument);
             PropertySection& operator = (std::string argument);
-            Variables::InputVariable* & MapTo(int*         ptr);
-            Variables::InputVariable* & MapTo(double*      ptr);
-            Variables::InputVariable* & MapTo(bool*        ptr);
-            Variables::InputVariable* & MapTo(std::string* ptr);
-            Variables::InputVariable* & MapTo(double**     ptr, int* nPtr);
-            Variables::InputVariable* & MapTo(double**     ptr);
-            Variables::InputVariable* & MapTo(int**        ptr, int* nPtr);
-            Variables::InputVariable* & MapTo(int**        ptr);
+            InputVariable* & MapTo(int*         ptr);
+            InputVariable* & MapTo(double*      ptr);
+            InputVariable* & MapTo(bool*        ptr);
+            InputVariable* & MapTo(std::string* ptr);
+            InputVariable* & MapTo(double**     ptr, int* nPtr);
+            InputVariable* & MapTo(double**     ptr);
+            InputVariable* & MapTo(int**        ptr, int* nPtr);
+            InputVariable* & MapTo(int**        ptr);
             bool StrictTraverseParse(std::string depthString);
             void StrictParse(void);
             void BreakIfAlreadyMapped(void);
@@ -64,11 +64,11 @@ namespace PTL
             bool wasCreatedFromTemplateDeclaration, isTerminalNode, hasValue, isPrincipal;
             PropertySection* host;
             std::string sectionName, sectionValue;
-            Variables::InputVariable* templateVariable;
+            InputVariable* templateVariable;
             void* terminalEndpointTarget;
             void* terminalEndpointTargetSecondaryData;
-            Variables::BasePointer basePointerType;
-            Variables::BasePointer secondaryBasePointerType;
+            BasePointer basePointerType;
+            BasePointer secondaryBasePointerType;
             PreProcessContext context;
     };
 }

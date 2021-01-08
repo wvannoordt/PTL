@@ -7,7 +7,7 @@ int main(void)
 	input.ReadInputFileToTreeData(filename);
 	
 	int globalValue;
-	input["globalValue"].MapTo(&globalValue) = new PTL::Variables::PTLInteger(3, "Dummy variables");
+	input["globalValue"].MapTo(&globalValue) = new PTL::PTLInteger(3, "Dummy variables");
 	
 	// for (PTL::Iterator it(input); it.HasNext(); it++)
 	// {

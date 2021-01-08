@@ -24,9 +24,9 @@ namespace PTL
         terminalEndpointTarget = NULL;
         terminalEndpointTargetSecondaryData = NULL;
         hasValue = false;
-        basePointerType = Variables::BasePointer::IntPointer;
+        basePointerType = BasePointer::IntPointer;
         isPrincipal = false;
-        secondaryBasePointerType = Variables::BasePointer::None;
+        secondaryBasePointerType = BasePointer::None;
         if (host_in != NULL)
         {
             context.SetHostContext(host->GetContext());
@@ -446,79 +446,79 @@ namespace PTL
         }
     }
 
-    Variables::InputVariable* & PropertySection::MapTo(int* ptr)
+    InputVariable* & PropertySection::MapTo(int* ptr)
     {
         isTerminalNode = true;
         BreakIfAlreadyMapped();
         terminalEndpointTarget = (void*)ptr;
-        basePointerType = Variables::BasePointer::IntPointer;
+        basePointerType = BasePointer::IntPointer;
         return templateVariable;
     }
 
-    Variables::InputVariable* & PropertySection::MapTo(double* ptr)
+    InputVariable* & PropertySection::MapTo(double* ptr)
     {
         isTerminalNode = true;
         BreakIfAlreadyMapped();
         terminalEndpointTarget = (void*)ptr;
-        basePointerType = Variables::BasePointer::DoublePointer;
+        basePointerType = BasePointer::DoublePointer;
         return templateVariable;
     }
 
-    Variables::InputVariable* & PropertySection::MapTo(double** ptr)
+    InputVariable* & PropertySection::MapTo(double** ptr)
     {
         isTerminalNode = true;
         BreakIfAlreadyMapped();
         terminalEndpointTarget = (void*)ptr;
-        basePointerType = Variables::BasePointer::DoubleArrayPointer;
+        basePointerType = BasePointer::DoubleArrayPointer;
         return templateVariable;
     }
 
-    Variables::InputVariable* & PropertySection::MapTo(int** ptr)
+    InputVariable* & PropertySection::MapTo(int** ptr)
     {
         isTerminalNode = true;
         BreakIfAlreadyMapped();
         terminalEndpointTarget = (void*)ptr;
-        basePointerType = Variables::BasePointer::IntArrayPointer;
+        basePointerType = BasePointer::IntArrayPointer;
         return templateVariable;
     }
 
-    Variables::InputVariable* & PropertySection::MapTo(bool* ptr)
+    InputVariable* & PropertySection::MapTo(bool* ptr)
     {
         isTerminalNode = true;
         BreakIfAlreadyMapped();
         terminalEndpointTarget = (void*)ptr;
-        basePointerType = Variables::BasePointer::BoolPointer;
+        basePointerType = BasePointer::BoolPointer;
         return templateVariable;
     }
 
-    Variables::InputVariable* & PropertySection::MapTo(std::string* ptr)
+    InputVariable* & PropertySection::MapTo(std::string* ptr)
     {
         isTerminalNode = true;
         BreakIfAlreadyMapped();
         terminalEndpointTarget = (void*)ptr;
-        basePointerType = Variables::BasePointer::StringPointer;
+        basePointerType = BasePointer::StringPointer;
         return templateVariable;
     }
 
-    Variables::InputVariable* & PropertySection::MapTo(double** ptr, int* nPtr)
+    InputVariable* & PropertySection::MapTo(double** ptr, int* nPtr)
     {
         isTerminalNode = true;
         BreakIfAlreadyMapped();
         terminalEndpointTarget = (void*)ptr;
         terminalEndpointTargetSecondaryData = (void*)nPtr;
-        basePointerType = Variables::BasePointer::DoubleArrayPointer;
-        secondaryBasePointerType = Variables::BasePointer::IntPointer;
+        basePointerType = BasePointer::DoubleArrayPointer;
+        secondaryBasePointerType = BasePointer::IntPointer;
         return templateVariable;
     }
 
-    Variables::InputVariable* & PropertySection::MapTo(int** ptr, int* nPtr)
+    InputVariable* & PropertySection::MapTo(int** ptr, int* nPtr)
     {
         isTerminalNode = true;
         BreakIfAlreadyMapped();
         terminalEndpointTarget = (void*)ptr;
         terminalEndpointTargetSecondaryData = (void*)nPtr;
-        basePointerType = Variables::BasePointer::IntArrayPointer;
-        secondaryBasePointerType = Variables::BasePointer::IntPointer;
+        basePointerType = BasePointer::IntArrayPointer;
+        secondaryBasePointerType = BasePointer::IntPointer;
         return templateVariable;
     }
 }

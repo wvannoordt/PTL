@@ -10,7 +10,7 @@ namespace PTL
     QueryResult::operator const std::string()
     {
         KillIfNotTerminal();
-        Variables::PTLString pvar("", "");
+        PTLString pvar("", "");
         std::string output;
         if (!pvar.ParseFromString(content, &output)) ErrorKill("Cannot parse \"" + content + "\" as string!");
         return output;
@@ -19,7 +19,7 @@ namespace PTL
     QueryResult::operator int ()
     {
         KillIfNotTerminal();
-        Variables::PTLInteger pvar(0, "");
+        PTLInteger pvar(0, "");
         int output;
         if (!pvar.ParseFromString(content, &output)) ErrorKill("Cannot parse \"" + content + "\" as integer!");
         return output;
@@ -34,7 +34,7 @@ namespace PTL
     QueryResult::operator double ()
     {
         KillIfNotTerminal();
-        Variables::PTLDouble pvar(0, "");
+        PTLDouble pvar(0, "");
         double output;
         if (!pvar.ParseFromString(content, &output)) ErrorKill("Cannot parse \"" + content + "\" as double!");
         return output;
@@ -43,7 +43,7 @@ namespace PTL
     QueryResult::operator bool ()
     {
         KillIfNotTerminal();
-        Variables::PTLBoolean pvar(0, "");
+        PTLBoolean pvar(0, "");
         bool output;
         if (!pvar.ParseFromString(content, &output)) ErrorKill("Cannot parse \"" + content + "\" as boolean!");
         return output;
@@ -52,7 +52,7 @@ namespace PTL
     QueryResult::operator std::vector<int> ()
     {
         KillIfNotTerminal();
-        Variables::PTLDynamicIntegerArray pvar("");
+        PTLDynamicIntegerArray pvar("");
         int* outputar;
         int outputNum;
         if (!pvar.ParseFromString(content, &outputar)) ErrorKill("Cannot parse \"" + content + "\" as integer array!");
@@ -65,7 +65,7 @@ namespace PTL
     QueryResult::operator std::vector<double> ()
     {
         KillIfNotTerminal();
-        Variables::PTLDynamicDoubleArray pvar("");
+        PTLDynamicDoubleArray pvar("");
         double* outputar;
         int outputNum;
         if (!pvar.ParseFromString(content, &outputar)) ErrorKill("Cannot parse \"" + content + "\" as double array!");

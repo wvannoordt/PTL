@@ -6,20 +6,17 @@
 
 namespace PTL
 {
-    namespace Variables
+    class PTLInteger : public InputVariable
     {
-        class PTLInteger : public InputVariable
-        {
-            public:
-                PTLInteger(int defaultValueIn, std::string description);
-                bool ParseFromString(std::string parseVal, void* ptr);
-                void Destroy(void);
-                void SetDefaultValue(void* ptr);
-                std::string GetDefaultValueString(void);
-            private:
-                int defaultValue;
-        };
-    }
+        public:
+            PTLInteger(int defaultValueIn, std::string description);
+            bool ParseFromString(std::string parseVal, void* ptr);
+            void Destroy(void);
+            void SetDefaultValue(void* ptr);
+            std::string GetDefaultValueString(void);
+        private:
+            int defaultValue;
+    };
 }
 
 #endif

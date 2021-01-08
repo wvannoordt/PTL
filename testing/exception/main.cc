@@ -6,7 +6,7 @@ int main(void)
 	PTL::PropertyTree input;
 	int testVariable;
 
-	input["testVariable"].MapTo(&testVariable) = new PTL::Variables::PTLInteger(1, "]");
+	input["testVariable"].MapTo(&testVariable) = new PTL::PTLInteger(1, "]");
 
 	input.ReadInputFileToTreeData(filename);
 	try

@@ -6,20 +6,17 @@
 
 namespace PTL
 {
-    namespace Variables
+    class PTLBoolean : public InputVariable
     {
-        class PTLBoolean : public InputVariable
-        {
-            public:
-                PTLBoolean(bool defaultValue, std::string description);
-                bool ParseFromString(std::string parseVal, void* ptr);
-                void Destroy(void);
-                void SetDefaultValue(void* ptr);
-                std::string GetDefaultValueString(void);
-            private:
-                bool defaultValue;
-        };
-    }
+        public:
+            PTLBoolean(bool defaultValue, std::string description);
+            bool ParseFromString(std::string parseVal, void* ptr);
+            void Destroy(void);
+            void SetDefaultValue(void* ptr);
+            std::string GetDefaultValueString(void);
+        private:
+            bool defaultValue;
+    };
 }
 
 #endif

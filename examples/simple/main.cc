@@ -11,7 +11,7 @@ int main(void)
     int testValue;
 
     //Define a template variable and map to target
-    input["testValue"].MapTo(&testValue) = new PTL::Variables::PTLInteger(1, "A test value with default value 1");
+    input["testValue"].MapTo(&testValue) = new PTL::PTLInteger(1, "A test value with default value 1");
 
     //Read the input file
     input.ReadInputFileToTreeData("test.ptl");

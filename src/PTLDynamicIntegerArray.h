@@ -7,25 +7,22 @@
 
 namespace PTL
 {
-    namespace Variables
+    class PTLDynamicIntegerArray : public InputVariable
     {
-        class PTLDynamicIntegerArray : public InputVariable
-        {
-            public:
-                PTLDynamicIntegerArray(std::string description);
-                bool ParseFromString(std::string parseVal, void* ptr);
-                void Destroy(void);
-                void SetDefaultValue(void* ptr);
-                std::string GetDefaultValueString(void);
-                void SetSecondaryVariable(void* ptr);
-            private:
-                const char* defaultValue;
-                bool requiresDelete;
-                PropStringHandler* strHandle;
-                int* basePtr;
-                int count;
-        };
-    }
+        public:
+            PTLDynamicIntegerArray(std::string description);
+            bool ParseFromString(std::string parseVal, void* ptr);
+            void Destroy(void);
+            void SetDefaultValue(void* ptr);
+            std::string GetDefaultValueString(void);
+            void SetSecondaryVariable(void* ptr);
+        private:
+            const char* defaultValue;
+            bool requiresDelete;
+            PropStringHandler* strHandle;
+            int* basePtr;
+            int count;
+    };
 }
 
 #endif

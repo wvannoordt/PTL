@@ -13,12 +13,12 @@ int main(int argc, char** argv)
     double* ar;
     int n;
 
-    input["SectionA"]["ValueA"].MapTo(&aa) = new PTL::Variables::PTLInteger(1, "aa");
-    input["SectionA"]["ValueB"].MapTo(&ab) = new PTL::Variables::PTLInteger(1, "ab");
-    input["SectionA"]["StringValue"].MapTo(&str) = new PTL::Variables::PTLString("defaultVal", "str");
-    input["SectionB"]["ValueA"].MapTo(&ba) = new PTL::Variables::PTLInteger(1, "ba");
-    input["SectionB"]["ValueB"].MapTo(&bb) = new PTL::Variables::PTLInteger(1, "bb");
-    input["SectionB"]["arr"].MapTo(&ar, &n) = new PTL::Variables::PTLDynamicDoubleArray("array");
+    input["SectionA"]["ValueA"].MapTo(&aa) = new PTL::PTLInteger(1, "aa");
+    input["SectionA"]["ValueB"].MapTo(&ab) = new PTL::PTLInteger(1, "ab");
+    input["SectionA"]["StringValue"].MapTo(&str) = new PTL::PTLString("defaultVal", "str");
+    input["SectionB"]["ValueA"].MapTo(&ba) = new PTL::PTLInteger(1, "ba");
+    input["SectionB"]["ValueB"].MapTo(&bb) = new PTL::PTLInteger(1, "bb");
+    input["SectionB"]["arr"].MapTo(&ar, &n) = new PTL::PTLDynamicDoubleArray("array");
     i.Run();
 
     return 0;

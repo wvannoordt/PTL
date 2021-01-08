@@ -31,8 +31,8 @@ int main(void)
 	int myval;
 	int somevalue;
 
-	input["myIntegerValue"].MapTo(&myval) = new PTL::Variables::PTLInteger(1, "Some integer value");
-	input["myEnumValue"].MapTo(&somevalue) = new PTL::Variables::PTLAutoEnum(option1, MySpecialEnumToString, "Some enum value");
+	input["myIntegerValue"].MapTo(&myval) = new PTL::PTLInteger(1, "Some integer value");
+	input["myEnumValue"].MapTo(&somevalue) = new PTL::PTLAutoEnum(option1, MySpecialEnumToString, "Some enum value");
 
 	input.ReadInputFileToTreeData(filename);
 	input.StrictParse();

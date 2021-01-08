@@ -6,21 +6,18 @@
 
 namespace PTL
 {
-    namespace Variables
+    class PTLDouble : public InputVariable
     {
-        class PTLDouble : public InputVariable
-        {
-            public:
-                PTLDouble(double defaultValue, std::string description);
-                bool ParseFromString(std::string parseVal, void* ptr);
-                void Destroy(void);
-                void SetDefaultValue(void* ptr);
-                std::string GetDefaultValueString(void);
-            private:
-                double defaultValue;
-                std::string allowed;
-        };
-    }
+        public:
+            PTLDouble(double defaultValue, std::string description);
+            bool ParseFromString(std::string parseVal, void* ptr);
+            void Destroy(void);
+            void SetDefaultValue(void* ptr);
+            std::string GetDefaultValueString(void);
+        private:
+            double defaultValue;
+            std::string allowed;
+    };
 }
 
 #endif

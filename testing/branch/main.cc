@@ -15,11 +15,11 @@ int main(void)
 	subtree1.SetAsSubtree(input["Subtree1"]);
 	subtree2.SetAsSubtree(input["Subtree2"]);
 
-	subtree1["value1"].MapTo(&v1) = new PTL::Variables::PTLDouble(1.0, "a description");
-	subtree1["othervalue"].MapTo(&h) = new PTL::Variables::PTLString("s", "a description");
+	subtree1["value1"].MapTo(&v1) = new PTL::PTLDouble(1.0, "a description");
+	subtree1["othervalue"].MapTo(&h) = new PTL::PTLString("s", "a description");
 
-	subtree2["value2"].MapTo(&a) = new PTL::Variables::PTLString("s", "a description");
-	subtree2["anothervalue"].MapTo(&ar, &num) = new PTL::Variables::PTLDynamicDoubleArray("a description");
+	subtree2["value2"].MapTo(&a) = new PTL::PTLString("s", "a description");
+	subtree2["anothervalue"].MapTo(&ar, &num) = new PTL::PTLDynamicDoubleArray("a description");
 
 	input.ReadInputFileToTreeData(filename);
 	subtree1.StrictParse();

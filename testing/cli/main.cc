@@ -8,7 +8,7 @@ int main(int argc, char** argv)
 
 	double inputValue;
 
-	input["inputValue"].MapTo(&inputValue) = new PTL::Variables::PTLDouble(1.0, "A dummy variable");
+	input["inputValue"].MapTo(&inputValue) = new PTL::PTLDouble(1.0, "A dummy variable");
 
 	input.ReadInputFileToTreeData(filename);
 	input.StrictParse();

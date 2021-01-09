@@ -1,0 +1,2 @@
+#define something somethingelse
+testValue = @udf(hello, $(something))

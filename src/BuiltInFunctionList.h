@@ -34,6 +34,7 @@ namespace PTL
         };
         extern BuiltInFunctionList builtInFunctions;
     }
+    void AddUserDefinedFunction(std::string name, BuiltIns::PTLBuiltinFunction_t func);
 }
 
 #endif

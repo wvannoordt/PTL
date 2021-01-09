@@ -15,4 +15,5 @@
 #include "Interactive.h"
 #include "InputArguments.h"
 #include "Error.h"
+#include "BuiltInFunctionList.h"
 #endif

@@ -17,11 +17,13 @@ export BIN_DIR
 
 IFLAGS := -I${HDR_DIR}
 
-SRC_FILES := $(wildcard ${SRC_DIR}/*.cpp)
+SRC_FILES   := $(wildcard ${SRC_DIR}/*.cpp)
+SRC_FILES_C := $(wildcard ${SRC_DIR}/*.c)
 
 HEADER_FILES := $(wildcard ${SRC_DIR}/*.h)
 
 OBJ_FILES   := $(patsubst ${SRC_DIR}/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
+OBJ_FILES_C := $(patsubst ${SRC_DIR}/%.c,$(OBJ_DIR)/%.o,$(SRC_FILES_C))
 
 TARGET := ${LIB_DIR}/lib${LIB_NAME}.a
 
@@ -29,9 +31,15 @@ ifndef CC_HOST
 CC_HOST := $(shell which g++)
 endif
 
-HOST_FLAGS := -O${OPTLEVEL} -Wno-unknown-pragmas -g -fPIC -fpermissive -std=c++11
+ifndef C_HOST
+C_HOST := $(shell which gcc)
+endif
+
+HOST_FLAGS   := -O${OPTLEVEL} -Wno-unknown-pragmas -g -fPIC -fpermissive -std=c++11
+HOST_FLAGS_C := -O${OPTLEVEL} -g -fPIC -fpermissive
 
 export CC_HOST
+export C_HOST
 export ICONFIG=-I${HDR_DIR}
 export LCONFIG=-L${LIB_DIR} -l${LIB_NAME}
 
@@ -41,11 +49,14 @@ executables: final
 				${MAKE} -C $${fldr} -f makefile || exit 1; \
 		done
 .PHONY: final
-final: setup ${OBJ_FILES}
-	${CC_HOST} -fPIC -shared ${COMPILE_TIME_OPT} ${OBJ_FILES} ${IFLAGS} -o ${TARGET}
+final: setup ${OBJ_FILES} ${OBJ_FILES_C}
+	${CC_HOST} -fPIC -shared ${COMPILE_TIME_OPT} ${OBJ_FILES} ${OBJ_FILES_C} ${IFLAGS} -o ${TARGET}
 
 ${OBJ_FILES}: ${OBJ_DIR}/%.o : ${SRC_DIR}/%.cpp
 	${CC_HOST} ${HOST_FLAGS} ${COMPILE_TIME_OPT} ${IFLAGS} -c $< -o $@
+
+${OBJ_FILES_C}: ${OBJ_DIR}/%.o : ${SRC_DIR}/%.c
+	${C_HOST} ${HOST_FLAGS_C} ${COMPILE_TIME_OPT} ${IFLAGS} -c $< -o $@
 
 setup:
 	-rm -r ${HDR_DIR}

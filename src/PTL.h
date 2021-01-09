@@ -16,4 +16,5 @@
 #include "InputArguments.h"
 #include "Error.h"
 #include "BuiltInFunctionList.h"
+#include "PTLGenericObject.h"
 #endif

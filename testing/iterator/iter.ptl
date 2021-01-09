@@ -1,1 +1,13 @@
-globalValue = 3
+Objects
+{
+    Object1
+    {
+        name = thisisobject1
+        value = 1
+    }
+    Object2
+    {
+        name = thisisobject2
+        value = 2
+    }
+}

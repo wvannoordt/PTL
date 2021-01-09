@@ -51,7 +51,7 @@ namespace PTL
         host = new PropertySection(stringHandler, depth, prevHost);
         host->DeclareIsNotPrincipal();
         if (prevHost!=NULL) prevHost->KeyToNewValue(oldName, host);
-        host->SetExistingKeyValuePair(sectionName, this);
+        host->NewSection(sectionName, this);
         host->SetName(oldName);
         if (prevHost!=NULL) host->GetContext()->SetHostContext(prevHost->GetContext());
         context.SetHostContext(host->GetContext());
@@ -70,9 +70,10 @@ namespace PTL
         }
     }
     
-    void PropertySection::SetExistingKeyValuePair(std::string key, PropertySection* val)
+    void PropertySection::NewSection(std::string key, PropertySection* val)
     {
         sectionSubSections.insert({key, val});
+        sectionRefs.push_back(val);
     }
     
     void PropertySection::KeyToNewValue(std::string key, PropertySection* newValue)
@@ -107,6 +108,26 @@ namespace PTL
     void PropertySection::DeclareIsTerminal(void)
     {
         isTerminalNode = true;
+    }
+    
+    std::vector<PropertySection*>::iterator PropertySection::begin() noexcept
+    {
+        return sectionRefs.begin();
+    }
+    
+    std::vector<PropertySection*>::const_iterator PropertySection::begin() const noexcept
+    {
+        return sectionRefs.begin();
+    }
+    
+    std::vector<PropertySection*>::iterator PropertySection::end() noexcept
+    {
+        return sectionRefs.end();
+    }
+    
+    std::vector<PropertySection*>::const_iterator PropertySection::end() const noexcept
+    {
+        return sectionRefs.end();
     }
     
     QueryResult PropertySection::Query(std::string sectionQuery)
@@ -228,7 +249,7 @@ namespace PTL
                     stringHandler->ParseElementAsVariable(topLevelElements[i], &name, &val);
                     if (sectionSubSections.find(name)==sectionSubSections.end())
                     {
-                        sectionSubSections.insert({name, new PropertySection(stringHandler, depth+1, this)});
+                        NewSection(name, new PropertySection(stringHandler, depth+1, this));
                     }
                     sectionSubSections[name]->DeclareIsTerminal();
                     sectionSubSections[name]->SetName(name);
@@ -241,7 +262,7 @@ namespace PTL
                     stringHandler->ParseElementAsSubSection(topLevelElements[i], &name, &val);
                     if (sectionSubSections.find(name)==sectionSubSections.end())
                     {
-                        sectionSubSections.insert({name, new PropertySection(stringHandler, depth+1, this)});
+                        NewSection(name, new PropertySection(stringHandler, depth+1, this));
                     }
                     sectionSubSections[name]->PopulateInstanceFromString(val);
                     sectionSubSections[name]->SetName(name);
@@ -408,7 +429,7 @@ namespace PTL
         if (sectionSubSections.find(argument)==sectionSubSections.end())
         {
             isNewSection = true;
-            sectionSubSections.insert({argument, new PropertySection(stringHandler, depth+1, this)});
+            NewSection(argument, new PropertySection(stringHandler, depth+1, this));
         }
         PropertySection* temp = sectionSubSections[argument];
         if (isNewSection)

@@ -61,6 +61,26 @@ namespace PTL
         }
     }
     
+    std::vector<PropertySection*>::iterator PropertyTree::begin() noexcept
+    {
+        return principalSection->begin();
+    }
+    
+    std::vector<PropertySection*>::const_iterator PropertyTree::begin() const noexcept
+    {
+        return principalSection->begin();
+    }
+    
+    std::vector<PropertySection*>::iterator PropertyTree::end() noexcept
+    {
+        return principalSection->end();
+    }
+    
+    std::vector<PropertySection*>::const_iterator PropertyTree::end() const noexcept
+    {
+        return principalSection->end();
+    }
+    
     QueryResult PropertyTree::Query(std::string sectionQuery)
     {
         std::vector<std::string> sptVec = stringHandler.Split(sectionQuery, '.');
@@ -94,6 +114,11 @@ namespace PTL
         std::string fileRawContents = stringHandler.Sanitize(stringHandler.ReadFileToString(filename), principalSection->GetContext());
         principalSection->PopulateInstanceFromString(fileRawContents);
         principalSection->SetValue(fileRawContents);
+    }
+    
+    void PropertyTree::Read(std::string filename)
+    {
+        ReadInputFileToTreeData(filename);
     }
 
     void PropertyTree::DebugPrint(void)

@@ -16,6 +16,7 @@ namespace PTL
             PropertyTree(void);
             ~PropertyTree(void);
             void ReadInputFileToTreeData(std::string filename);
+            void Read(std::string filename);
             void SetCloseMessage(std::string message);
             void DebugPrint(void);
             PropertySection& operator [](std::string argument);
@@ -27,6 +28,10 @@ namespace PTL
             PropertySection& Principal(void);
             void ResolveAllStrings(void);
             QueryResult Query(std::string sectionQuery);
+            std::vector<PropertySection*>::iterator begin() noexcept;
+            std::vector<PropertySection*>::const_iterator begin() const noexcept;
+            std::vector<PropertySection*>::iterator end() noexcept;
+            std::vector<PropertySection*>::const_iterator end() const noexcept;
         private:
             PropertySection* principalSection;
             PropStringHandler stringHandler;

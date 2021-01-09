@@ -13,6 +13,7 @@
 #include <fstream>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <iterator>
 #include "PTLOutputStream.h"
 #include "QueryResult.h"
 namespace PTL
@@ -49,16 +50,21 @@ namespace PTL
             void RecursiveWriteDefaults(std::ofstream& myfile);
             PropertySection* PushSection(std::string pushedSection);
             void KeyToNewValue(std::string key, PropertySection* newValue);
-            void SetExistingKeyValuePair(std::string key, PropertySection* val);
+            void NewSection(std::string key, PropertySection* val);
             void RecursiveIncrementDepth(void);
             std::string GetSectionName(void);
             void ResolveAllStrings(void);
             QueryResult Query(std::string sectionQuery);
             QueryResult Query(std::stack<std::string>& sectionQuery, std::string absoluteString);
             std::vector<std::string> GetTerminalSections(void);
+            std::vector<PropertySection*>::iterator begin() noexcept;
+            std::vector<PropertySection*>::const_iterator begin() const noexcept;
+            std::vector<PropertySection*>::iterator end() noexcept;
+            std::vector<PropertySection*>::const_iterator end() const noexcept;
         private:
             void AssertPointerConsistency(std::string variableLocation, bool isSecondary);
             std::map<std::string,PropertySection*> sectionSubSections;
+            std::vector<PropertySection*> sectionRefs;
             PropStringHandler* stringHandler;
             int depth;
             bool wasCreatedFromTemplateDeclaration, isTerminalNode, hasValue, isPrincipal;

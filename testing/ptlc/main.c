@@ -3,5 +3,5 @@
 int main(void)
 {
 	TestFunction();
-	return 1;
+	return 0;
 }

@@ -120,7 +120,7 @@ int main(int argc, char** argv)
 myInteger = 5
 ```
 
-## Supported Input Types
+### Supported Input Types
 Any input type can be implemented by inheriting the `PTL::InputVariable` class. PTL currently has implementations for:
 
 * `PTL::PTLInteger`: An integer value.
@@ -238,6 +238,63 @@ Objects
 }
 ```
 
+### Runtime Evaluation
+PTL offers preprocessor contexts that allow users to do some simple scripting. The context is resolved when a `.ptl`
+file is read. Supported operations include reading from files, simple calculations, logicals, array indexing, and user-defined functions.
+The following example demonstrates some simple preprocessor evaluation:
+
+`input.ptl`
+
+```
+#define thetaDegrees 25
+#define radius 1.45
+#define xcoord @prod($(radius), @cosd($(thetaDegrees)))
+#define ycoord @prod($(radius), @sind($(thetaDegrees)))
+
+#define outputDirectory output
+#define outputFileName data.dat
+
+SamplePoint
+{
+    filename = @cat($(outputDirectory),/,$(outputFileName)) //evaluates to output/data.dat
+    coordinates = [$(xcoord), $(ycoord)] // evaluates to [1.314147,0.612796]
+    x = $(xcoord); y=$(ycoord) // semicolon can be used for multiple statements on a line
+    rad = @sqrt(@sum(@prod($(xcoord),$(xcoord)), @prod($(ycoord),$(ycoord)))) // 1.450000
+}
+```
+
+Note that the `//` symbol denotes a comment. One can also define user-defined functions within an application as follows:
+
+```c++
+std::string udf(std::vector<std::string>& args)
+{
+	std::string output = "UDFVALUE:";
+	for (const auto a:args) output += a;
+	return output;
+}
+
+int main(void)
+{
+	std::string filename = "udf.ptl";
+	PTL::PropertyTree input;
+	PTL::AddUserDefinedFunction("udf", udf);
+    input.Read(filename);
+}
+```
+
+The above will allow you to use the `@udf(...)` function in the input file.
+
+### Syntax Highlighting
+Syntax highlighting is currently a work in progress, and only supported through the Atom editor. In theory, you can simply type 
+
+```
+apm install language-ptl
+```
+
+in a bash terminal and it should install. Below is a screenshot, check it out!
+
+![PTL syntax highlighting](https://i.imgur.com/OQnrEWA.png)
+    
 ### Other Types
 The reader is directed to [examples](https://github.com/wvannoordt/PTL/tree/master/examples) and [testing](https://github.com/wvannoordt/PTL/tree/master/testing)
 for more examples of usage.

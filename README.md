@@ -282,7 +282,53 @@ int main(void)
 }
 ```
 
-The above will allow you to use the `@udf(...)` function in the input file.
+The above will allow you to use the `@udf(...)` function in the input file. Here are the preprocessor functions
+that PTL currently supports (WIP):
+
+* `env(variable)`: retrieves the environment variable `variable`. If it is
+not defined, an empty string is returned.
+
+* `cat(expr1, expr2, ...)`: concatenates the values `expr1`, `expr2` and so 
+forth.
+
+* `choose(n, option0, option1, ...)`: selects the n-th element of the list
+of arguments that follow, i.e. n=0 gives `option0`.
+
+* `sum(num1, num2, ...)`: returns the sum of all arguments, which must be
+parseable as numerical types.
+
+* `prod(num1, num2, ...)`: returns the product of all arguments, which must be
+parseable as numerical types.
+
+* `sub(a, b)`: returns `a-b`. `a` and `b` must be parseable as numerical types.
+
+* `div(a, b)`: returns `a/b`. `a` and `b` must be parseable as numerical types.
+
+* `fread(file, n)`: returns the nth line of the file `file`.
+
+* `round(num)`: rounds the numeric `num` to the nearest integer.
+
+* `sin(num)`: returns the sine of the numeric `num`, assumed in radians.
+
+* `cos(num)`: returns the cosine of the numeric `num`, assumed in radians.
+
+* `sind(num)`: returns the sine of the numeric `num`, assumed in degrees.
+
+* `cosd(num)`: returns the cosine of the numeric `num`, assumed in degrees.
+
+* `max(num1, num2, ...)`: returns the maximum value of a list of numerics.
+
+* `min(num1, num2, ...)`: returns the minimum value of a list of numerics.
+
+* `atan2(y, x)`: returns the quadrant-aware arctangent of `y/x`, in radians.
+
+* `atan2d(y, x)`: returns the quadrant-aware arctangent of `y/x`, in degrees.
+
+* `sqrt(num)`: returns the square root of the numeric `num`.
+
+* `lt(num1, num2)`: returns the logical-string `1` if `num1<num2`.
+
+* `gt(num1, num2)`: returns the logical-string `1` if `num1>num2`.
 
 ### Syntax Highlighting
 Syntax highlighting is currently a work in progress, and only supported through the Atom editor. In theory, you can simply type 

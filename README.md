@@ -175,48 +175,48 @@ Note that for a class that inherits `PTL::PTLGenericObject`, it is necessary to 
 
 class MyClass : public PTL::PTLGenericObject
 {
-	using PTL::PTLGenericObject::PTLGenericObject; // required
-	private:
-		std::string strval;
-		int intval;
-	public:
+    using PTL::PTLGenericObject::PTLGenericObject; // required
+    private:
+        std::string strval;
+        int intval;
+    public:
         // required function
-		void Definitions(PTL::PropertySection& section)
-		{
-			section["name"].MapTo(&strval)
-             = new PTL::PTLString("default value", "The name of the object");
-			section["value"].MapTo(&intval)
-             = new PTL::PTLInteger(0, "The value of the object");
-		}
-		void Print(void)
-		{
-			std::cout     <<
+        void Definitions(PTL::PropertySection& section)
+        {
+            section["name"].MapTo(&strval)
+            = new PTL::PTLString("default value", "The name of the object");
+            section["value"].MapTo(&intval)
+            = new PTL::PTLInteger(0, "The value of the object");
+        }
+        void Print(void)
+        {
+            std::cout     <<
             "name: "      <<
             strval        <<
             "\nvalue: "   <<
             intval        <<
             "\nsection: " <<
             objName       << std::endl;
-		}
+        }
 };
 
 int main(void)
 {
-	std::string filename = "iter.ptl";
-	PTL::PropertyTree input;
-	input.Read(filename);
-	std::vector<MyClass> objs;
-    
-     // Note that PTL::PropertyTree and
-     // PTL::PropertySection support range loops
-	for (const auto& s : input["Objects"])
-	{
-		MyClass obj(s);
-		obj.Parse();
-		objs.push_back(obj);
-	}
-	for (auto& o:objs) o.Print();
-	return 0;
+    std::string filename = "iter.ptl";
+    PTL::PropertyTree input;
+    input.Read(filename);
+    std::vector<MyClass> objs;
+
+    // Note that PTL::PropertyTree and
+    // PTL::PropertySection support range loops
+    for (const auto& s : input["Objects"])
+    {
+        MyClass obj(s);
+        obj.Parse();
+        objs.push_back(obj);
+    }
+    for (auto& o:objs) o.Print();
+    return 0;
 }
 ```
 
@@ -311,14 +311,14 @@ int main(void)
 {
     // Create tree object
     PTL::PropertyTree input;
-    
+
     // Read the input file
     input.Read("input.ptl");
-    
+
     // Query the content of the tree
     int intValue  = input.Query("intValue");
     int intValue2 = input.Query("SomeSection.intValue2");
-    
+
     // print the value
     std::cout << intValue << std::endl;
     std::cout << intValue2 << std::endl;

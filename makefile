@@ -1,7 +1,7 @@
 LIB_NAME := PTL
 
 ifndef OPTLEVEL
-OPTLEVEL := 3
+OPTLEVEL := 0
 endif
 
 BASEIDIR  := $(shell pwd)
@@ -9,6 +9,7 @@ SRC_DIR   := ${BASEIDIR}/src
 LIB_DIR   := ${BASEIDIR}/lib
 OBJ_DIR   := ${BASEIDIR}/obj
 BIN_DIR   := ${BASEIDIR}/bin
+UTL_DIR   := ${BASEIDIR}/util
 HDR_DIR   := ${BASEIDIR}/include
 export BASEIDIR
 export LIB_DIR
@@ -70,6 +71,8 @@ setup:
 
 test: executables
 	@for fldr in testing/* ; do \
+				echo $${fldr} ; \
+				ln -sf ${UTL_DIR}/makefile.test $${fldr}/makefile; \
                 ${MAKE} -C $${fldr} -f makefile -s test || exit 1; \
         done
 	@for fldr in examples/* ; do \
@@ -80,6 +83,7 @@ test: executables
 clean:
 	for fldr in testing/* ; do \
 	            ${MAKE} -C $${fldr} -f makefile clean ; \
+				rm -f $${fldr}/makefile ; \
 	    done
 	for fldr in examples/* ; do \
                 ${MAKE} -C $${fldr} -f makefile clean || exit 1; \

@@ -332,7 +332,9 @@ namespace PTL
     
     void PropertySection::StrictParse(void)
     {
-    	if (!this->StrictTraverseParse(""))
+        std::string noString = "";
+        bool success = this->StrictTraverseParse(noString);
+    	if (!success)
         {
             ErrorKill("Found at least 1 invalid argument. Stopping.");
         }
@@ -383,6 +385,10 @@ namespace PTL
                         return false;
                     }
                     return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
             else if(!templateVariable->ParseFromString(sectionValue, terminalEndpointTarget))

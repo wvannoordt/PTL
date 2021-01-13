@@ -1,1 +1,2 @@
+#define myNumber 0
 inputValue = $(myNumber)

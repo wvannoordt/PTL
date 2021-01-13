@@ -1,7 +1,7 @@
 EXE  := program
 MAIN := $(wildcard *.cc)
 main:
-	${CC_HOST} ${ICONFIG} ${MAIN} -o ${EXE} ${LCONFIG}
+	${CC_HOST} -fpermissive -std=c++11  ${ICONFIG} ${MAIN} -o ${EXE} ${LCONFIG}
 
 clean:
 	-rm ${EXE}

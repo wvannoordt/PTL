@@ -91,7 +91,10 @@ namespace PTL
         *((int**)ptr) = basePtr;
         if (hasFiller)
         {
-            for (int i = 0; i < assertCount; i++) basePtr[i] = filler(i);
+            for (int i = 0; i < assertCount; i++)
+            {
+                basePtr[i] = filler(i);
+            }
         }
     }
     

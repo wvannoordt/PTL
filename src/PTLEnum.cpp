@@ -10,11 +10,18 @@ namespace PTL
         strHandle = new PropStringHandler();
         std::string acceptable = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-";
         if (formattedOptions.length()==0) ErrorKill("PTLEnum declaration with default value \"" + defaultValueIn + "\" has empty option specifier.");
-        this->SetDescription(descriptionIn);
         defaultValue = defaultValueIn;
         basePointerType = BasePointer::IntPointer;
         strHandle->SetDelimiter(':');
         std::vector<std::string> optStrings = strHandle->IdentifyTopLevels(formattedOptions, ':');
+        std::string optionString = " :: Options: {";
+        for (int i = 0; i < optStrings.size(); i++)
+        {
+            if (i!=0) optionString += ", ";
+            optionString += optStrings[i];
+        }
+        optionString += "}";
+        this->SetDescription(descriptionIn + optionString);
         for (int i = 0; i < optStrings.size(); i++)
         {
             for (int j = 0; j < optStrings[i].length(); j++)

@@ -230,7 +230,8 @@ namespace PTL
             }
             else
             {
-                myfile << indent << sectionName << " = "  << templateVariable->GetDefaultValueString() << ptl::endl;
+                myfile << indent << sectionName << " = "  << templateVariable->GetDefaultValueString() + " "
+                    + stringHandler->GetCommentSpecifier() + " " + templateVariable->GetDescription() << ptl::endl;
             }
         }
     }

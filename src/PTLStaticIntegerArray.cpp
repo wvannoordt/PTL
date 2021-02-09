@@ -8,6 +8,15 @@ namespace PTL
         strHandle = new PropStringHandler();
         this->SetDescription(descriptionIn);
         defaultValue = "[]";
+        if (assertCount_in>0)
+        {
+            defaultValue = "[0";
+            for (int i = 1; i < assertCount_in; i++)
+            {
+                defaultValue += ",0";
+            }
+            defaultValue += "]";
+        }
         basePointerType = BasePointer::IntArrayPointer;
         requiresDelete = false;
         basePtr = NULL;
@@ -23,6 +32,15 @@ namespace PTL
         strHandle = new PropStringHandler();
         this->SetDescription(descriptionIn);
         defaultValue = "[]";
+        if (assertCount_in>0)
+        {
+            defaultValue = "["+std::to_string(filler_in(0));
+            for (int i = 1; i < assertCount_in; i++)
+            {
+                defaultValue += ","+std::to_string(filler_in(i));;
+            }
+            defaultValue += "]";
+        }
         basePointerType = BasePointer::IntArrayPointer;
         requiresDelete = false;
         basePtr = NULL;

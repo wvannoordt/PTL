@@ -12,13 +12,22 @@ namespace PTL
     PTLAutoEnum::PTLAutoEnum(int defaultValueIn, std::string (*stringifier)(int), std::string descriptionIn)
     {
         std::string acceptable = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-";
-        this->SetDescription(descriptionIn);
         defaultValue = stringifier(defaultValueIn);
         basePointerType = BasePointer::IntPointer;
+        std::vector<std::string> opt;
         for (int i = 0; ((i < MAX_ENUM_OPTIONS)&&(stringifier(i)!=PTL_AUTO_ENUM_TERMINATOR)); i++)
         {
             options.insert({stringifier(i), i});
+            opt.push_back(stringifier(i));
         }
+        std::string optionString = " :: Options: {";
+        for (int i = 0; i < opt.size(); i++)
+        {
+            if (i!=0) optionString += ", ";
+            optionString += opt[i];
+        }
+        optionString += "}";
+        this->SetDescription(descriptionIn + optionString);
     }
 
     std::string PTLAutoEnum::GetAcceptableValueString(void)

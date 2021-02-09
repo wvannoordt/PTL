@@ -30,7 +30,7 @@ namespace PTL
     }
     std::string PTLBoolean::GetDefaultValueString(void)
     {
-        return std::to_string(defaultValue);
+        return defaultValue?"true":"false";
     }
     void PTLBoolean::SetDefaultValue(void* ptr)
     {

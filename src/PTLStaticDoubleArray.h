@@ -17,7 +17,7 @@ namespace PTL
             void SetDefaultValue(void* ptr);
             std::string GetDefaultValueString(void);
         private:
-            const char* defaultValue;
+            std::string defaultValue;
             bool requiresDelete;
             PropStringHandler* strHandle;
             double* basePtr;

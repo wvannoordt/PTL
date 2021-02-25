@@ -515,7 +515,16 @@ namespace PTL
         isTerminalNode = true;
         BreakIfAlreadyMapped();
         terminalEndpointTarget = (void*)ptr;
-        basePointerType = BasePointer::BoolPointer;
+        basePointerType = BasePointer::BooleanPointer;
+        return templateVariable;
+    }
+    
+    InputVariable* & PropertySection::MapTo(bool** ptr)
+    {
+        isTerminalNode = true;
+        BreakIfAlreadyMapped();
+        terminalEndpointTarget = (void*)ptr;
+        basePointerType = BasePointer::BooleanArrayPointer;
         return templateVariable;
     }
 

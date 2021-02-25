@@ -35,6 +35,8 @@ namespace PTL
         {
             ErrorKill("Default option \"" + defaultValueIn + "\" not found in PTLEnum declaration \"" + formattedOptions + "\"");
         }
+        //need to reset the parsed flag
+        hasBeenParsed = false;
     }
 
     std::string PTLEnum::GetAcceptableValueString(void)

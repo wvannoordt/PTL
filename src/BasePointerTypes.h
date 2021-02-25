@@ -8,10 +8,10 @@ namespace PTL
         None,
         IntPointer,
         DoublePointer,
-        BoolPointer,
+        BooleanPointer,
         IntArrayPointer,
         DoubleArrayPointer,
-        BoolArrayPointer,
+        BooleanArrayPointer,
         StringPointer,
         CustomClassPointers
     };
@@ -22,10 +22,10 @@ namespace PTL
             case None:                return "BasePointer::None";
             case IntPointer:          return "BasePointer::IntPointer";
             case DoublePointer:       return "BasePointer::DoublePointer";
-            case BoolPointer:         return "BasePointer::BoolPointer";
+            case BooleanPointer:      return "BasePointer::BooleanPointer";
             case IntArrayPointer:     return "BasePointer::IntArrayPointer";
             case DoubleArrayPointer:  return "BasePointer::DoubleArrayPointer";
-            case BoolArrayPointer:    return "BasePointer::BoolArrayPointer";
+            case BooleanArrayPointer: return "BasePointer::BooleanArrayPointer";
             case StringPointer:       return "BasePointer::StringPointer";
             case CustomClassPointers: return "BasePointer::CustomClassPointers";
             default: return "NO_BASE_PTR";

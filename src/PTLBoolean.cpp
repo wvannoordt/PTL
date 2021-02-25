@@ -7,7 +7,7 @@ namespace PTL
     {
         this->SetDescription(descriptionIn);
         defaultValue = defaultValueIn;
-        basePointerType = BasePointer::BoolPointer;
+        basePointerType = BasePointer::BooleanPointer;
     }
     bool PTLBoolean::ParseFromString(std::string parseVal, void* ptr)
     {

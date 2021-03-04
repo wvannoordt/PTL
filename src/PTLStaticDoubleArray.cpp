@@ -13,9 +13,9 @@ namespace PTL
             defaultValue = "[0";
             for (int i = 1; i < assertCount_in; i++)
             {
-                defaultValue += ",0";
+                defaultValue = defaultValue + ",0";
             }
-            defaultValue += "]";
+            defaultValue = defaultValue + "]";
         }
         basePointerType = BasePointer::DoubleArrayPointer;
         requiresDelete = false;
@@ -37,9 +37,10 @@ namespace PTL
             defaultValue = "["+std::to_string(filler_in(0));
             for (int i = 1; i < assertCount_in; i++)
             {
-                defaultValue += ","+std::to_string(filler_in(i));
+                defaultValue = defaultValue + ",";
+                defaultValue = defaultValue + std::to_string(filler_in(i));
             }
-            defaultValue += "]";
+            defaultValue = defaultValue + "]";
         }
         basePointerType = BasePointer::DoubleArrayPointer;
         requiresDelete = false;

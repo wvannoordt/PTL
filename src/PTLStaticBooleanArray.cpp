@@ -34,10 +34,12 @@ namespace PTL
         defaultValue = "[]";
         if (assertCount_in>0)
         {
-            defaultValue = "["+std::to_string(filler_in(0));
+            defaultValue = "[";
+            defaultValue+=(filler_in(0)?"true":"false");
             for (int i = 1; i < assertCount_in; i++)
             {
-                defaultValue += ","+std::to_string(filler_in(i));
+                defaultValue += ",";
+                defaultValue += (filler_in(i)?"true":"false");
             }
             defaultValue += "]";
         }

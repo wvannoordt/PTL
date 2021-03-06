@@ -8,12 +8,13 @@ namespace PTL
         strHandle = new PropStringHandler();
         this->SetDescription(descriptionIn);
         defaultValue = "[]";
+        std::string fstr = GetBoolStr(false);
         if (assertCount_in>0)
         {
-            defaultValue = "[false";
+            defaultValue = "[" + fstr;
             for (int i = 1; i < assertCount_in; i++)
             {
-                defaultValue += ",false";
+                defaultValue += ","+fstr;
             }
             defaultValue += "]";
         }
@@ -27,6 +28,11 @@ namespace PTL
         hasFiller = false;
     }
     
+    std::string PTLStaticBooleanArray::GetBoolStr(bool b)
+    {
+        return b?"true":"false";
+    }
+    
     PTLStaticBooleanArray::PTLStaticBooleanArray(int assertCount_in, std::string descriptionIn, bool (*filler_in)(int))
     {
         strHandle = new PropStringHandler();
@@ -35,11 +41,11 @@ namespace PTL
         if (assertCount_in>0)
         {
             defaultValue = "[";
-            defaultValue+=(filler_in(0)?"true":"false");
+            defaultValue+=GetBoolStr(filler_in(0));
             for (int i = 1; i < assertCount_in; i++)
             {
                 defaultValue += ",";
-                defaultValue += (filler_in(i)?"true":"false");
+                defaultValue += GetBoolStr(filler_in(i));
             }
             defaultValue += "]";
         }
@@ -89,7 +95,7 @@ namespace PTL
     }
     std::string PTLStaticBooleanArray::GetDefaultValueString(void)
     {
-        return std::string(defaultValue);
+        return defaultValue;
     }
     void PTLStaticBooleanArray::SetDefaultValue(void* ptr)
     {

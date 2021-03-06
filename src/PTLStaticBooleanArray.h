@@ -13,10 +13,11 @@ namespace PTL
             PTLStaticBooleanArray(int assertCount_in, std::string descriptionIn);
             PTLStaticBooleanArray(int assertCount_in, std::string descriptionIn, bool (*filler_in)(int));
             bool ParseFromString(std::string parseVal, void* ptr);
-            void Destroy(void);
+            void Destroy(void) override;
             void SetDefaultValue(void* ptr);
             std::string GetDefaultValueString(void);
         private:
+            std::string GetBoolStr(bool b);
             std::string defaultValue;
             bool requiresDelete;
             PropStringHandler* strHandle;

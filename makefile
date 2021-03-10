@@ -36,7 +36,10 @@ ifndef C_HOST
 C_HOST := $(shell which gcc)
 endif
 
-HOST_FLAGS   := -O${OPTLEVEL} -Wno-unknown-pragmas -g -fPIC -fpermissive -std=c++11
+C11F := -fpermissive -std=c++11
+export C11F
+
+HOST_FLAGS   := -O${OPTLEVEL} -Wno-unknown-pragmas -g -fPIC ${C11F}
 HOST_FLAGS_C := -O${OPTLEVEL} -g -fPIC -fpermissive
 
 export CC_HOST

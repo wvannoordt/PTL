@@ -41,6 +41,7 @@ namespace PTL
             InputVariable* & MapTo(double**     ptr);
             InputVariable* & MapTo(int**        ptr, int* nPtr);
             InputVariable* & MapTo(int**        ptr);
+            InputVariable* & MapTo(bool**       ptr);
             bool StrictTraverseParse(std::string depthString);
             void StrictParse(void);
             void BreakIfAlreadyMapped(void);

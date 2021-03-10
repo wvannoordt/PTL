@@ -10,6 +10,7 @@
 #include "PTLAutoEnum.h"
 #include "PTLDynamicDoubleArray.h"
 #include "PTLStaticDoubleArray.h"
+#include "PTLStaticBooleanArray.h"
 #include "PTLDynamicIntegerArray.h"
 #include "PTLStaticIntegerArray.h"
 #include "Interactive.h"

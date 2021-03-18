@@ -12,6 +12,7 @@ namespace PTL
     {
         public:
             InputVariable(void){hasRestrictedValues = false; secondaryBasePointerType=None;parseErrorString="none";hasBeenParsed = false;}
+            virtual ~InputVariable(void){}
             virtual bool ParseFromString(std::string parseVal, void* ptr)=0;
             virtual void Destroy(void)=0;
             virtual std::string GetDescription(void) {return variableDescription;}

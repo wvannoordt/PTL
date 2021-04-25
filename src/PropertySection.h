@@ -13,6 +13,8 @@
 #include <fstream>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <iostream>
+#include <sstream>
 #include <iterator>
 #include "PTLOutputStream.h"
 #include "QueryResult.h"
@@ -32,7 +34,14 @@ namespace PTL
             void Destroy(void);
             PreProcessContext* GetContext(void);
             PropertySection& operator [] (std::string argument);
-            PropertySection& operator = (std::string argument);
+            template <typename stype> PropertySection& operator = (stype argument)
+            {
+                std::stringstream st;
+                st << argument;
+                this->SetValue(st.str());
+                this->DeclareIsTerminal();
+                return *this;
+            }
             InputVariable* & MapTo(int*         ptr);
             InputVariable* & MapTo(double*      ptr);
             InputVariable* & MapTo(bool*        ptr);
@@ -48,7 +57,7 @@ namespace PTL
             void DeclareIsPrincipal(void);
             void DeclareIsNotPrincipal(void);
             std::string GetTotalName(void);
-            void RecursiveWriteDefaults(std::ofstream& myfile);
+            void RecursiveWriteDefaults(std::ostream& myfile);
             PropertySection* PushSection(std::string pushedSection);
             void KeyToNewValue(std::string key, PropertySection* newValue);
             void NewSection(std::string key, PropertySection* val);

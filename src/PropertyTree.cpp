@@ -108,6 +108,11 @@ namespace PTL
         principalSection->RecursiveWriteDefaults(myfile);
         myfile.close();
     }
+    
+    void PropertyTree::Serialize(std::ostream& stream)
+    {
+        principalSection->RecursiveWriteDefaults(stream);
+    }
 
     void PropertyTree::ReadInputFileToTreeData(std::string filename)
     {

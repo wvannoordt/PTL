@@ -21,6 +21,7 @@ namespace PTL
             void DebugPrint(void);
             PropertySection& operator [](std::string argument);
             void StrictParse(void);
+            void Serialize(std::ostream& stream);
             void Destroy(void);
             void CreateDefaultValuesFile(std::string filename);
             void SetAsSubtree(PropertySection& newPrincipal);

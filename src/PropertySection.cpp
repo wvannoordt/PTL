@@ -200,7 +200,7 @@ namespace PTL
         }
     }
 
-    void PropertySection::RecursiveWriteDefaults(std::ofstream& myfile)
+    void PropertySection::RecursiveWriteDefaults(std::ostream& myfile)
     {
         std::string indent = "";
         char beginSection, endSection;
@@ -446,13 +446,6 @@ namespace PTL
         }
         temp->DeclareIsFromTemplateDeclaration();
         return *temp;
-    }
-
-    PropertySection& PropertySection::operator= (std::string argument)
-    {
-        this->SetValue(argument);
-        this->DeclareIsTerminal();
-        return *this;
     }
 
     std::string PropertySection::GetTotalName(void)

@@ -71,6 +71,16 @@ namespace PTL
             std::vector<PropertySection*>::const_iterator begin() const noexcept;
             std::vector<PropertySection*>::iterator end() noexcept;
             std::vector<PropertySection*>::const_iterator end() const noexcept;
+            template <typename convertType> operator convertType ()
+            {
+                if (!(this->isTerminalNode))
+                {
+                    ErrorKill("Can't parse a non-terminal node: " + this->GetSectionName());
+                }
+                QueryResult qresult(this->sectionValue, true, !(this->isTerminalNode), this, "[none]");
+                convertType output = qresult;
+                return output;
+            }
         private:
             void AssertPointerConsistency(std::string variableLocation, bool isSecondary);
             std::map<std::string,PropertySection*> sectionSubSections;

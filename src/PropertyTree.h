@@ -20,6 +20,11 @@ namespace PTL
             void SetCloseMessage(std::string message);
             void DebugPrint(void);
             PropertySection& operator [](std::string argument);
+            template <const size_t cCharSize> PropertySection& operator [] (const char (&key)[cCharSize])
+            {
+                std::string keyStr(key);
+                return (*this)[keyStr];
+            }
             void StrictParse(void);
             void Serialize(std::ostream& stream);
             void Destroy(void);

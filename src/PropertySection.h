@@ -34,6 +34,11 @@ namespace PTL
             void Destroy(void);
             PreProcessContext* GetContext(void);
             PropertySection& operator [] (std::string argument);
+            template <const size_t cCharSize> PropertySection& operator [] (const char (&key)[cCharSize])
+            {
+                std::string keyStr(key);
+                return (*this)[keyStr];
+            }
             template <typename stype> PropertySection& operator = (stype argument)
             {
                 std::stringstream st;

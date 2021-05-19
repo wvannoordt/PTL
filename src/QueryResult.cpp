@@ -29,6 +29,7 @@ namespace PTL
     {
         KillIfNotTerminal();
         ErrorKill("QueryResult::operator std::vector<std::string> () not yet implemented");
+        return std::vector<std::string> ();
     }
     
     QueryResult::operator double ()

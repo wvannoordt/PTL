@@ -32,6 +32,7 @@ namespace PTL
         bool BuiltInFunctionList::AddFunction(std::string funcName, PTLBuiltinFunction_t func)
         {
             intrinsic.insert({funcName, func});
+            return true;
         }
         
         bool BuiltInFunctionList::Exists(std::string funcName)

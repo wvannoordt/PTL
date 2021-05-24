@@ -1,3 +1,2 @@
 #define something SOMETHINGCOOL
 testValue = helloworld
-testValue2  = @cat(1, a, b, c, @env(CODE_DIR), $(something))

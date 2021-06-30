@@ -19,6 +19,10 @@ namespace PTL
             void Read(std::string filename);
             void SetCloseMessage(std::string message);
             void DebugPrint(void);
+            PreProcessContext* GetContext(void)
+            {
+                return principalSection->GetContext();
+            }
             PropertySection& operator [](std::string argument);
             template <const size_t cCharSize> PropertySection& operator [] (const char (&key)[cCharSize])
             {

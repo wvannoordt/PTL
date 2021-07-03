@@ -9,27 +9,18 @@ int main(void)
 	std::vector<double> doubleVec;
 	std::vector<bool> boolVec;
 
-	input["intvector"].MapTo(&intVec) = new PTL::PTLIntegerVector("int vec");
+	input["intvector"].MapTo(&intVec) = new PTL::PTLIntegerVector("int vec", 8, [](int i) -> int {return i+15;});
 	input["doublevector"].MapTo(&doubleVec) = new PTL::PTLDoubleVector("double vec");
 	input["boolvector"].MapTo(&boolVec) = new PTL::PTLBooleanVector("bool vec");
-
+	
 	input.Read(filename);
 	input.StrictParse();
-	
-	for (auto v:intVec)
+
+	for (auto y:intVec)
 	{
-		std::cout << v << std::endl;
+		std::cout << y << std::endl;
 	}
-	
-	for (auto v:doubleVec)
-	{
-		std::cout << v << std::endl;
-	}
-	
-	for (auto v:boolVec)
-	{
-		std::cout << (v?"true":"false") << std::endl;
-	}
+
 	
 	input.DebugPrint();
 	return 0;

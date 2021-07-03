@@ -9,6 +9,17 @@ namespace PTL
         this->SetDescription(descriptionIn);
         defaultValue = "[]";
         basePointerType = BasePointer::BoolVectorPointer;
+        filler = NULL;
+        defaultSize = 0;
+    }
+    PTLBooleanVector::PTLBooleanVector(std::string descriptionIn, int defaultSize_in, bool (*filler_in)(int))
+    {
+        strHandle = new PropStringHandler();
+        this->SetDescription(descriptionIn);
+        defaultValue = "[]";
+        basePointerType = BasePointer::BoolVectorPointer;
+        filler = filler_in;
+        defaultSize = defaultSize_in;
     }
     bool PTLBooleanVector::ParseFromString(std::string parseVal, void* ptr)
     {
@@ -43,13 +54,28 @@ namespace PTL
             }
         }
         hasBeenParsed = true;
+        if (filler!=NULL)
+        {
+            for (int i = vec.size(); i < defaultSize; i++)
+            {
+                vec.push_back(filler(i));
+            }
+        }
         return true;
     }
     std::string PTLBooleanVector::GetDefaultValueString(void)
     {
         return defaultValue;
     }
-    void PTLBooleanVector::SetDefaultValue(void* ptr){}
+    void PTLBooleanVector::SetDefaultValue(void* ptr)
+    {
+        auto& vec = *((std::vector<bool>*)ptr);
+        if (filler==NULL) return;
+        for (int i = 0; i < defaultSize; i++)
+        {
+            vec.push_back(filler(i));
+        }
+    }
     void PTLBooleanVector::Destroy(void)
     {
         delete strHandle;

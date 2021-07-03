@@ -11,6 +11,7 @@ namespace PTL
     {
         public:
             PTLBooleanVector(std::string description);
+            PTLBooleanVector(std::string descriptionIn, int defaultSize_in, bool (*filler_in)(int));
             bool ParseFromString(std::string parseVal, void* ptr);
             void Destroy(void);
             void SetDefaultValue(void* ptr);
@@ -18,6 +19,8 @@ namespace PTL
         private:
             PropStringHandler* strHandle;
             std::string defaultValue;
+            bool (*filler)(int);
+            int defaultSize;
     };
 }
 

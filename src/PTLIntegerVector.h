@@ -11,6 +11,7 @@ namespace PTL
     {
         public:
             PTLIntegerVector(std::string description);
+            PTLIntegerVector(std::string descriptionIn, int defaultSize_in, int (*filler_in)(int));
             bool ParseFromString(std::string parseVal, void* ptr);
             void Destroy(void);
             void SetDefaultValue(void* ptr);
@@ -18,6 +19,8 @@ namespace PTL
         private:
             PropStringHandler* strHandle;
             std::string defaultValue;
+            int (*filler)(int);
+            int defaultSize;
     };
 }
 

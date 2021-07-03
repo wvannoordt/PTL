@@ -9,7 +9,20 @@ namespace PTL
         this->SetDescription(descriptionIn);
         defaultValue = "[]";
         basePointerType = BasePointer::IntVectorPointer;
+        defaultSize = 0;
+        filler = NULL;
     }
+    
+    PTLIntegerVector::PTLIntegerVector(std::string descriptionIn, int defaultSize_in, int (*filler_in)(int))
+    {
+        strHandle = new PropStringHandler();
+        this->SetDescription(descriptionIn);
+        defaultValue = "[]";
+        basePointerType = BasePointer::IntVectorPointer;
+        defaultSize = defaultSize_in;
+        filler = filler_in;
+    }
+    
     bool PTLIntegerVector::ParseFromString(std::string parseVal, void* ptr)
     {
         if (hasBeenParsed) return true;
@@ -49,13 +62,28 @@ namespace PTL
             }
         }
         hasBeenParsed = true;
+        if (filler!=NULL)
+        {
+            for (int i = vec.size(); i < defaultSize; i++)
+            {
+                vec.push_back(filler(i));
+            }
+        }
         return true;
     }
     std::string PTLIntegerVector::GetDefaultValueString(void)
     {
         return defaultValue;
     }
-    void PTLIntegerVector::SetDefaultValue(void* ptr){}
+    void PTLIntegerVector::SetDefaultValue(void* ptr)
+    {
+        auto& vec = *((std::vector<int>*)ptr);
+        if (filler==NULL) return;
+        for (int i = 0; i < defaultSize; i++)
+        {
+            vec.push_back(filler(i));
+        }
+    }
     void PTLIntegerVector::Destroy(void)
     {
         delete strHandle;

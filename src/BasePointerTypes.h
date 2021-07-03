@@ -13,6 +13,8 @@ namespace PTL
         DoubleArrayPointer,
         BooleanArrayPointer,
         StringPointer,
+        IntVectorPointer,
+        DoubleVectorPointer,
         CustomClassPointers
     };
     static inline std::string BasePointerToString(BasePointer p)
@@ -27,6 +29,8 @@ namespace PTL
             case DoubleArrayPointer:  return "BasePointer::DoubleArrayPointer";
             case BooleanArrayPointer: return "BasePointer::BooleanArrayPointer";
             case StringPointer:       return "BasePointer::StringPointer";
+            case IntVectorPointer:    return "BasePointer::IntVectorPointer";
+            case DoubleVectorPointer: return "BasePointer::DoubleVectorPointer";
             case CustomClassPointers: return "BasePointer::CustomClassPointers";
             default: return "NO_BASE_PTR";
         }

@@ -13,6 +13,8 @@
 #include "PTLStaticBooleanArray.h"
 #include "PTLDynamicIntegerArray.h"
 #include "PTLStaticIntegerArray.h"
+#include "PTLIntegerVector.h"
+#include "PTLDoubleVector.h"
 #include "Interactive.h"
 #include "InputArguments.h"
 #include "Error.h"

@@ -47,15 +47,17 @@ namespace PTL
                 this->DeclareIsTerminal();
                 return *this;
             }
-            InputVariable* & MapTo(int*         ptr);
-            InputVariable* & MapTo(double*      ptr);
-            InputVariable* & MapTo(bool*        ptr);
-            InputVariable* & MapTo(std::string* ptr);
-            InputVariable* & MapTo(double**     ptr, int* nPtr);
-            InputVariable* & MapTo(double**     ptr);
-            InputVariable* & MapTo(int**        ptr, int* nPtr);
-            InputVariable* & MapTo(int**        ptr);
-            InputVariable* & MapTo(bool**       ptr);
+            InputVariable* & MapTo(int*                 ptr);
+            InputVariable* & MapTo(double*              ptr);
+            InputVariable* & MapTo(bool*                ptr);
+            InputVariable* & MapTo(std::string*         ptr);
+            InputVariable* & MapTo(double**             ptr, int* nPtr);
+            InputVariable* & MapTo(double**             ptr);
+            InputVariable* & MapTo(int**                ptr, int* nPtr);
+            InputVariable* & MapTo(int**                ptr);
+            InputVariable* & MapTo(bool**               ptr);
+            InputVariable* & MapTo(std::vector<int>*    ptr);
+            InputVariable* & MapTo(std::vector<double>* ptr);
             bool StrictTraverseParse(std::string depthString);
             void StrictParse(void);
             void BreakIfAlreadyMapped(void);

@@ -529,7 +529,25 @@ namespace PTL
         basePointerType = BasePointer::StringPointer;
         return templateVariable;
     }
-
+    
+    InputVariable* & PropertySection::MapTo(std::vector<int>* ptr)
+    {
+        isTerminalNode = true;
+        BreakIfAlreadyMapped();
+        terminalEndpointTarget = (void*)ptr;
+        basePointerType = BasePointer::IntVectorPointer;
+        return templateVariable;
+    }
+    
+    InputVariable* & PropertySection::MapTo(std::vector<double>* ptr)
+    {
+        isTerminalNode = true;
+        BreakIfAlreadyMapped();
+        terminalEndpointTarget = (void*)ptr;
+        basePointerType = BasePointer::DoubleVectorPointer;
+        return templateVariable;
+    }
+    
     InputVariable* & PropertySection::MapTo(double** ptr, int* nPtr)
     {
         isTerminalNode = true;

@@ -548,6 +548,15 @@ namespace PTL
         return templateVariable;
     }
     
+    InputVariable* & PropertySection::MapTo(std::vector<bool>* ptr)
+    {
+        isTerminalNode = true;
+        BreakIfAlreadyMapped();
+        terminalEndpointTarget = (void*)ptr;
+        basePointerType = BasePointer::BoolVectorPointer;
+        return templateVariable;
+    }
+    
     InputVariable* & PropertySection::MapTo(double** ptr, int* nPtr)
     {
         isTerminalNode = true;

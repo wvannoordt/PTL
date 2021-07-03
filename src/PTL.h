@@ -15,6 +15,7 @@
 #include "PTLStaticIntegerArray.h"
 #include "PTLIntegerVector.h"
 #include "PTLDoubleVector.h"
+#include "PTLBooleanVector.h"
 #include "Interactive.h"
 #include "InputArguments.h"
 #include "Error.h"

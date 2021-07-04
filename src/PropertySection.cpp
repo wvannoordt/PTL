@@ -27,6 +27,10 @@ namespace PTL
         basePointerType = BasePointer::IntPointer;
         isPrincipal = false;
         secondaryBasePointerType = BasePointer::None;
+        if (host_in!= NULL)
+        {
+            baseTree = host_in->baseTree;
+        }
         if (host_in != NULL)
         {
             context.SetHostContext(host->GetContext());
@@ -42,6 +46,11 @@ namespace PTL
 	{
 		return sectionName;
 	}
+    
+    PropertyTree& PropertySection::GetBaseTree(void)
+    {
+        return *baseTree;
+    }
     
     PropertySection* PropertySection::PushSection(std::string pushedSection)
     {

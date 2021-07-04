@@ -18,6 +18,7 @@ namespace PTL
     {
         stringHandler = PropStringHandler();
         principalSection = new PropertySection(&stringHandler, 0, NULL);
+        principalSection->baseTree = this;
         principalSection->DeclareIsPrincipal();
         principalSection->SetName("[ROOT]");
         closeMessage = "none";

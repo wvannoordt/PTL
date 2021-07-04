@@ -21,6 +21,17 @@ namespace PTL
         basePointerType = BasePointer::IntVectorPointer;
         filler = filler_in;
         defaultSize = defaultSize_in;
+        defaultValue = "[";
+        if (defaultSize>0)
+        {
+            defaultValue+=std::to_string(filler(0));
+            for (int i = 1; i < defaultSize; i++)
+            {
+                defaultValue+=",";
+                defaultValue+=std::to_string(filler(i));
+            }
+        }
+        defaultValue += "]";
     }
     bool PTLDoubleVector::ParseFromString(std::string parseVal, void* ptr)
     {

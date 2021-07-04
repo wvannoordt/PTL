@@ -20,6 +20,17 @@ namespace PTL
         basePointerType = BasePointer::BoolVectorPointer;
         filler = filler_in;
         defaultSize = defaultSize_in;
+        defaultValue = "[";
+        if (defaultSize>0)
+        {
+            defaultValue+=(filler(0)?"true":"false");
+            for (int i = 1; i < defaultSize; i++)
+            {
+                defaultValue+=",";
+                defaultValue+=(filler(i)?"true":"false");
+            }
+        }
+        defaultValue += "]";
     }
     bool PTLBooleanVector::ParseFromString(std::string parseVal, void* ptr)
     {

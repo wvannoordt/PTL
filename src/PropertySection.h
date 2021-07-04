@@ -20,6 +20,7 @@
 #include "QueryResult.h"
 namespace PTL
 {
+    class PropertyTree;
     class PropertySection
     {
         public:
@@ -72,9 +73,12 @@ namespace PTL
             void RecursiveIncrementDepth(void);
             std::string GetSectionName(void);
             void ResolveAllStrings(void);
+            PropertyTree& GetBaseTree(void);
             QueryResult Query(std::string sectionQuery);
             QueryResult Query(std::stack<std::string>& sectionQuery, std::string absoluteString);
             std::vector<std::string> GetTerminalSections(void);
+            bool HasTemplateVariable(void) {return templateVariable!= NULL;}
+            InputVariable* GetTemplateVariable(void) {return templateVariable;}
             std::vector<PropertySection*>::iterator begin() noexcept;
             std::vector<PropertySection*>::const_iterator begin() const noexcept;
             std::vector<PropertySection*>::iterator end() noexcept;
@@ -89,6 +93,7 @@ namespace PTL
                 convertType output = qresult;
                 return output;
             }
+            std::string GetSectionValue(void) {return sectionValue;}
         private:
             void AssertPointerConsistency(std::string variableLocation, bool isSecondary);
             std::map<std::string,PropertySection*> sectionSubSections;
@@ -99,11 +104,13 @@ namespace PTL
             PropertySection* host;
             std::string sectionName, sectionValue;
             InputVariable* templateVariable;
+            PropertyTree* baseTree;
             void* terminalEndpointTarget;
             void* terminalEndpointTargetSecondaryData;
             BasePointer basePointerType;
             BasePointer secondaryBasePointerType;
             PreProcessContext context;
+            friend class PropertyTree;
     };
 }
 #endif

@@ -4,6 +4,8 @@ ifndef OPTLEVEL
 OPTLEVEL := 0
 endif
 
+
+
 BASEIDIR  := $(shell pwd)
 SRC_DIR   := ${BASEIDIR}/src
 LIB_DIR   := ${BASEIDIR}/lib
@@ -36,8 +38,28 @@ ifndef C_HOST
 C_HOST := $(shell which gcc)
 endif
 
+ifndef FC_HOST
+FC_HOST := $(shell which gfortran)
+endif
+export FC_HOST
+
+LINKS :=
+
+PTL_FORTRAN :=
+OBJ_FILES_F := 
+
+ifndef PTLF
+PTLF := 1
+endif
+
+ifeq (${PTLF},1)
+PTL_FORTRAN := fort
+OBJ_FILES_F := ${OBJ_DIR}/PTLf.o
+LINKS += -lgfortran
+endif
+
 C11F := -fpermissive -std=c++11
-export C11F 
+export C11F
 
 HOST_FLAGS   := -O${OPTLEVEL} -Wno-unknown-pragmas -g -fPIC -DGLIBCXX_FORCE_NEW=1 ${C11F}
 HOST_FLAGS_C := -O${OPTLEVEL} -g -fPIC -fpermissive
@@ -52,9 +74,17 @@ executables: final
 	@for fldr in executables/* ; do \
 				${MAKE} -C $${fldr} -f makefile || exit 1; \
 		done
+
+fort:
+	${FC_HOST} ${COMPILE_TIME_OPT} ${IFLAGS} ${BASEIDIR}/fortran/src/PTLf.F90 -c -o ${OBJ_DIR}/PTLf.o
+	mv -t ${HDR_DIR} ${BASEIDIR}/ptlf.mod
+
+forttest: final
+	${MAKE} -C ${BASEIDIR}/fortran/testing -f makefile run
+
 .PHONY: final
-final: setup ${OBJ_FILES} ${OBJ_FILES_C}
-	${CC_HOST} -fPIC -shared ${COMPILE_TIME_OPT} ${OBJ_FILES} ${OBJ_FILES_C} ${IFLAGS} -o ${TARGET}
+final: setup ${OBJ_FILES} ${PTL_FORTRAN} ${OBJ_FILES_C}
+	${CC_HOST} -fPIC -shared ${COMPILE_TIME_OPT} ${OBJ_FILES} ${OBJ_FILES_C} ${OBJ_FILES_F} ${IFLAGS} -o ${TARGET} ${LINKS}
 
 ${OBJ_FILES}: ${OBJ_DIR}/%.o : ${SRC_DIR}/%.cpp
 	${CC_HOST} ${HOST_FLAGS} ${COMPILE_TIME_OPT} ${IFLAGS} -c $< -o $@
@@ -84,6 +114,7 @@ test: executables
 	@echo "${LIB_NAME} passed all tests."
 
 clean:
+	${MAKE} -C fortran/testing -f makefile clean
 	for fldr in testing/* ; do \
 	            ${MAKE} -C $${fldr} -f makefile clean ; \
 				rm -f $${fldr}/makefile ; \

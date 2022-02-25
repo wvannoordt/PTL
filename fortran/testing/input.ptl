@@ -1,0 +1,6 @@
+#define myval 2
+Section
+{
+    someIntValue = $(myval)
+    someRealValue = @sqrt(2.0)
+}

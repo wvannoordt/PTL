@@ -77,7 +77,7 @@ executables: final
 
 fort:
 	${FC_HOST} ${COMPILE_TIME_OPT} ${IFLAGS} ${BASEIDIR}/fortran/src/PTLf.F90 -c -o ${OBJ_DIR}/PTLf.o
-	mv -t ${HDR_DIR} ${BASEIDIR}/ptlf.mod
+	mv ${BASEIDIR}/ptlf.mod ${HDR_DIR}
 
 forttest: final
 	${MAKE} -C ${BASEIDIR}/fortran/testing -f makefile run

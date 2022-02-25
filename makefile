@@ -99,7 +99,7 @@ setup:
 	mkdir -p ${HDR_DIR}
 	mkdir -p ${BIN_DIR}
 	@for hdr in ${HEADER_FILES} ; do \
-		ln -s $${hdr} -t ${HDR_DIR};\
+		ln -sf $${hdr} -t ${HDR_DIR};\
 	done
 
 test: executables

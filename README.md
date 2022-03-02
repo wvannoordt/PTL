@@ -340,6 +340,9 @@ apm install language-ptl
 in a bash terminal and it should install. Below is a screenshot, check it out!
 
 ![PTL syntax highlighting](https://i.imgur.com/OQnrEWA.png)
+
+The intention is to expand the syntax highlighting capabilities to other editors as well.
+There is a `tree-sitter` grammar package for PTL [here](https://github.com/wvannoordt/tree-sitter-ptl):
     
 ### Other Types
 The reader is directed to [examples](https://github.com/wvannoordt/PTL/tree/master/examples) and [testing](https://github.com/wvannoordt/PTL/tree/master/testing)
@@ -438,6 +441,12 @@ SomeSection
     intValue2 = 14
 }
 ```
+
+### Fortran Interface
+
+PTL now supports a basic interface for Fortran 90. An example can be found in `PTL/fortran/testing/main.F90`. Currently,
+the fortran interface only supports the PTL format through query mode.
+
 
 ## License
 [GNU GENERAL PUBLIC LICENSE](https://choosealicense.com/licenses/gpl-3.0/)

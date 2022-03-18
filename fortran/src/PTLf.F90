@@ -43,10 +43,10 @@ module PTLf
 		interface
 			subroutine PTLC_Tree_Parse_Int(ptl_id_f, chars_f, len_f, val_out) bind(c, name="PTLC_Tree_Parse_Int")
 				use iso_c_binding
-				integer   (c_int),  intent(in) :: ptl_id_f
-				character (c_char), intent(in) :: chars_f
-				integer   (c_int),  intent(in) :: len_f
-				integer   (c_int),  intent(in) :: val_out
+				integer   (c_int),  intent(in)    :: ptl_id_f
+				character (c_char), intent(in)    :: chars_f
+				integer   (c_int),  intent(in)    :: len_f
+				integer   (c_int),  intent(inout) :: val_out
 			end subroutine PTLC_Tree_Parse_Int
 		end interface
 		call PTLC_Tree_Parse_Int(ptl_id, var_string, len(var_string), value_Int)
@@ -63,15 +63,36 @@ module PTLf
 		interface
 			subroutine PTLC_Tree_Parse_Real(ptl_id_f, chars_f, len_f, val_out) bind(c, name="PTLC_Tree_Parse_Real")
 				use iso_c_binding
-				integer   (c_int),    intent(in) :: ptl_id_f
-				character (c_char),   intent(in) :: chars_f
-				integer   (c_int),    intent(in) :: len_f
-				real      (c_double), intent(in) :: val_out
+				integer   (c_int),    intent(in)    :: ptl_id_f
+				character (c_char),   intent(in)    :: chars_f
+				integer   (c_int),    intent(in)    :: len_f
+				real      (c_double), intent(inout) :: val_out
 			end subroutine PTLC_Tree_Parse_Real
 		end interface
 		call PTLC_Tree_Parse_Real(ptl_id, var_string, len(var_string), value_Real)
 		
 	end subroutine PTLf_Tree_Parse_Real
+	
+	subroutine PTLf_Tree_Parse_String(ptl_id, var_string, value_string)
+	
+		use, intrinsic :: iso_c_binding
+		implicit none
+		integer(c_int),    intent(in)     :: ptl_id
+		character*(*),     intent(in)     :: var_string
+		character*(*),     intent(inout)  :: value_string
+		interface
+			subroutine PTLC_Tree_Parse_String(ptl_id_f, chars_f, len_f, val_out, val_len) bind(c, name="PTLC_Tree_Parse_String")
+				use iso_c_binding
+				integer   (c_int),    intent(in)    :: ptl_id_f
+				character (c_char),   intent(in)    :: chars_f
+				integer   (c_int),    intent(in)    :: len_f
+				character (c_char),   intent(inout) :: val_out
+				integer   (c_int),    intent(in)    :: val_len
+			end subroutine PTLC_Tree_Parse_String
+		end interface
+		call PTLC_Tree_Parse_String(ptl_id, var_string, len(var_string), value_string, len(value_string))
+		
+	end subroutine PTLf_Tree_Parse_String
 	
 	subroutine PTLf_Tree_Parse_RealVec(ptl_id, var_string, realvec)
 		

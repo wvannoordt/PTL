@@ -37,6 +37,26 @@ void PTLC_Tree_Parse_Int   (int* tree_id, char* query, int* len_query, int* val_
     *val_out = val;
 }
 
+void PTLC_Tree_Parse_String   (int* tree_id, char* query, int* len_query, char* val_out, int* val_len)
+{
+    std::string fname = get_string(query, *len_query);
+    auto& tree = ptl_state.GetTree(*tree_id);
+    std::string val = tree.Query(fname);
+    if (*val_len < val.length())
+    {
+        ErrorKill("Requested value \"" + fname + "\" attempted to copy into string that is too small (value size: "
+            + std::to_string(val.length()) + ", recipient size: " + std::to_string(*val_len) + "). Please resize the recipient variable.");
+    }
+    else
+    {
+        for (std::size_t i = 0; i < *val_len; i++) val_out[i] = ' ';
+        for (std::size_t i = 0; i < val.length(); i++)
+        {
+            val_out[i] = val[i];
+        }
+    }
+}
+
 void PTLC_Tree_Parse_RealVec_Length  (int* tree_id, char* query, int* len_query, int* len_out)
 {
     std::string fname = get_string(query, *len_query);

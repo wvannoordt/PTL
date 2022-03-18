@@ -205,7 +205,8 @@ namespace PTL
         if (commentPosition != std::string::npos) inter = line.substr(0, commentPosition);
         std::string output = "";
         bool lineContainsAssignment = false;
-        if (context->ValidateDefinition(inter))
+        bool isdef = context->ValidateDefinition(inter);
+        if (isdef)
         {
             lineContainsAssignment = true;
             output = output+inter;
@@ -214,8 +215,11 @@ namespace PTL
         {
             for (size_t i = 0; i < inter.length(); i++)
             {
-                if (whiteSpace.find(inter[i]) == std::string::npos) output = output + inter[i];
                 lineContainsAssignment = lineContainsAssignment || (inter[i] == assignChar);
+            }
+            for (size_t i = 0; i < inter.length(); i++)
+            {
+                if (whiteSpace.find(inter[i]) == std::string::npos) output = output + inter[i];
             }
         }
         return lineContainsAssignment?output+delimiter:output;

@@ -1,1 +1,4 @@
-stringWithSymbols = "this is my favorite place$@#%@$%$("
+Section
+{
+    stringWithSymbols = "this is my favo @sqrt() rite place$@#%@$%$("
+}

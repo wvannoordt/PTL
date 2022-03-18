@@ -1,1 +1,1 @@
-cmd: 'make forttest'
+cmd: 'TESTS=testing/stringLiteral make test'

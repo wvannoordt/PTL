@@ -118,7 +118,6 @@ namespace PTL
     void PropertyTree::ReadInputFileToTreeData(std::string filename)
     {
         std::string fileRawContents = stringHandler.Sanitize(stringHandler.ReadFileToString(filename), principalSection->GetContext());
-        std::cout << fileRawContents << std::endl;
         principalSection->PopulateInstanceFromString(fileRawContents);
         principalSection->SetValue(fileRawContents);
     }

@@ -28,7 +28,9 @@ namespace PTL
             void GetSectionStyle(char* open, char* close);
             void GetVectorStyle(char* open, char* close);
             std::string GetCommentSpecifier(void);
+            std::string RemoveUnprotectedWhiteSpace(const std::string& str);
             std::string Trim(std::string str);
+            std::string RemoveLineContinuation(const std::string& str, bool& hadLineContinuation);
             std::vector<std::string> Split(const std::string& str, char c);
         private:
             std::string commentString;
@@ -41,6 +43,8 @@ namespace PTL
             char assignChar;
             char delimiter;
             char variableSpecification;
+            char stringQuoteChar;
+            char lineContinuationChar;
             std::vector<size_t> lineBreaks;
     };
 }

@@ -225,7 +225,8 @@ namespace PTL
             }
             output = this->RemoveUnprotectedWhiteSpace(inter);
         }
-        return (lineContainsAssignment && !lineHasLineContinuation)?output+delimiter:output;
+        if (lineContainsAssignment && !lineHasLineContinuation) output += delimiter;
+        return output;
     }
     std::string PropStringHandler::RemoveUnprotectedWhiteSpace(const std::string& str)
     {

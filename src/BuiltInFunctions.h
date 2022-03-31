@@ -27,6 +27,7 @@ namespace PTL
         std::string PTLFunc_sqrt    (std::vector<std::string>& args);
         std::string PTLFunc_gt      (std::vector<std::string>& args);
         std::string PTLFunc_lt      (std::vector<std::string>& args);
+        std::string PTLFunc_pow     (std::vector<std::string>& args);
     }
 }
 #endif

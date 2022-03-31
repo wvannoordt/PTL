@@ -27,6 +27,7 @@ namespace PTL
             this->AddFunction("sqrt",       PTLFunc_sqrt);
             this->AddFunction("lt",         PTLFunc_lt);
             this->AddFunction("gt",         PTLFunc_gt);
+            this->AddFunction("pow",        PTLFunc_pow);
         }
         
         bool BuiltInFunctionList::AddFunction(std::string funcName, PTLBuiltinFunction_t func)

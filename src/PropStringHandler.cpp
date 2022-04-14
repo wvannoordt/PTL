@@ -23,7 +23,9 @@ namespace PTL
         variableSpecification = '$';
         assignChar = '=';
         delimiter = ';';
+        stringQuoteChar = '\"';
         forbiddenNameChars = "!@#$%^&*(){}[]\\|~\'`?/<>,";
+        lineContinuationChar = '\\';
     }
     std::vector<std::string> PropStringHandler::Split(const std::string& str, char c)
     {
@@ -205,7 +207,12 @@ namespace PTL
         if (commentPosition != std::string::npos) inter = line.substr(0, commentPosition);
         std::string output = "";
         bool lineContainsAssignment = false;
-        if (context->ValidateDefinition(inter))
+        bool isdef = context->ValidateDefinition(inter);
+        //check if the current line ends in a line break
+        bool lineHasLineContinuation = false;
+        inter = Trim(inter);
+        inter = this->RemoveLineContinuation(inter, lineHasLineContinuation);
+        if (isdef)
         {
             lineContainsAssignment = true;
             output = output+inter;
@@ -214,20 +221,51 @@ namespace PTL
         {
             for (size_t i = 0; i < inter.length(); i++)
             {
-                if (whiteSpace.find(inter[i]) == std::string::npos) output = output + inter[i];
                 lineContainsAssignment = lineContainsAssignment || (inter[i] == assignChar);
             }
+            output = this->RemoveUnprotectedWhiteSpace(inter);
         }
-        return lineContainsAssignment?output+delimiter:output;
-        //return lineContainsAssignment?output+",":output;
+        if (lineContainsAssignment && !lineHasLineContinuation) output += delimiter;
+        return output;
+    }
+    std::string PropStringHandler::RemoveUnprotectedWhiteSpace(const std::string& str)
+    {
+        std::string output = "";
+        for (size_t i = 0; i < str.length(); i++)
+        {
+            bool isWhiteSpace = (whiteSpace.find(str[i]) != std::string::npos);
+            if (!isWhiteSpace)
+            {
+                output += str[i];
+            }
+        }
+        return output;
+    }
+    std::string PropStringHandler::RemoveLineContinuation(const std::string& str, bool& hadLineContinuation)
+    {
+        hadLineContinuation = false;
+        if (str.length()>1)
+        {
+            hadLineContinuation = (str[str.length()-1]==this->lineContinuationChar);
+        }
+        if (hadLineContinuation)
+        {
+            std::string output = "";
+            for (std::size_t i = 0; i < str.length()-1; i++) output += str[i];
+            return output;
+        }
+        else
+        {
+            return str;
+        } 
     }
 
     std::string PropStringHandler::Trim(std::string str)
     {
         size_t start, end;
         for (start = 0; start<str.length(); start++) {if (whiteSpace.find(str[start]) == std::string::npos) {break;}}
-        for (end = str.length(); end >= 0; end--) {if (whiteSpace.find(str[end]) == std::string::npos) {break;}}
-        std::string output = str.substr(start, end-start);
+        for (end = str.length()-1; end >= 0; end--) {if (whiteSpace.find(str[end]) == std::string::npos) {break;}}
+        std::string output = str.substr(start, end+1-start);
         return output;
     }
 

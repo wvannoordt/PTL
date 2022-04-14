@@ -4,6 +4,9 @@ ifndef OPTLEVEL
 OPTLEVEL := 0
 endif
 
+ifndef TESTS
+TESTS := testing/*
+endif
 
 
 BASEIDIR  := $(shell pwd)
@@ -103,7 +106,7 @@ setup:
 	done
 
 test: executables
-	@for fldr in testing/* ; do \
+	@for fldr in ${TESTS} ; do \
 				echo $${fldr} ; \
 				ln -sf ${UTL_DIR}/makefile.test $${fldr}/makefile; \
                 ${MAKE} -C $${fldr} -f makefile -s test || exit 1; \

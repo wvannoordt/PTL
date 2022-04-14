@@ -1,1 +1,6 @@
-stringWithSymbols = "this is my favorite place$@#%@$%$("
+#define myvar 0.4
+Section
+{
+    stringWithSymbols = "this is my favo rite place$@#%@$%"
+    doubleVec = [0.1, 0.2, 0.3]
+}

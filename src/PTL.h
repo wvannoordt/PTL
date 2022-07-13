@@ -22,5 +22,6 @@
 #include "BuiltInFunctionList.h"
 #include "PTLGenericObject.h"
 #include "BuiltInUtils.h"
+#include "BuiltInFunctions.h"
 #include <cmath>
 #endif

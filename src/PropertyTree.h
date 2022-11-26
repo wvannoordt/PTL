@@ -37,6 +37,7 @@ namespace PTL
             void PushSection(std::string pushedSection);
             PropertySection& Principal(void);
             void ResolveAllStrings(void);
+            PropertySection& Head() {return *principalSection;}
             QueryResult Query(std::string sectionQuery);
             std::vector<PropertySection*>::iterator begin() noexcept;
             std::vector<PropertySection*>::const_iterator begin() const noexcept;

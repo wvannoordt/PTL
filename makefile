@@ -79,7 +79,7 @@ executables: final
 		done
 
 fort:
-	${FC_HOST} ${COMPILE_TIME_OPT} ${IFLAGS} ${BASEIDIR}/fortran/src/PTLf.F90 -c -o ${OBJ_DIR}/PTLf.o
+	${FC_HOST} -fPIC ${COMPILE_TIME_OPT} ${IFLAGS} ${BASEIDIR}/fortran/src/PTLf.F90 -c -o ${OBJ_DIR}/PTLf.o
 	mv ${BASEIDIR}/ptlf.mod ${HDR_DIR}
 
 forttest: final

@@ -64,8 +64,8 @@ endif
 C11F := -fpermissive -std=c++11
 export C11F
 
-HOST_FLAGS   := -O${OPTLEVEL} -Wno-unknown-pragmas -g -fPIC -DGLIBCXX_FORCE_NEW=1 ${C11F}
-HOST_FLAGS_C := -O${OPTLEVEL} -g -fPIC -fpermissive
+HOST_FLAGS   := -O${OPTLEVEL} -Wno-unknown-pragmas -g -DGLIBCXX_FORCE_NEW=1 ${C11F}
+HOST_FLAGS_C := -O${OPTLEVEL} -g -fpermissive
 
 export CC_HOST
 export C_HOST
@@ -87,7 +87,8 @@ forttest: final
 
 .PHONY: final
 final: setup ${OBJ_FILES} ${PTL_FORTRAN} ${OBJ_FILES_C}
-	${CC_HOST} -fPIC -shared ${COMPILE_TIME_OPT} ${OBJ_FILES} ${OBJ_FILES_C} ${OBJ_FILES_F} ${IFLAGS} -o ${TARGET} ${LINKS}
+	#${CC_HOST} ${COMPILE_TIME_OPT} ${OBJ_FILES} ${OBJ_FILES_C} ${OBJ_FILES_F} ${IFLAGS} -o ${TARGET} ${LINKS}
+	ar rcs ${TARGET} ${OBJ_FILES} ${OBJ_FILES_C}
 
 ${OBJ_FILES}: ${OBJ_DIR}/%.o : ${SRC_DIR}/%.cpp
 	${CC_HOST} ${HOST_FLAGS} ${COMPILE_TIME_OPT} ${IFLAGS} -c $< -o $@

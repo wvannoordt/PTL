@@ -52,7 +52,7 @@ PTL_FORTRAN :=
 OBJ_FILES_F := 
 
 ifndef PTLF
-PTLF := 1
+PTLF := 0
 endif
 
 ifeq (${PTLF},1)

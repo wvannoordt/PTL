@@ -223,7 +223,10 @@ namespace PTL
             {
                 lineContainsAssignment = lineContainsAssignment || (inter[i] == assignChar);
             }
+            // std::cout << inter << std::endl;
             output = this->RemoveUnprotectedWhiteSpace(inter);
+            // std::cout << output << std::endl;
+            // std::cin.get();
         }
         if (lineContainsAssignment && !lineHasLineContinuation) output += delimiter;
         return output;
@@ -231,13 +234,20 @@ namespace PTL
     std::string PropStringHandler::RemoveUnprotectedWhiteSpace(const std::string& str)
     {
         std::string output = "";
+        bool quote_escaped = false;
         for (size_t i = 0; i < str.length(); i++)
         {
+            if (quote_escaped && str[i]=='\'') quote_escaped = false;
             bool isWhiteSpace = (whiteSpace.find(str[i]) != std::string::npos);
-            if (!isWhiteSpace)
+            if (!isWhiteSpace || quote_escaped)
             {
-                output += str[i];
+                if (str[i] != '\'') output += str[i];
             }
+            // else
+            // {
+            //     break;
+            // }
+            if (!quote_escaped && str[i]=='\'') quote_escaped = true;
         }
         return output;
     }

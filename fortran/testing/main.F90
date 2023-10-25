@@ -15,8 +15,8 @@ program PTLTest
     call PTLf_Tree_Read(ptl_id, 'input.ptl')
     call PTLf_Tree_Parse_Int(ptl_id,  'Section1.someIntValue', someIntValue)
     call PTLf_Tree_Parse_Real(ptl_id, 'Section1.someRealValue', someRealValue)
-    call PTLf_Tree_Parse_RealVec(ptl_id, 'Section2.somRealValues', someRealData)
-    call PTLf_Tree_Parse_IntVec(ptl_id, 'Section2.somIntValues', someIntData)
+    call PTLf_Tree_Parse_RealVec(ptl_id, 'Section2.someRealValues', someRealData)
+    call PTLf_Tree_Parse_IntVec(ptl_id, 'Section2.someIntValues', someIntData)
     call PTLf_Tree_Parse_String(ptl_id, 'Section2.someStringValue', someStringValue)
     
     print*, 'someIntValue = ', someIntValue

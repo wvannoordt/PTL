@@ -28,6 +28,7 @@ namespace PTL
             operator int ();
             operator std::vector<std::string> ();
             operator double ();
+            operator float  ();
             operator bool ();
             operator std::vector<int> ();
             operator std::vector<double> ();

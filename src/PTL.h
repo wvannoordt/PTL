@@ -1,5 +1,6 @@
 #ifndef PROPTREELIB_H
 #define PROPTREELIB_H
+#define PTL_MAJOR_VERSION 1
 #include "PropertyTree.h"
 #include "InputVariable.h"
 #include "PTLInteger.h"

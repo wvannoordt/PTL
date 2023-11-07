@@ -3,11 +3,17 @@
 #include "PTLCState.h"
 #include <string>
 
+static bool crash_on_missing_option = true;
 std::string get_string(char* buf, int len)
 {
     std::string output;
     for (int i = 0; i < len; i++) output += buf[i];
     return output;
+}
+
+void PTLC_Except_On_Missing(int* input)
+{
+    crash_on_missing_option = bool(*input);
 }
 
 void PTLC_Create_Tree(int* tree_id_out)

@@ -1,5 +1,28 @@
 module PTLf
 	contains
+	
+	subroutine PTLf_Except_On_Missing(input)
+
+		use, intrinsic :: iso_c_binding
+		implicit none
+		logical, intent(in) :: input
+		integer :: val
+		interface
+			subroutine PTLC_Except_On_Missing(input_f) bind (c,name="PTLC_Except_On_Missing")
+				use iso_c_binding
+				integer (c_int), intent (in) :: input_f
+			end subroutine PTLC_Except_On_Missing
+		end interface
+		if (input) then
+			val = 1
+			call PTLC_Except_On_Missing(val)
+		else
+			val = 0
+			call PTLC_Except_On_Missing(val)
+		end if
+
+	end subroutine PTLf_Except_On_Missing
+	
 	subroutine PTLf_Create_Tree(ptl_id)
 
 		use, intrinsic :: iso_c_binding

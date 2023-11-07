@@ -1,5 +1,6 @@
 #include "QueryResult.h"
 #include "PTL.h"
+#include "PTLc.h"
 namespace PTL
 {
     void QueryResult::KillIfNotTerminal(void)
@@ -12,7 +13,7 @@ namespace PTL
         KillIfNotTerminal();
         PTLString pvar("", "");
         std::string output;
-        if (!pvar.ParseFromString(content, &output)) ErrorKill("Cannot parse \"" + content + "\" as string!");
+        if (!pvar.ParseFromString(content, &output) && crash_on_missing_option) ErrorKill("Cannot parse \"" + content + "\" as string!");
         return output;
     }
     
@@ -21,7 +22,7 @@ namespace PTL
         KillIfNotTerminal();
         PTLInteger pvar(0, "");
         int output;
-        if (!pvar.ParseFromString(content, &output)) ErrorKill("Cannot parse \"" + content + "\" as integer!");
+        if (!pvar.ParseFromString(content, &output) && crash_on_missing_option) ErrorKill("Cannot parse \"" + content + "\" as integer!");
         return output;
     }
     
@@ -37,8 +38,17 @@ namespace PTL
         KillIfNotTerminal();
         PTLDouble pvar(0, "");
         double output;
-        if (!pvar.ParseFromString(content, &output)) ErrorKill("Cannot parse \"" + content + "\" as double!");
+        if (!pvar.ParseFromString(content, &output)  && crash_on_missing_option) ErrorKill("Cannot parse \"" + content + "\" as double!");
         return output;
+    }
+    
+    QueryResult::operator float ()
+    {
+        KillIfNotTerminal();
+        PTLDouble pvar(0, "");
+        double output;
+        if (!pvar.ParseFromString(content, &output) && crash_on_missing_option) ErrorKill("Cannot parse \"" + content + "\" as double!");
+        return (float)output;
     }
     
     QueryResult::operator bool ()
@@ -46,7 +56,7 @@ namespace PTL
         KillIfNotTerminal();
         PTLBoolean pvar(0, "");
         bool output;
-        if (!pvar.ParseFromString(content, &output)) ErrorKill("Cannot parse \"" + content + "\" as boolean!");
+        if (!pvar.ParseFromString(content, &output) && crash_on_missing_option) ErrorKill("Cannot parse \"" + content + "\" as boolean!");
         return output;
     }
     
@@ -56,7 +66,7 @@ namespace PTL
         PTLDynamicIntegerArray pvar("");
         int* outputar;
         int outputNum;
-        if (!pvar.ParseFromString(content, &outputar)) ErrorKill("Cannot parse \"" + content + "\" as integer array!");
+        if (!pvar.ParseFromString(content, &outputar) && crash_on_missing_option) ErrorKill("Cannot parse \"" + content + "\" as integer array!");
         pvar.SetSecondaryVariable(&outputNum);
         std::vector<int> output;
         for (int i = 0; i < outputNum; i++) output.push_back(outputar[i]);
@@ -69,7 +79,7 @@ namespace PTL
         PTLDynamicDoubleArray pvar("");
         double* outputar;
         int outputNum;
-        if (!pvar.ParseFromString(content, &outputar)) ErrorKill("Cannot parse \"" + content + "\" as double array!");
+        if (!pvar.ParseFromString(content, &outputar) && crash_on_missing_option) ErrorKill("Cannot parse \"" + content + "\" as double array!");
         pvar.SetSecondaryVariable(&outputNum);
         std::vector<double> output;
         for (int i = 0; i < outputNum; i++) output.push_back(outputar[i]);

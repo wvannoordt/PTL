@@ -1,9 +1,10 @@
 #ifndef PTL_GLOBAL_H
 #define PTL_GLOBAL_H
+extern bool crash_on_missing_option;
 #ifdef __cplusplus
 extern "C" {
 #endif
-
+void PTLC_Except_On_Missing          (int* input);
 void PTLC_Create_Tree                (int* tree_id_out);
 void PTLC_Tree_Read                  (int* tree_id, char* filename, int* len_filename);
 void PTLC_Tree_Parse_Real            (int* tree_id, char* query, int* len_query, double* val_out);

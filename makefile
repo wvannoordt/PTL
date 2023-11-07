@@ -52,7 +52,7 @@ PTL_FORTRAN :=
 OBJ_FILES_F := 
 
 ifndef PTLF
-PTLF := 0
+PTLF := 1
 endif
 
 ifeq (${PTLF},1)
@@ -61,7 +61,7 @@ OBJ_FILES_F := ${OBJ_DIR}/PTLf.o
 LINKS += -lgfortran
 endif
 
-C11F := -fpermissive -std=c++11
+C11F := -fpermissive -std=c++11 -fPIC
 export C11F
 
 HOST_FLAGS   := -O${OPTLEVEL} -Wno-unknown-pragmas -g -DGLIBCXX_FORCE_NEW=1 ${C11F}
@@ -88,7 +88,7 @@ forttest: final
 .PHONY: final
 final: setup ${OBJ_FILES} ${PTL_FORTRAN} ${OBJ_FILES_C}
 	#${CC_HOST} ${COMPILE_TIME_OPT} ${OBJ_FILES} ${OBJ_FILES_C} ${OBJ_FILES_F} ${IFLAGS} -o ${TARGET} ${LINKS}
-	ar rcs ${TARGET} ${OBJ_FILES} ${OBJ_FILES_C}
+	ar rcs ${TARGET} ${OBJ_FILES} ${OBJ_FILES_C} ${OBJ_FILES_F}
 
 ${OBJ_FILES}: ${OBJ_DIR}/%.o : ${SRC_DIR}/%.cpp
 	${CC_HOST} ${HOST_FLAGS} ${COMPILE_TIME_OPT} ${IFLAGS} -c $< -o $@

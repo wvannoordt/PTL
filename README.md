@@ -82,7 +82,7 @@ This example shows how to read a simple integer value from a file `input.ptl`:
 
 `main.cc`
 
-```c++
+```c++  
 #include "PTL.h"
 int main(int argc, char** argv)
 {

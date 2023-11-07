@@ -20,10 +20,11 @@ program PTLTest
     call PTLf_Tree_Parse_RealVec(ptl_id, 'Section2.someRealValues', someRealData)
     call PTLf_Tree_Parse_IntVec(ptl_id, 'Section2.someIntValues', someIntData)
     call PTLf_Tree_Parse_String(ptl_id, 'Section2.someStringValue', someStringValue)
-    
-    ! We need to default values so that if they aren't found, they still have valid data
+
+    ! this won't crash now thanks to the option we set with Except_On_Missing
     call PTLf_Tree_Parse_Real(ptl_id, 'Section1.missingValue', missingValue)
-    
+
+    ! We can also check if sections / variables exist
     missingValueFound = PTLf_Exists(ptl_id, 'Section1.missingValue')
     goodValueFound    = PTLf_Exists(ptl_id, 'Section2.someIntValues')
     

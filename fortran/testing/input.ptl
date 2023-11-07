@@ -6,7 +6,7 @@ Section1
 }
 Section2
 {
-    somRealValues = [3.4, 1.2, 10.9]
-    somIntValues = [1, 6, 1, 9, 1, 2, 4, 6, 6, 2, 4]
-    someStringValue = helloworld
+    someRealValues = [3.4, 1.2, 10.9]
+    someIntValues = [1, 6, 1, 9, 1, 2, 4, 6, 6, 2, 4]
+    someStringValue = 'hello world'
 }

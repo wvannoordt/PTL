@@ -8,6 +8,7 @@ program PTLTest
     integer, allocatable :: someIntData(:)
     integer :: someIntValue
     real*8  :: someRealValue, missingValue
+    logical :: missingValueFound, goodValueFound
     character*128 :: someStringValue !note that if this is too small, then PTL will throw an error
     
     print*, 'Testing PTL for Fortran...'
@@ -21,14 +22,18 @@ program PTLTest
     call PTLf_Tree_Parse_String(ptl_id, 'Section2.someStringValue', someStringValue)
     
     ! We need to default values so that if they aren't found, they still have valid data
-    missingValue = -1.2398
     call PTLf_Tree_Parse_Real(ptl_id, 'Section1.missingValue', missingValue)
     
-    print*, 'someIntValue    = ', someIntValue
-    print*, 'someRealValue   = ', someRealValue
-    print*, 'someRealData    = ', someRealData
-    print*, 'someIntData     = ', someIntData
-    print*, 'someStringValue = ', trim(someStringValue)
-    print*, 'missingValue    = ', missingValue
+    missingValueFound = PTLf_Exists(ptl_id, 'Section1.missingValue')
+    goodValueFound    = PTLf_Exists(ptl_id, 'Section2.someIntValues')
+    
+    print*, 'someIntValue      = ', someIntValue
+    print*, 'someRealValue     = ', someRealValue
+    print*, 'someRealData      = ', someRealData
+    print*, 'someIntData       = ', someIntData
+    print*, 'someStringValue   = ', trim(someStringValue)
+    print*, 'missingValue      = ', missingValue
+    print*, 'missingValueFound = ', missingValueFound
+    print*, 'goodValueFound    = ', goodValueFound
     
 end program PTLTest

@@ -43,6 +43,10 @@ namespace PTL
             std::vector<PropertySection*>::const_iterator begin() const noexcept;
             std::vector<PropertySection*>::iterator end() noexcept;
             std::vector<PropertySection*>::const_iterator end() const noexcept;
+            bool Has(const std::string& queryval) const
+            {
+                return principalSection->Has(queryval);
+            }
         private:
             PropertySection* principalSection;
             PropStringHandler stringHandler;

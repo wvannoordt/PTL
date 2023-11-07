@@ -3,7 +3,7 @@
 #include "PTLCState.h"
 #include <string>
 
-static bool crash_on_missing_option = true;
+bool crash_on_missing_option = true;
 std::string get_string(char* buf, int len)
 {
     std::string output;
@@ -19,6 +19,18 @@ void PTLC_Except_On_Missing(int* input)
 void PTLC_Create_Tree(int* tree_id_out)
 {
     *tree_id_out = ptl_state.AddTree();
+}
+
+void PTLC_Exists(int* tree_id, char* query, int* len_var, int* val_out)
+{
+    auto& tree = ptl_state.GetTree(*tree_id);
+    std::string fname = get_string(query, *len_var);
+    *val_out = 0;
+    bool found = tree.Has(fname);
+    if (found)
+    {
+        *val_out = 1;
+    }
 }
 
 void PTLC_Tree_Read  (int* tree_id, char* filename, int* len_filename)

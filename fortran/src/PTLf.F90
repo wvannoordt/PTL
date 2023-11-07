@@ -56,6 +56,48 @@ module PTLf
 		
 	end subroutine PTLf_Tree_Read
 	
+	logical function PTLf_Exists(ptl_id, var_string)
+	
+		implicit none
+		integer, intent(in)         :: ptl_id
+		character*(*),  intent(in)  :: var_string
+		logical :: check
+		call PTLf_Check_Exists(ptl_id, var_string, check)
+	
+		PTLf_Exists = check
+	
+	end function PTLf_Exists
+	
+	subroutine PTLf_Check_Exists(ptl_id, var_string, output)
+	
+		use, intrinsic :: iso_c_binding
+		implicit none
+		integer(c_int), intent(in)  :: ptl_id
+		character*(*),  intent(in)  :: var_string
+		logical, intent(out) :: output
+		integer :: val_out
+		
+		interface
+			subroutine PTLC_Exists(ptl_id_f, chars_f, len_f, val_out) bind(c, name="PTLC_Exists")
+				use iso_c_binding
+				integer   (c_int),  intent(in)    :: ptl_id_f
+				character (c_char), intent(in)    :: chars_f
+				integer   (c_int),  intent(in)    :: len_f
+				integer   (c_int),  intent(inout) :: val_out
+			end subroutine PTLC_Exists
+		end interface
+		
+		output = .true.
+		call PTLC_Exists(ptl_id, var_string, len(var_string), val_out)
+		
+		if (val_out == 0) then
+			output = .false.
+		else
+			output = .true.
+		end if
+	
+	end subroutine PTLf_Check_Exists
+	
 	subroutine PTLf_Tree_Parse_Int(ptl_id, var_string, value_Int)
 	
 		use, intrinsic :: iso_c_binding

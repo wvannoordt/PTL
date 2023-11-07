@@ -94,6 +94,27 @@ namespace PTL
                 return output;
             }
             std::string GetSectionValue(void) {return sectionValue;}
+            bool Has(const std::string& queryval)
+            {
+                std::size_t ip = queryval.find('.');
+                if(ip == std::string::npos)
+                {
+                    return (sectionSubSections.find(queryval) != sectionSubSections.end());
+                }
+                else
+                {
+                    std::string term = queryval.substr(0, ip);
+                    std::string next = queryval.substr(ip+1, queryval.length() - (ip + 1));
+                    if (sectionSubSections.find(term) == sectionSubSections.end())
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return (*this)[term].Has(next);
+                    }
+                }
+            }
         private:
             void AssertPointerConsistency(std::string variableLocation, bool isSecondary);
             std::map<std::string,PropertySection*> sectionSubSections;
